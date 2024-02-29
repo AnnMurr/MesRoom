@@ -13,7 +13,7 @@ export const LinkGenerator = () => {
     const linkRef = useRef(null)
 
     const onGenerateLink = () => {
-        const link = `http://localhost:3000/room/${uuidv4()}`
+        const link = `http://localhost:3000/#room/${uuidv4()}`
         setIsLink(link)
     }
 
