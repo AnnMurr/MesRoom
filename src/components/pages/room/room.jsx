@@ -1,7 +1,10 @@
+import { Form } from "./form/form";
+import { Container } from "./styledRoom";
+
 export const Room = () => {
     return (
-        <div style={{color: 'white'}}>
-            ROOM
-        </div>
+        <Container>
+            <Form />
+        </Container>
     )
 }
