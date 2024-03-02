@@ -27,7 +27,7 @@ export const Form = () => {
                 if(!res.ok) {
                     console.error("Failed to send data")
                 } else {
-                    navigation('/generator')
+                    navigation(`/room/${id}/${userName}`)
                 }
             } catch (err) {
                 throw err
