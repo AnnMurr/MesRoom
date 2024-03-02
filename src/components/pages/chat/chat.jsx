@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationArrow } from "@fortawesome/free-solid-svg-icons";
-import { Container, LeftBlock, RightBlock, Section, Wrapper, Message, Input, BlockSendMessage, SendBtn } from "./styledChat";
+import { Container, LeftBlock, RightBlock, Section, Wrapper, Message, MessageInner, Input, BlockSendMessage, SendBtn } from "./styledChat";
 
 export const Chat = () => {
     return (
@@ -15,20 +15,20 @@ export const Chat = () => {
 
                     <RightBlock>
                         <div>
-                        <Message>
-                            <div><span>Lorem ipsum dolor sit amet.</span></div>
-                        </Message>
-                        <Message>
-                            <div><span>Lorem ipsum dolor sit amet.</span></div>
-                        </Message>
-                        <Message>
-                            <div><span>Lorem ipsum dolor sit amet.</span></div>
-                        </Message>
+                            <MessageInner>
+                                <Message><span>Lorem ipsum dolor sit amet.</span></Message>
+                            </MessageInner>
+                            <MessageInner>
+                                <Message><span>Lorem ipsum dolor sit amet.</span></Message>
+                            </MessageInner>
+                            <MessageInner>
+                                <Message><span>Lorem ipsum dolor sit amet.</span></Message>
+                            </MessageInner>
                         </div>
                         <BlockSendMessage>
                             <Input type="text" />
                             <SendBtn>
-                                <FontAwesomeIcon size="xl" color="#55ea47d4" icon={faLocationArrow} /> 
+                                <FontAwesomeIcon size="xl" color="#55ea47d4" icon={faLocationArrow} />
                             </SendBtn>
                         </BlockSendMessage>
                     </RightBlock>

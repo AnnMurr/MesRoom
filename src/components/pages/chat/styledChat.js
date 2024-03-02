@@ -37,9 +37,17 @@ export const RightBlock = styled.div`
     border-left: 2px solid #66666670;
 `
 
-export const Message = styled.div`
+export const MessageInner = styled.div`
     padding: 10px;
     color: white;
+`
+
+export const Message = styled.div`
+    width: fit-content;
+    background-color: #5dac92;
+    color: black;
+    padding: 10px;
+    border-radius: 20px 10px 5px 0;
 `
 export const SendBtn = styled.button`
     position: absolute;
