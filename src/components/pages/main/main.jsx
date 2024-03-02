@@ -1,10 +1,12 @@
-import { Container } from './mainStyled.js';
-import { BtnConponent } from './startBtn/startBtn.jsx';
+import { Button } from '../../common/button/button.jsx';
+import { Container, BtnInner } from './mainStyled.js';
 
 export const Main = () => {
-    return (
-            <Container>
-                    <BtnConponent />
-            </Container>
-    )
+        return (
+                <Container>
+                        <BtnInner to={"/generator"}>
+                                <Button text={"Get started"} />
+                        </BtnInner>
+                </Container>
+        )
 }

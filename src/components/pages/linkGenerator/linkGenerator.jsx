@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { Wrapper, Btn, BtnInner, LinkWrapper, CopyBtn, TitleLink } from "./styledLinkGenerator";
+import { Wrapper, BtnInner, LinkWrapper, CopyBtn, TitleLink } from "./styledLinkGenerator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import { getCopyText } from "../../../utils/copyText";
+import { Button } from "../../common/button/button";
 
 export const LinkGenerator = () => {
     const [isCopyBtnClick, setIsCopyBtnClick] = useState(false);
     const [isLink, setIsLink] = useState('');
-    const stateFromRedux = useSelector((state) => state.user.userName);
 
     const onGenerateLink = async () => {
         try {
@@ -36,7 +35,7 @@ export const LinkGenerator = () => {
     return (
         <Wrapper>
             <BtnInner>
-                <Btn onClick={onGenerateLink}>Generate link</Btn>
+                <Button size={"big"} func={onGenerateLink} text={"Generate link"} />
             </BtnInner>
             {isLink && (
                 <LinkWrapper>

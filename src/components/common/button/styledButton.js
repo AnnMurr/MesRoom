@@ -1,19 +1,14 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const Container = styled(Link)`
-    display: contents;
-`
-
 export const Btn = styled.button`
-    padding: 13px 0;
+    padding: ${({size}) => size === "big" ? "15px" : "13px"};
     border-radius: 2px;
     background-color: #55ea47d4; 
     cursor: pointer;
     font-weight: 700;
     transition: background-color 0.3s ease-in-out; 
     width: 100%;
-    max-width: 230px;
+    max-width: ${({size}) => size === "big" ? "330px" : "230px"};
 
     &:hover {
         background-color: #7fffd4;
