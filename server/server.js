@@ -25,20 +25,6 @@ app.post("/room", (req, res) => {
   }
 });
 
-app.post("/room/:id", (req, res) => {
-  const id = req.params.id;
-  const userName = req.body.name;
-
-  if (rooms.has(id)) {
-    const room = rooms.get(id);
-    if (!room.users.includes(userName)) {
-      room.users.push(userName);
-    }
-  }
-
-  res.send();
-});
-
 io.on("connection", (socket) => {
   socket.on("ROOM:JOIN", ({ roomId, userName }) => {
     socket.join(roomId);

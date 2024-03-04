@@ -13,23 +13,7 @@ export const Form = () => {
 
         if (userName.length >= 2 && !userName.includes(" ") && pattern.test(userName)) {
             const id = document.location.href.split('#room/')[1];
-            const data = { name: userName, url: id }
-
-            try {
-                const res = await fetch(`http://localhost:1234/room/${id}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data),
-                })
-
-                if(!res.ok) {
-                    console.error("Failed to send data")
-                } else {
-                    navigation(`/room/${id}/${userName}`)
-                }
-            } catch (err) {
-                throw err
-            }
+            navigation(`/room/${id}/${userName}`)
         } else {
             inputRef.current.style.border = "2px solid #990909ad"
         }
