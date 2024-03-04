@@ -1,7 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { FormInner, Input, Wrapper, Section, Btn } from "./formStyled";
-import { useDispatch, useSelector } from "react-redux";
-import { setUserNameToRedux } from "../../../../redux/redusers/userReduser";
 import { useNavigate } from "react-router-dom";
 
 export const Form = () => {
