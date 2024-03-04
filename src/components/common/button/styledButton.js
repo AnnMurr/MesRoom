@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Btn = styled.button`
-    padding: ${({size}) => size === "big" ? "15px" : "13px"};
+    padding: ${({size}) => size === "big" ? "15px" : size === "small" ? "10px" : "13px"};
     border-radius: 2px;
     background-color: #55ea47d4; 
     cursor: pointer;

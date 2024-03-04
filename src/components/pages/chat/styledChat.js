@@ -50,6 +50,11 @@ export const Message = styled.div`
     border-radius: 20px 10px 5px 0;
 `
 
+export const OnlineTitle = styled.h5`
+    padding-bottom: 10px;
+    font-size: 17px;
+`
+
 export const SubMessage = styled.div`
     font-size: 13px;
     opacity: 0.6;

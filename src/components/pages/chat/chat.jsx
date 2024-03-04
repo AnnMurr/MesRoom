@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationArrow } from "@fortawesome/free-solid-svg-icons";
-import { Container, LeftBlock, RightBlock, Section, Wrapper, SubMessage, Message, MessageInner, Input, BlockSendMessage, SendBtn } from "./styledChat";
+import { Container, LeftBlock, RightBlock, Section, Wrapper,OnlineTitle, SubMessage, Message, MessageInner, Input, BlockSendMessage, SendBtn } from "./styledChat";
 import { useEffect, useState } from "react";
 import { socket } from "../../../socket/socket";
 import { useLocation } from "react-router-dom";
@@ -54,7 +54,7 @@ export const Chat = () => {
                 <Wrapper>
                     <LeftBlock>
                         <div>
-                            <h5>Online:</h5>
+                            <OnlineTitle>Online:</OnlineTitle>
                             <ul>
                                 {usersOnline &&
                                     usersOnline.map((user, id) => (

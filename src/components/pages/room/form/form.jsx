@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { FormInner, Input, Wrapper, Section, Btn } from "./formStyled";
 import { useNavigate } from "react-router-dom";
+import { Button } from "../../../common/button/button";
 
 export const Form = () => {
     const [userName, setUserName] = useState("")
@@ -28,7 +29,7 @@ export const Form = () => {
                         value={userName}
                         placeholder="Name"
                         onChange={(e) => setUserName(e.target.value)} />
-                    <Btn onClick={sendData}>Sign in</Btn>
+                    <Button text={"Sign in"} func={sendData} size={"small"} />
                 </FormInner>
             </Wrapper>
         </Section>

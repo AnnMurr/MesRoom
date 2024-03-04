@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Wrapper, BtnInner, LinkWrapper, CopyBtn, TitleLink } from "./styledLinkGenerator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCopy } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faCopy } from "@fortawesome/free-solid-svg-icons";
 import { getCopyText } from "../../../utils/copyText";
 import { Button } from "../../common/button/button";
 
@@ -28,7 +28,7 @@ export const LinkGenerator = () => {
 
     const onCopy = () => {
         setIsCopyBtnClick(true);
-        setTimeout(() => setIsCopyBtnClick(false), 100);
+        setTimeout(() => setIsCopyBtnClick(false), 2000);
         getCopyText(isLink);
     };
 
@@ -47,7 +47,9 @@ export const LinkGenerator = () => {
                     </div>
                     <div>
                         <CopyBtn onClick={onCopy} type="button">
-                            <FontAwesomeIcon size="xl" color={!isCopyBtnClick ? "#000" : "#9ba0a4bf"} icon={faCopy} />
+                            {!isCopyBtnClick ? <FontAwesomeIcon size="xl" icon={faCopy} /> :
+                                <FontAwesomeIcon size="xl" icon={faCheck} />
+                            }
                         </CopyBtn>
                     </div>
                 </LinkWrapper>
