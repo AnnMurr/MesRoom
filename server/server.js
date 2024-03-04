@@ -20,7 +20,10 @@ app.post("/room", (req, res) => {
   const roomId = uuidv4();
   const link = `http://localhost:3000/#room/${roomId}`;
   if (!rooms.has(roomId)) {
-    rooms.set(roomId, { users: [] });
+    rooms.set(roomId, new Map([
+        ["users", []],
+        ["messages", []],
+    ]));
     res.status(200).json({ link });
   }
 });
@@ -30,19 +33,23 @@ io.on("connection", (socket) => {
     socket.join(roomId);
 
     if (rooms.has(roomId)) {
-        const room = rooms.get(roomId);
-        if (!room.users.includes(userName)) {
-          room.users.push(userName);
+        const users = rooms.get(roomId).get("users");
+        if (!users.includes(userName)) {
+            rooms.get(roomId).get("users").push(userName);
         }
 
-        io.to(roomId).emit("usersOnline", room.users);
+        io.to(roomId).emit("usersOnline", users);
       }
   });
 
   socket.on("ROOM:LEAVE", ({ roomId, userName }) => {
-    const room = rooms.get(roomId);
-    room.users = room.users.filter(name => name !== userName)
-    io.to(roomId).emit("usersOnline", room.users);
+    if (rooms.has(roomId)) {
+        const users = rooms.get(roomId).get("users");
+        const updateUsers = users.filter(name => name !== userName)
+        rooms.get(roomId).set("users", updateUsers)
+        io.to(roomId).emit("usersOnline", updateUsers);
+    }
+
   })
 
   socket.on("disconnect", () => {
