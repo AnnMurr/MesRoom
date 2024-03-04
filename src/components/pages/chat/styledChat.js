@@ -49,6 +49,11 @@ export const Message = styled.div`
     padding: 10px;
     border-radius: 20px 10px 5px 0;
 `
+
+export const SubMessage = styled.div`
+    font-size: 13px;
+    opacity: 0.6;
+`
 export const SendBtn = styled.button`
     position: absolute;
     right: 10px;

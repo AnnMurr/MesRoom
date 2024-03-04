@@ -1,13 +1,23 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationArrow } from "@fortawesome/free-solid-svg-icons";
-import { Container, LeftBlock, RightBlock, Section, Wrapper, Message, MessageInner, Input, BlockSendMessage, SendBtn } from "./styledChat";
+import { Container, LeftBlock, RightBlock, Section, Wrapper, SubMessage, Message, MessageInner, Input, BlockSendMessage, SendBtn } from "./styledChat";
 import { useEffect, useState } from "react";
 import { socket } from "../../../socket/socket";
 import { useLocation } from "react-router-dom";
 
 export const Chat = () => {
-    const location = useLocation()
     const [usersOnline, setUsersOnline] = useState([])
+    const [message, setMessage] = useState("")
+    const [chatMessages, setChatMessages] = useState([])
+    const location = useLocation()
+
+    const sendMessage = () => {
+        const locationArray = location.pathname.split('/')
+        const userName = locationArray[locationArray.length - 1];
+        const id = locationArray[locationArray.length - 2];
+        socket.emit("SEND_MESSAGE", { roomId: id, message:  { userName: userName, text: message } })
+        setMessage("")
+    }
 
     useEffect(() => {
         const locationArray = location.pathname.split('/')
@@ -20,17 +30,23 @@ export const Chat = () => {
             setUsersOnline(users)
         })
 
-        const handleUnload =() =>  socket.emit("ROOM:LEAVE", { roomId: id, userName: userName})
+        socket.on("chatMessages", (messages) => {
+            setChatMessages(messages)
+        })
+
+        const handleUnload = () => socket.emit("ROOM:LEAVE", { roomId: id, userName: userName })
 
         window.addEventListener("beforeunload", handleUnload)
 
         return () => {
             window.removeEventListener("beforeunload", handleUnload)
-    
-            socket.emit("ROOM:LEAVE", { roomId: id, userName: userName})
+
+            socket.emit("ROOM:LEAVE", { roomId: id, userName: userName })
             socket.disconnect();
         };
     }, [])
+
+    console.log(chatMessages)
 
     return (
         <Section>
@@ -51,20 +67,20 @@ export const Chat = () => {
 
                     <RightBlock>
                         <div>
-                            <MessageInner>
-                                <Message><span>Lorem ipsum dolor sit amet.</span></Message>
-                            </MessageInner>
-                            <MessageInner>
-                                <Message><span>Lorem ipsum dolor sit amet.</span></Message>
-                            </MessageInner>
-                            <MessageInner>
-                                <Message><span>Lorem ipsum dolor sit amet.</span></Message>
-                            </MessageInner>
+                            {chatMessages &&
+                                chatMessages.map((message, id) => (
+                                    
+                                    <MessageInner key={id}>
+                                        <Message><span>{message.text}</span></Message>
+                                        <SubMessage>{message.userName}</SubMessage>
+                                    </MessageInner>
+                                ))
+                            }
                         </div>
                         <BlockSendMessage>
-                            <Input type="text" />
+                            <Input type="text" onChange={(e) => setMessage(e.target.value)} value={message} />
                             <SendBtn>
-                                <FontAwesomeIcon size="xl" color="#55ea47d4" icon={faLocationArrow} />
+                                <FontAwesomeIcon onClick={sendMessage} size="xl" color="#55ea47d4" icon={faLocationArrow} />
                             </SendBtn>
                         </BlockSendMessage>
                     </RightBlock>
