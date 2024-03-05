@@ -4,6 +4,7 @@ import { Container, LeftBlock, RightBlock, Section, Wrapper, OnlineTitle, SubMes
 import { useEffect, useState } from "react";
 import { socket } from "../../../socket/socket";
 import { useLocation } from "react-router-dom";
+import {v4 as uuid } from "uuid";
 
 export const Chat = () => {
     const [usersOnline, setUsersOnline] = useState([])
@@ -55,8 +56,8 @@ export const Chat = () => {
                             <OnlineTitle>Online:</OnlineTitle>
                             <ul>
                                 {usersOnline &&
-                                    usersOnline.map((user, id) => (
-                                        <li key={id}>{user}</li>
+                                    usersOnline.map((user) => (
+                                        <li key={uuid()}>{user}</li>
                                     ))
                                 }
                             </ul>
