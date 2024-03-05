@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationArrow } from "@fortawesome/free-solid-svg-icons";
-import { Container, LeftBlock, RightBlock, Section, Wrapper,OnlineTitle, SubMessage, Message, MessageInner, Input, BlockSendMessage, SendBtn } from "./styledChat";
+import { Container, LeftBlock, RightBlock, Section, Wrapper, OnlineTitle, SubMessage, Message, MessageInner, Input, BlockSendMessage, SendBtn } from "./styledChat";
 import { useEffect, useState } from "react";
 import { socket } from "../../../socket/socket";
 import { useLocation } from "react-router-dom";
@@ -15,7 +15,7 @@ export const Chat = () => {
         const locationArray = location.pathname.split('/')
         const userName = locationArray[locationArray.length - 1];
         const id = locationArray[locationArray.length - 2];
-        socket.emit("SEND_MESSAGE", { roomId: id, message:  { userName: userName, text: message } })
+        socket.emit("SEND_MESSAGE", { roomId: id, message: { userName: userName, text: message } })
         setMessage("")
     }
 
@@ -46,8 +46,6 @@ export const Chat = () => {
         };
     }, [])
 
-    console.log(chatMessages)
-
     return (
         <Section>
             <Container>
@@ -69,7 +67,7 @@ export const Chat = () => {
                         <div>
                             {chatMessages &&
                                 chatMessages.map((message, id) => (
-                                    
+
                                     <MessageInner key={id}>
                                         <Message><span>{message.text}</span></Message>
                                         <SubMessage>{message.userName}</SubMessage>
