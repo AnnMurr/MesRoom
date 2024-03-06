@@ -4,7 +4,7 @@ import { FormBlock } from "./components/formBlock/formBlock";
 import { useState } from "react";
 
 export const Form = () => {
-    const [userEmoji, setUserEmoji] = useState("\u{1F60A}")
+    const [userEmoji, setUserEmoji] = useState("\u{1F60A}");
 
     return (
         <Section>

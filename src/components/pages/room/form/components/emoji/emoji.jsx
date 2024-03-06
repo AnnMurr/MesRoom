@@ -1,14 +1,12 @@
 import { EMOJI } from "../../../../../../consts/consts";
-import { Emoji, EmojiBlock, EmojiList, EmojiItemBtn, EmojiItem } from "./styledEmoji";
 import { v4 as uuid } from "uuid";
+import { Emoji, EmojiBlock, EmojiList, EmojiItemBtn, EmojiItem } from "./styledEmoji";
 
-export const EmojiComponent = ({userEmoji,setUserEmoji }) => {
-    
-
+export const EmojiComponent = ({ userEmoji, setUserEmoji }) => {
     const selectEmoji = (e) => {
-        e.preventDefault()
-        setUserEmoji(e.target.textContent)
-    }
+        e.preventDefault();
+        setUserEmoji(e.target.textContent);
+    };
 
     return (
         <>

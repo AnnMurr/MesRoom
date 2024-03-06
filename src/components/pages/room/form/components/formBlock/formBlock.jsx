@@ -3,8 +3,8 @@ import { Btn } from "../button/button";
 import { FormInner, Label, Input, ErrorMes } from "./styledFormBlock";
 
 export const FormBlock = ({ userEmoji }) => {
-    const [userName, setUserName] = useState("")
-    const [errorMessage, setErrorMessage] = useState("")
+    const [userName, setUserName] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     return (
         <FormInner>

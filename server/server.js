@@ -50,18 +50,18 @@ app.post("/check-username", (req, res) => {
 io.on("connection", (socket) => {
   socket.on("ROOM:JOIN", ({ roomId, userName }) => {
     socket.join(roomId);
-    userName.name = userName.name.charAt(0).toUpperCase() + userName.name.slice(1, userName.length)
+    userName.name = userName.name.charAt(0).toUpperCase() + userName.name.slice(1, userName.length);
 
     if (rooms.has(roomId)) {
       const users = rooms.get(roomId).get("users");
       const messages = rooms.get(roomId).get("messages");
+
       if (
         users.findIndex((userData) => userData.name.toLowerCase() === userName.name.toLowerCase()) === -1) {
         rooms.get(roomId).get("users").push(userName);
       }
 
       io.to(roomId).emit("usersOnline", users);
-
       io.to(roomId).emit("chatMessages", messages);
     }
   });
@@ -70,8 +70,7 @@ io.on("connection", (socket) => {
     if (rooms.has(roomId)) {
       const users = rooms.get(roomId).get("users");
       const updateUsers = users.filter(
-        (userData) => userData.name.toLowerCase() !== userName.name.toLowerCase()
-      );
+        (userData) => userData.name.toLowerCase() !== userName.name.toLowerCase());
       rooms.get(roomId).set("users", updateUsers);
       io.to(roomId).emit("usersOnline", updateUsers);
     }
