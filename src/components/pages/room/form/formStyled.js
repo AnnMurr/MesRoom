@@ -17,5 +17,3 @@ export const Wrapper = styled.div`
     max-width: 15%;
     width: 100%;
 `
-
-

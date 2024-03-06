@@ -23,13 +23,13 @@ export const Wrapper = styled.div`
 `
 
 export const LeftBlock = styled.div`
-    background-color: ##141414;
-    padding: 40px;
+    background-color: #141414;
+    padding: 40px 30px 40px 30px;
     color: white;
 `
 
 export const RightBlock = styled.div`
-    background-color: ##141414;
+    background-color: #141414;
     padding-top: 40px;
     display: flex;
     flex-direction: column;

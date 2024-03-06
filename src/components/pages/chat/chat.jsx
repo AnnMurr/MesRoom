@@ -31,7 +31,6 @@ export const Chat = () => {
         socket.emit("ROOM:JOIN", { roomId: id, userName: { name: name, icon: userEmoji } })
 
         socket.on("usersOnline", (users) => {
-            console.log(users)
             setUsersOnline(users)
         })
 
@@ -67,7 +66,6 @@ export const Chat = () => {
                             </ul>
                         </div>
                     </LeftBlock>
-
                     <RightBlock>
                         <RightBlockInner>
                             {chatMessages &&
@@ -79,7 +77,6 @@ export const Chat = () => {
                                                 <SubMessage>{message.time} {message.userName}</SubMessage>
                                             </MessageInner>
                                             : 
-                                            
                                             <MessageInnerOwn key={uuid()}>
                                                 <MessageOwn><span>{message.text}</span></MessageOwn>
                                                 <SubMessage>{message.time} {message.userName}</SubMessage>
@@ -89,9 +86,18 @@ export const Chat = () => {
                             }
                         </RightBlockInner>
                         <BlockSendMessage>
-                            <TextArea onKeyDown={sendMessagebyEnter} rows={1} onChange={(e) => setMessage(e.target.value)} value={message} />
+                            <TextArea 
+                            placeholder="Message" 
+                            onKeyDown={sendMessagebyEnter} 
+                            rows={1} 
+                            onChange={(e) => setMessage(e.target.value)} 
+                            value={message} />
                             <SendBtn>
-                                <FontAwesomeIcon onKeyDown={sendMessagebyEnter} onClick={sendMessage} size="lg" color="#55ea47d4" icon={faLocationArrow} />
+                                <FontAwesomeIcon 
+                                onClick={sendMessage} 
+                                size="lg" 
+                                color="#55ea47d4" 
+                                icon={faLocationArrow} />
                             </SendBtn>
                         </BlockSendMessage>
                     </RightBlock>
