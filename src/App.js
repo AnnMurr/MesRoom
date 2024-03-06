@@ -1,7 +1,6 @@
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import { Body, Main, LinkGenerator, Room, Chat } from "./components";
 
-
 function App() {
   return (
     <Router>

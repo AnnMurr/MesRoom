@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationArrow } from "@fortawesome/free-solid-svg-icons";
 import { socket } from "../../../../../../../socket/socket";
+import { getCurrentTime } from "../../../../../../../utils/currentDate";
 import { Container, SendBtn, TextArea } from "./styledBlockSendMessage";
 
 export const BlockSendMessage = ({ setMessage, message }) => {
@@ -16,7 +17,7 @@ export const BlockSendMessage = ({ setMessage, message }) => {
             message: {
                 userName: name,
                 text: message,
-                time: `${new Date().getHours()}:${new Date().getMinutes()} `
+                time: getCurrentTime()
             }
         })
         setMessage("");
