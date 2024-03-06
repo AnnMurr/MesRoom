@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { Btn } from "../button/button";
 import { FormInner, Label, Input } from "./styledFormBlock";
 
-export const FormBlock = () => {
+export const FormBlock = ({ userEmoji }) => {
     const [userName, setUserName] = useState("")
     const inputRef = useRef(null)
 
@@ -15,7 +15,7 @@ export const FormBlock = () => {
                     placeholder="Name"
                     onChange={(e) => setUserName(e.target.value)} />
             </Label>
-            <Btn userName={userName} inputRef={inputRef} />
+            <Btn userEmoji={userEmoji} userName={userName} inputRef={inputRef} />
         </FormInner>
     )
 }

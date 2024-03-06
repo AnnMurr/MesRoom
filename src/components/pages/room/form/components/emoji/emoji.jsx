@@ -1,10 +1,9 @@
-import { useState } from "react";
 import { EMOJI } from "../../../../../../consts/consts";
 import { Emoji, EmojiBlock, EmojiList, EmojiItemBtn, EmojiItem } from "./styledEmoji";
 import { v4 as uuid } from "uuid";
 
-export const EmojiComponent = () => {
-    const [userEmoji, setUserEmoji] = useState("\u{1F60A}")
+export const EmojiComponent = ({userEmoji,setUserEmoji }) => {
+    
 
     const selectEmoji = (e) => {
         e.preventDefault()

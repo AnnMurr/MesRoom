@@ -1,33 +1,37 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationArrow } from "@fortawesome/free-solid-svg-icons";
-import { Container, LeftBlock, RightBlock, Section, Wrapper, OnlineTitle, SubMessage, Message, MessageInner, Input, BlockSendMessage, SendBtn } from "./styledChat";
+import { Container, LeftBlock, RightBlock, Section, Wrapper, OnlineTitle, SubMessage, Message, MessageInner, TextArea, BlockSendMessage, SendBtn, MessageInnerOwn, MessageOwn, RightBlockInner } from "./styledChat";
 import { useEffect, useState } from "react";
 import { socket } from "../../../socket/socket";
 import { useLocation } from "react-router-dom";
-import {v4 as uuid } from "uuid";
+import { v4 as uuid } from "uuid";
 
 export const Chat = () => {
     const [usersOnline, setUsersOnline] = useState([])
     const [message, setMessage] = useState("")
     const [chatMessages, setChatMessages] = useState([])
     const location = useLocation()
+    const { id, name, userEmoji } = location.state
+
+    const sendMessagebyEnter = (event) => event.key === "Enter" && sendMessage()
 
     const sendMessage = () => {
         const locationArray = location.pathname.split('/')
         const userName = locationArray[locationArray.length - 1];
         const id = locationArray[locationArray.length - 2];
-        socket.emit("SEND_MESSAGE", { roomId: id, message: { userName: userName, text: message } })
+        socket.emit("SEND_MESSAGE", { roomId: id, message: { userName: userName, text: message, time: `${new Date().getHours()}:${new Date().getMinutes()} `} })
         setMessage("")
     }
 
     useEffect(() => {
-        const locationArray = location.pathname.split('/')
-        const userName = locationArray[locationArray.length - 1];
-        const id = locationArray[locationArray.length - 2];
+        // const locationArray = location.pathname.split('/')
+        // const userName = locationArray[locationArray.length - 1];
+        // const id = locationArray[locationArray.length - 2];
 
-        socket.emit("ROOM:JOIN", { roomId: id, userName: userName })
+        socket.emit("ROOM:JOIN", { roomId: id, userName: { name: name, icon: userEmoji } })
 
         socket.on("usersOnline", (users) => {
+            console.log(users)
             setUsersOnline(users)
         })
 
@@ -35,17 +39,17 @@ export const Chat = () => {
             setChatMessages(messages)
         })
 
-        const handleUnload = () => socket.emit("ROOM:LEAVE", { roomId: id, userName: userName })
+        const handleUnload = () => socket.emit("ROOM:LEAVE", { roomId: id, userName: { name: name, icon: userEmoji } })
 
         window.addEventListener("beforeunload", handleUnload)
 
         return () => {
             window.removeEventListener("beforeunload", handleUnload)
 
-            socket.emit("ROOM:LEAVE", { roomId: id, userName: userName })
+            socket.emit("ROOM:LEAVE", { roomId: id, userName: { name: name, icon: userEmoji } })
             socket.disconnect();
         };
-    }, [])
+    }, [location.pathname])
 
     return (
         <Section>
@@ -56,8 +60,8 @@ export const Chat = () => {
                             <OnlineTitle>Online:</OnlineTitle>
                             <ul>
                                 {usersOnline &&
-                                    usersOnline.map((user) => (
-                                        <li key={uuid()}>{user}</li>
+                                    usersOnline.map((userData) => (
+                                        <li key={uuid()}> <span>{userData.icon}</span> {userData.name}</li>
                                     ))
                                 }
                             </ul>
@@ -65,21 +69,29 @@ export const Chat = () => {
                     </LeftBlock>
 
                     <RightBlock>
-                        <div>
+                        <RightBlockInner>
                             {chatMessages &&
-                                chatMessages.map((message, id) => (
-
-                                    <MessageInner key={id}>
-                                        <Message><span>{message.text}</span></Message>
-                                        <SubMessage>{message.userName}</SubMessage>
-                                    </MessageInner>
+                                chatMessages.map((message) => (
+                                    <>
+                                        {message.userName !== name ?
+                                            <MessageInner key={uuid()}>
+                                                <Message><span>{message.text}</span></Message>
+                                                <SubMessage>{message.time} {message.userName}</SubMessage>
+                                            </MessageInner>
+                                            : 
+                                            
+                                            <MessageInnerOwn key={uuid()}>
+                                                <MessageOwn><span>{message.text}</span></MessageOwn>
+                                                <SubMessage>{message.time} {message.userName}</SubMessage>
+                                            </MessageInnerOwn>}
+                                    </>
                                 ))
                             }
-                        </div>
+                        </RightBlockInner>
                         <BlockSendMessage>
-                            <Input type="text" onChange={(e) => setMessage(e.target.value)} value={message} />
+                            <TextArea onKeyDown={sendMessagebyEnter} rows={1} onChange={(e) => setMessage(e.target.value)} value={message} />
                             <SendBtn>
-                                <FontAwesomeIcon onClick={sendMessage} size="xl" color="#55ea47d4" icon={faLocationArrow} />
+                                <FontAwesomeIcon onKeyDown={sendMessagebyEnter} onClick={sendMessage} size="lg" color="#55ea47d4" icon={faLocationArrow} />
                             </SendBtn>
                         </BlockSendMessage>
                     </RightBlock>

@@ -30,24 +30,51 @@ export const LeftBlock = styled.div`
 
 export const RightBlock = styled.div`
     background-color: ##141414;
-    padding: 40px;
+    padding-top: 40px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: hidden;
     border-left: 2px solid #66666670;
+`
+
+export const RightBlockInner = styled.div`
+    padding: 0 40px 0 40px;
+    overflow: scroll;
 `
 
 export const MessageInner = styled.div`
     padding: 10px;
     color: white;
+    overflow-wrap: anywhere;
+`
+
+export const MessageInnerOwn = styled.div`
+    padding: 10px;
+    color: white;
+    width: fit-content;
+    text-align: end;
+    margin-left: auto;
+    overflow-wrap: anywhere;
 `
 
 export const Message = styled.div`
     width: fit-content;
-    background-color: #5dac92;
-    color: black;
+    background-color: #242121;
+    color: #fff;
     padding: 10px;
-    border-radius: 20px 10px 5px 0;
+    border-radius: 10px;
+    text-align: left;
+`
+
+export const MessageOwn = styled.div`
+    width: fit-content;
+    background-color: #3e9413;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: left;
+    margin-left: auto;
 `
 
 export const OnlineTitle = styled.h5`
@@ -58,24 +85,37 @@ export const OnlineTitle = styled.h5`
 export const SubMessage = styled.div`
     font-size: 13px;
     opacity: 0.6;
+    padding-top: 5px;
 `
 export const SendBtn = styled.button`
     position: absolute;
     right: 10px;
-    top: 5px;
+    top: 7px;
+    right: 42px;
+    top: 18px;
 `
 
 export const BlockSendMessage = styled.div`
     display: flex;
     justify-content: space-between;
     position: relative;
+    background-color: #242121;
+    padding: 10px 30px 10px 30px;
 `
 
-export const Input = styled.input`
+export const TextArea = styled.textarea`
     width: 100%;
-    border-radius: 5px;
-    padding: 7px;
-    background-color: #242121;
+    border-radius: 10px;
+    padding: 7px 33px 7px 15px;
+    background-color: #101010;
     border: none;
-    color: #747474;
+    color: #fff;
+    resize: none;
+    overflow: hidden;
+    overflow-y: scroll;
+    scrollbar-width: none;
+
+    &:focus-visible {
+        outline: 1px auto #00ff005c;
+    }
 `

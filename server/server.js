@@ -19,7 +19,7 @@ const rooms = new Map();
 app.post("/room", (req, res) => {
   const roomId = uuidv4();
   const link = `http://localhost:3000/#room/${roomId}`;
-  console.log(rooms);
+
   if (!rooms.has(roomId)) {
     rooms.set(
       roomId,
@@ -39,7 +39,7 @@ io.on("connection", (socket) => {
     if (rooms.has(roomId)) {
       const users = rooms.get(roomId).get("users");
       const messages = rooms.get(roomId).get("messages");
-      if (!users.includes(userName)) {
+      if (users.findIndex(userData => userData.name === userName.name) === -1) {
         rooms.get(roomId).get("users").push(userName);
       }
 
@@ -52,7 +52,7 @@ io.on("connection", (socket) => {
   socket.on("ROOM:LEAVE", ({ roomId, userName }) => {
     if (rooms.has(roomId)) {
       const users = rooms.get(roomId).get("users");
-      const updateUsers = users.filter((name) => name !== userName);
+      const updateUsers = users.filter((userData) => userData.name !== userName.name);
       rooms.get(roomId).set("users", updateUsers);
       io.to(roomId).emit("usersOnline", updateUsers);
     }
