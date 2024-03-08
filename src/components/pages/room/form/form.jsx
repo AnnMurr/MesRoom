@@ -1,7 +1,7 @@
-import { EmojiComponent } from "./components/emoji/emoji";
-import { Wrapper, Container, Section } from "./formStyled";
-import { FormBlock } from "./components/formBlock/formBlock";
 import { useState } from "react";
+import { EmojiComponent } from "./components/emoji/emoji";
+import { FormBlock } from "./components/formBlock/formBlock";
+import { Wrapper, Container, Section } from "./formStyled";
 
 export const Form = () => {
     const [userEmoji, setUserEmoji] = useState("\u{1F60A}");

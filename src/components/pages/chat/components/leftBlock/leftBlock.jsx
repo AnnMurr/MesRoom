@@ -48,7 +48,9 @@ export const LeftBlock = () => {
                                         {<FontAwesomeIcon size="sm" style={{ color: "lightgray" }} icon={faPen} />}
                                     </EditBtn>
                                     : null}
-                                <EmojiBlock emojiBlockRef={emojiBlockRef} selectEmoji={selectEmoji} />
+                                {userData.name.toLowerCase() === name.toLowerCase() ?
+                                    <EmojiBlock emojiBlockRef={emojiBlockRef} selectEmoji={selectEmoji} />
+                                    : null}
                             </Item>
                         ))
                     }

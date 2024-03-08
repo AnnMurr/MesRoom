@@ -10,6 +10,7 @@ export const Emoji = styled.div`
     width: fit-content;
     opacity: 1;
     z-index: 5;
+    color: #fff;
 
     &:hover + ${EmojiBlockContainer} {
         opacity: 1; 

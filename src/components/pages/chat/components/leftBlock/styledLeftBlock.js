@@ -21,6 +21,7 @@ export const EditBtn = styled.button`
 export const Item = styled.li`
     cursor: pointer;
     position: relative;
+    padding-bottom: 5px;
 
     &:hover > ${EditBtn} {
         opacity: 1;
