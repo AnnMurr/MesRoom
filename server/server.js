@@ -38,8 +38,13 @@ app.post("/check-username", (req, res) => {
 
   if (rooms.has(roomId)) {
     if (
-      rooms.get(roomId).get("users")
-        .findIndex((data) => data.name.toLowerCase() === userName.toLowerCase()) !== -1) {
+      rooms
+        .get(roomId)
+        .get("users")
+        .findIndex(
+          (data) => data.name.toLowerCase() === userName.toLowerCase()
+        ) !== -1
+    ) {
       isUserName = true;
     }
   }
@@ -50,14 +55,20 @@ app.post("/check-username", (req, res) => {
 io.on("connection", (socket) => {
   socket.on("ROOM:JOIN", ({ roomId, userName }) => {
     socket.join(roomId);
-    userName.name = userName.name.charAt(0).toUpperCase() + userName.name.slice(1, userName.length);
+    userName.name =
+      userName.name.charAt(0).toUpperCase() +
+      userName.name.slice(1, userName.length);
 
     if (rooms.has(roomId)) {
       const users = rooms.get(roomId).get("users");
       const messages = rooms.get(roomId).get("messages");
 
       if (
-        users.findIndex((userData) => userData.name.toLowerCase() === userName.name.toLowerCase()) === -1) {
+        users.findIndex(
+          (userData) =>
+            userData.name.toLowerCase() === userName.name.toLowerCase()
+        ) === -1
+      ) {
         rooms.get(roomId).get("users").push(userName);
       }
 
@@ -70,7 +81,9 @@ io.on("connection", (socket) => {
     if (rooms.has(roomId)) {
       const users = rooms.get(roomId).get("users");
       const updateUsers = users.filter(
-        (userData) => userData.name.toLowerCase() !== userName.name.toLowerCase());
+        (userData) =>
+          userData.name.toLowerCase() !== userName.name.toLowerCase()
+      );
       rooms.get(roomId).set("users", updateUsers);
       io.to(roomId).emit("usersOnline", updateUsers);
     }
@@ -82,6 +95,19 @@ io.on("connection", (socket) => {
       rooms.get(roomId).get("messages").push(message);
       io.to(roomId).emit("chatMessages", messages);
     }
+  });
+
+  socket.on("CHANGE-USERICON", ({ id, name, newEmoji }) => {
+    const users = rooms.has(id) && rooms.get(id).get("users");
+
+    if (rooms.has(id)) {
+      const user = users.find(
+        (user) => user.name.toLowerCase() === name.toLowerCase()
+      );
+      user.icon = newEmoji;
+    }
+
+    io.to(id).emit("CHANGED-USERDATA", users);
   });
 
   socket.on("disconnect", () => {

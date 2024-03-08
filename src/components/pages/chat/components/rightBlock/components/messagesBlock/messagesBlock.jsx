@@ -1,5 +1,5 @@
-import { useLocation } from "react-router-dom";
 import { v4 as uuid } from "uuid";
+import { getDataFromSessionStorage } from "../../../../../../../store/sessionStorage";
 import {
     Container,
     Message,
@@ -10,9 +10,8 @@ import {
 } from "./styledMessagesBlock";
 
 export const MessagesBlock = ({ chatMessages }) => {
-    const location = useLocation();
-    const { name } = location.state;
-    
+    const { name } = getDataFromSessionStorage("userData");
+
     return (
         <Container>
             {chatMessages &&

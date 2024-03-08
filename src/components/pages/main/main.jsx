@@ -5,7 +5,7 @@ export const Main = () => {
         return (
                 <Container>
                         <BtnInner to={"/generator"}>
-                                <Button text={"Get started"} />
+                                <Button size={"big"} text={"Get started"} />
                         </BtnInner>
                 </Container>
         )

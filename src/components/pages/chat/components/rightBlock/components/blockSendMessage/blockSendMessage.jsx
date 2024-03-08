@@ -1,14 +1,13 @@
-import { useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationArrow } from "@fortawesome/free-solid-svg-icons";
 import { socket } from "../../../../../../../socket/socket";
 import { getCurrentTime } from "../../../../../../../utils/currentDate";
+import { getDataFromSessionStorage } from "../../../../../../../store/sessionStorage";
 import { Container, SendBtn, TextArea } from "./styledBlockSendMessage";
 
 export const BlockSendMessage = ({ setMessage, message }) => {
-    const location = useLocation();
-    const { id, name } = location.state;
-
+    const { id, name }  = getDataFromSessionStorage("userData");
+    
     const sendMessagebyEnter = (event) => event.key === "Enter" && sendMessage();
 
     const sendMessage = () => {

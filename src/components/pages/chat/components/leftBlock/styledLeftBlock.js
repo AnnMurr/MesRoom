@@ -10,3 +10,20 @@ export const OnlineTitle = styled.h5`
     padding-bottom: 10px;
     font-size: 17px;
 `
+
+export const EditBtn = styled.button`
+    margin-left: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease-in;
+`
+
+export const Item = styled.li`
+    cursor: pointer;
+    position: relative;
+
+    &:hover > ${EditBtn} {
+        opacity: 1;
+        visibility: visible;
+    }
+`

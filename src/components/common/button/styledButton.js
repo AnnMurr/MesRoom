@@ -8,7 +8,7 @@ export const Btn = styled.button`
     font-weight: 700;
     transition: background-color 0.3s ease-in-out; 
     width: 100%;
-    max-width: ${({size}) => size === "big" ? "330px" : "230px"};
+    max-width: ${({size}) => size === "big" ? "330px" : "100%"};
 
     &:hover {
         background-color: #7fffd4;

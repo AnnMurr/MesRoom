@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../../../../common/button/button";
+import { setDataToSessionStorage } from "../../../../../../store/sessionStorage";
 
 export const Btn = ({ userName, userEmoji, setErrorMessage }) => {
     const navigation = useNavigate();
@@ -37,7 +38,8 @@ export const Btn = ({ userName, userEmoji, setErrorMessage }) => {
                 id: roomId,
                 userEmoji: userEmoji
             };
-            navigation(`/room/${roomId}/${userName}`, { state: data });
+            navigation(`/room/${roomId}/${userName}`);
+            setDataToSessionStorage("userData", data);
         } else {
             setErrorMessage("wrong data");
         }

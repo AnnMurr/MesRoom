@@ -1,6 +1,5 @@
-import { EMOJI } from "../../../../../../consts/consts";
-import { v4 as uuid } from "uuid";
-import { Emoji, EmojiBlock, EmojiList, EmojiItemBtn, EmojiItem } from "./styledEmoji";
+import { EmojiBlock } from "../../../../../common/emojiBlock/emojiBlock";
+import { Emoji } from "./styledEmoji";
 
 export const EmojiComponent = ({ userEmoji, setUserEmoji }) => {
     const selectEmoji = (e) => {
@@ -13,18 +12,7 @@ export const EmojiComponent = ({ userEmoji, setUserEmoji }) => {
             <Emoji>
                 {userEmoji}
             </Emoji>
-            <EmojiBlock>
-                <EmojiList>
-                    {EMOJI &&
-                        EMOJI.map((emoji) => (
-                            <EmojiItem key={uuid()}>
-                                <EmojiItemBtn onClick={selectEmoji}>
-                                    {emoji}
-                                </EmojiItemBtn>
-                            </EmojiItem>
-                        ))}
-                </EmojiList>
-            </EmojiBlock>
+            <EmojiBlock selectEmoji={selectEmoji} />
         </>
     )
 }

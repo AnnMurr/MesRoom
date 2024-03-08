@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import { socket } from "../../../socket/socket";
 import { LeftBlock } from "./components/leftBlock/leftBlock";
 import { RightBlock } from "./components/rightBlock/rightBlock";
+import { getDataFromSessionStorage } from "../../../store/sessionStorage";
 import { Container, Section, Wrapper } from "./styledChat";
 
 export const Chat = () => {
     const [usersOnline, setUsersOnline] = useState([]);
-    const [message, setMessage] = useState("");
     const [chatMessages, setChatMessages] = useState([]);
-    const location = useLocation();
-    const { id, name, userEmoji } = location.state;
+    const [message, setMessage] = useState("");
+    const { id, name, userEmoji } = getDataFromSessionStorage("userData");
 
     useEffect(() => {
-        socket.emit("ROOM:JOIN", { roomId: id, userName: { name: name, icon: userEmoji } });
+        socket.emit("ROOM:JOIN", { roomId: id, userName: { name: name, icon: userEmoji ? userEmoji :  userEmoji  } });
         socket.on("usersOnline", (users) => setUsersOnline(users));
         socket.on("chatMessages", (messages) =>  setChatMessages(messages));
 
@@ -34,12 +33,12 @@ export const Chat = () => {
                 roomId: id, 
                 userName: { 
                     name: name, 
-                    icon: userEmoji 
+                    icon:  userEmoji
                 } 
             });
             socket.disconnect();
         };
-    }, [location.pathname]);
+    }, []);
 
     return (
         <Section>

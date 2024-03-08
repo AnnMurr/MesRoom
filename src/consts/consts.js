@@ -30,3 +30,11 @@ export const EMOJI = [
     '\u{1F6BC}', '\u{1F6BD}', '\u{1F6BE}', '\u{1F6BF}', '\u{1F6C0}'
 ];
 
+export const fetchEmojiData = async () => {
+    return fetch("https://emoji-api.com/emojis?access_key=a48c2f3f60b61ebca161dbd05e75ab0a5296d6ec")
+    .then((response) => response.json())
+    .then((data) => data)
+    .catch((err) => {
+        throw err;
+    })
+  };
