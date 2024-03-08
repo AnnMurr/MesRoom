@@ -10,8 +10,8 @@ export const EmojiBlock = ({ selectEmoji, emojiBlockRef }) => {
         try {
             const dataEmoji = await fetchEmojiData();
             setEmojiFromApi(dataEmoji)
-        } catch (e) {
-            console.error("Failed to fetch");
+        } catch (error) {
+            console.error('Failed to fetch:', error);
         }
     }
 

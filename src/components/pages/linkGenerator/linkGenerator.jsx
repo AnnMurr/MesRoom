@@ -18,8 +18,8 @@ export const LinkGenerator = () => {
 
             const { link } = await response.json();
             setIsLink(link);
-        } catch (err) {
-            throw err
+        } catch (error) {
+            console.error('Failed to fetch:', error);
         }
     };
 

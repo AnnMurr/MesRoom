@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const EmojiBlockContainer = styled.div`
     opacity: 0; 
     visibility: hidden; 
-    transition: all 0.8s ease-in-out;
+    transition: all 0.5s ease-in-out;
     position: absolute;
     width: 100%;
     background-color: #2c2c2c;

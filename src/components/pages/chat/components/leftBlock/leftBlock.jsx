@@ -6,12 +6,21 @@ import { socket } from "../../../../../socket/socket";
 import { v4 as uuid } from "uuid";
 import { getDataFromSessionStorage, setDataToSessionStorage } from "../../../../../store/sessionStorage";
 import { Container, OnlineTitle, Item, EditBtn } from "./styledLeftBlock";
+import { checkUserIcon } from "../../../../../api/checkUserData";
 
 export const LeftBlock = () => {
     const { id, name } = getDataFromSessionStorage("userData");
     const [usersOnline, setUsersOnline] = useState([]);
     const emojiBlockRef = useRef(null);
-    const localData = getDataFromSessionStorage("userData");
+    const editBtnRef = useRef(null);
+    const dataFromLocalStorage = getDataFromSessionStorage("userData");
+
+    const closeEmojiBlockByClickOutside = (event) => {
+        if (!emojiBlockRef.current.contains(event.target)
+            && !editBtnRef.current.contains(event.target)) {
+            openEmojiBlock()
+        }
+    }
 
     useEffect(() => {
         socket.on("usersOnline", (users) => setUsersOnline(users));
@@ -21,17 +30,28 @@ export const LeftBlock = () => {
     const openEmojiBlock = () => {
         const emojiBlocStyle = emojiBlockRef.current.style;
         emojiBlocStyle.opacity = emojiBlocStyle.opacity === "1" ? "0" : "1";
-        emojiBlocStyle.visibility = emojiBlocStyle.opacity === "visible" ? "hidden" : "visible";
+        emojiBlocStyle.visibility = emojiBlocStyle.visibility === "visible" ? "hidden" : "visible";
+
+        emojiBlocStyle.visibility === "visible" ?
+        document.addEventListener("click", closeEmojiBlockByClickOutside) :
+        document.removeEventListener("click", closeEmojiBlockByClickOutside)
     }
 
-    const selectEmoji = async (e) => {
-        const newEmoji = e.target.textContent;
-        e.preventDefault();
+    const selectEmoji = async (event) => {
+        const selectedEmoji = event.target.textContent;
+        const isEmoji = await checkUserIcon(id, selectedEmoji);
 
-        socket.emit("CHANGE-USERICON", { id, name, newEmoji });
-
-        localData.userEmoji = newEmoji;
-        setDataToSessionStorage("userData", localData);
+        if(isEmoji) {
+           console.log("emoji err")
+        } else {
+            const newEmoji = selectedEmoji;
+            event.preventDefault();
+    
+            socket.emit("CHANGE-USERICON", { id, name, newEmoji });
+    
+            dataFromLocalStorage.userEmoji = newEmoji;
+            setDataToSessionStorage("userData", dataFromLocalStorage);
+        }
     };
 
     return (
@@ -44,7 +64,7 @@ export const LeftBlock = () => {
                             <Item key={uuid()}>
                                 <span>{userData.icon}</span> {userData.name}
                                 {userData.name.toLowerCase() === name.toLowerCase() ?
-                                    <EditBtn onClick={openEmojiBlock}>
+                                    <EditBtn ref={editBtnRef} onClick={openEmojiBlock}>
                                         {<FontAwesomeIcon size="sm" style={{ color: "lightgray" }} icon={faPen} />}
                                     </EditBtn>
                                     : null}

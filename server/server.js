@@ -32,7 +32,7 @@ app.post("/room", (req, res) => {
   }
 });
 
-app.post("/check-username", (req, res) => {
+app.post("/check-userName", (req, res) => {
   const { roomId, userName } = req.body;
   let isUserName = false;
 
@@ -50,6 +50,20 @@ app.post("/check-username", (req, res) => {
   }
 
   res.status(200).json({ isUserName });
+});
+
+app.post("/check-userEmoji", (req, res) => {
+  const { roomId, userEmoji } = req.body;
+  let isUserEmoji = false;
+
+  if (rooms.has(roomId)) {
+    if (rooms.get(roomId).get("users")
+      .findIndex((data) => data.icon === userEmoji) !== -1) {
+      isUserEmoji = true;
+    }
+  }
+
+  res.status(200).json({ isUserEmoji });
 });
 
 io.on("connection", (socket) => {
