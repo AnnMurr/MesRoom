@@ -12,16 +12,19 @@ export const Chat = () => {
     const { id, name, userEmoji } = getDataFromSessionStorage("userData");
 
     useEffect(() => {
-        socket.emit("ROOM:JOIN", { roomId: id, userName: { name: name, icon: userEmoji ? userEmoji :  userEmoji  } });
+        socket.emit("ROOM:JOIN", { roomId: id, userName: { name: name, icon: userEmoji ? userEmoji : userEmoji } });
         socket.on("usersOnline", (users) => setUsersOnline(users));
-        socket.on("chatMessages", (messages) =>  setChatMessages(messages));
+        socket.on("chatMessages", (messages) => setChatMessages(messages));
+        socket.on("changed-messages", (messages) => setChatMessages(messages));
 
-        const handleUnload = () => socket.emit("ROOM:LEAVE", { 
-            roomId: id, 
-            userName: { 
-                name: name, 
-                icon: userEmoji 
-            } 
+        console.log("chatMessages", chatMessages)
+
+        const handleUnload = () => socket.emit("ROOM:LEAVE", {
+            roomId: id,
+            userName: {
+                name: name,
+                icon: userEmoji
+            }
         });
 
         window.addEventListener("beforeunload", handleUnload);
@@ -30,11 +33,11 @@ export const Chat = () => {
             window.removeEventListener("beforeunload", handleUnload);
 
             socket.emit("ROOM:LEAVE", {
-                roomId: id, 
-                userName: { 
-                    name: name, 
-                    icon:  userEmoji
-                } 
+                roomId: id,
+                userName: {
+                    name: name,
+                    icon: userEmoji
+                }
             });
             socket.disconnect();
         };
@@ -44,12 +47,13 @@ export const Chat = () => {
         <Section>
             <Container>
                 <Wrapper>
-                   <LeftBlock usersOnline={usersOnline} />
-                   <RightBlock 
-                   chatMessages={chatMessages} 
-                   setMessage={setMessage} 
-                   message={message} />
-                </Wrapper>       
+                    <LeftBlock usersOnline={usersOnline} />
+                    <RightBlock
+                        chatMessages={chatMessages}
+                        setMessage={setMessage}
+                        setChatMessages={setChatMessages}
+                        message={message} />
+                </Wrapper>
             </Container>
         </Section>
     )

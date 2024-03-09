@@ -124,6 +124,18 @@ io.on("connection", (socket) => {
     io.to(id).emit("CHANGED-USERDATA", users);
   });
 
+  socket.on("DELETE_MESSAGE", ({ messageId, roomId }) => {
+
+    if(rooms.has(roomId))  {
+      const messages = rooms.get(roomId).get("messages");
+      const updatedMessages = messages.filter(data => data.id !== messageId)
+      rooms.get(roomId).set("messages", updatedMessages)
+
+      io.to(roomId).emit("changed-messages", messages);
+    }
+    
+  })
+
   socket.on("disconnect", () => {
     console.log("Client disconnected");
   });
