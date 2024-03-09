@@ -6,6 +6,7 @@ export const Container = styled.div`
 `
 
 export const MessageInner = styled.div`
+    position: relative;
     padding: 10px;
     color: white;
     overflow-wrap: anywhere;
@@ -18,6 +19,7 @@ export const MessageInnerOwn = styled.div`
     text-align: end;
     margin-left: auto;
     overflow-wrap: anywhere;
+    position: relative;
 `
 
 export const Message = styled.div`
