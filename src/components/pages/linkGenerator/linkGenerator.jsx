@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { Button } from "../../common/button/button";
 import { Link } from "./components/link";
 import { Wrapper, BtnInner } from "./styledLinkGenerator";
+import { OutlinedAlerts } from "../../common/alerts/alerts";
 
 export const LinkGenerator = () => {
     const [isLink, setIsLink] = useState('');
+    const [isSuccessAlert, setIsSuccessAlert] = useState(false);
+    const [isErrorAlert, setIsErrorAlert] = useState(false);
 
     const onGenerateLink = async () => {
         try {
@@ -28,7 +31,13 @@ export const LinkGenerator = () => {
             <BtnInner>
                 <Button size={"big"} func={onGenerateLink} text={"Generate link"} />
             </BtnInner>
-            {isLink && (<Link isLink={isLink} />)}
+            {isLink && (<Link isLink={isLink} setIsSuccessAlert={setIsSuccessAlert} setIsErrorAlert={setIsErrorAlert} />)}
+            {isSuccessAlert ?
+                <OutlinedAlerts type={"success"} text={"The link has been successfully copied"} />
+                : null}
+            {isErrorAlert ?
+                <OutlinedAlerts type={"error"} text={"Error copying text"} />
+                : null}
         </Wrapper>
     );
 };
