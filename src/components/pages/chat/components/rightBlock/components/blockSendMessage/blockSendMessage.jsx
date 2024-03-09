@@ -6,20 +6,22 @@ import { getDataFromSessionStorage } from "../../../../../../../store/sessionSto
 import { Container, SendBtn, TextArea } from "./styledBlockSendMessage";
 
 export const BlockSendMessage = ({ setMessage, message }) => {
-    const { id, name }  = getDataFromSessionStorage("userData");
-    
+    const { id, name } = getDataFromSessionStorage("userData");
+
     const sendMessagebyEnter = (event) => event.key === "Enter" && sendMessage();
 
     const sendMessage = () => {
-        socket.emit("SEND_MESSAGE", {
-            roomId: id,
-            message: {
-                userName: name,
-                text: message,
-                time: getCurrentTime()
-            }
-        })
-        setMessage("");
+        if (message && !message.split("").every((symbol) => symbol === " ")) {
+            socket.emit("SEND_MESSAGE", {
+                roomId: id,
+                message: {
+                    userName: name,
+                    text: message,
+                    time: getCurrentTime()
+                }
+            })
+            setMessage("");
+        }
     }
 
     return (

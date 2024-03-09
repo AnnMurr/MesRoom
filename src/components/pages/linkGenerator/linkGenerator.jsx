@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Button } from "../../common/button/button";
 import { Link } from "./components/link";
-import { Wrapper, BtnInner } from "./styledLinkGenerator";
 import { OutlinedAlerts } from "../../common/alerts/alerts";
+import { Wrapper, BtnInner } from "./styledLinkGenerator";
 
 export const LinkGenerator = () => {
     const [isLink, setIsLink] = useState('');

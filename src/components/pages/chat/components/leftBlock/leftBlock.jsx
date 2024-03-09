@@ -5,23 +5,20 @@ import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { socket } from "../../../../../socket/socket";
 import { v4 as uuid } from "uuid";
 import { getDataFromSessionStorage, setDataToSessionStorage } from "../../../../../store/sessionStorage";
-import { Container, OnlineTitle, Item, EditBtn } from "./styledLeftBlock";
 import { checkUserIcon } from "../../../../../api/checkUserData";
 import { OutlinedAlerts } from "../../../../common/alerts/alerts";
 import { blockPreviousPage } from "../../../../../utils/blockPreviousPage";
+import { Container, OnlineTitle, Item, EditBtn } from "./styledLeftBlock";
 
 export const LeftBlock = () => {
     const { id, name } = getDataFromSessionStorage("userData");
+    const dataFromLocalStorage = getDataFromSessionStorage("userData");
     const [usersOnline, setUsersOnline] = useState([]);
     const [isErrorAlert, setIsErrorAlert] = useState(false);
     const emojiBlockRef = useRef(null);
     const editBtnRef = useRef(null);
-    const dataFromLocalStorage = getDataFromSessionStorage("userData");
-
-    
 
     const closeEmojiBlockByClickOutside = (event) => {
-        console.log("click")
         if (emojiBlockRef.current && !emojiBlockRef.current.contains(event.target)
             && !editBtnRef.current.contains(event.target)) {
             openEmojiBlock()
@@ -35,7 +32,7 @@ export const LeftBlock = () => {
 
         emojiBlocStyle.visibility === "visible" ?
             document.addEventListener("click", closeEmojiBlockByClickOutside) :
-            document.removeEventListener("click", closeEmojiBlockByClickOutside)
+            document.removeEventListener("click", closeEmojiBlockByClickOutside);
     }
 
     const selectEmoji = async (event) => {
@@ -53,6 +50,7 @@ export const LeftBlock = () => {
 
             dataFromLocalStorage.userEmoji = newEmoji;
             setDataToSessionStorage("userData", dataFromLocalStorage);
+            document.removeEventListener("click", closeEmojiBlockByClickOutside);
         }
     };
 
@@ -61,11 +59,6 @@ export const LeftBlock = () => {
         
         socket.on("usersOnline", (users) => setUsersOnline(users));
         socket.on("CHANGED-USERDATA", (data) => setUsersOnline(data));
-
-        return () => {
-            console.log("remove")
-            document.removeEventListener("click", closeEmojiBlockByClickOutside)
-        }
     }, []);
 
     return (
