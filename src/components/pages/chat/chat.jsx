@@ -49,7 +49,7 @@ export const Chat = () => {
                    chatMessages={chatMessages} 
                    setMessage={setMessage} 
                    message={message} />
-                </Wrapper>
+                </Wrapper>       
             </Container>
         </Section>
     )
