@@ -9,7 +9,12 @@ import { Container, SendBtn, TextArea } from "./styledBlockSendMessage";
 export const BlockSendMessage = ({ setMessage, message }) => {
     const { id, name } = getDataFromSessionStorage("userData");
 
-    const sendMessagebyEnter = (event) => event.key === "Enter" && sendMessage();
+    const sendMessagebyEnter = (event) => {
+        if (event.key === "Enter" && !event.shiftKey) {
+            event.preventDefault()
+            sendMessage();
+        }
+    }
 
     const sendMessage = () => {
         if (message && !message.split("").every((symbol) => symbol === " ")) {

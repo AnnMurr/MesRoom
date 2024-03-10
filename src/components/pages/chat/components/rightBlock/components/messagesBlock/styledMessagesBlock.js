@@ -29,6 +29,7 @@ export const Message = styled.div`
     padding: 10px;
     border-radius: 10px;
     text-align: left;
+    white-space: pre-wrap;
 `
 
 export const MessageOwn = styled.div`
@@ -39,6 +40,7 @@ export const MessageOwn = styled.div`
     border-radius: 10px;
     text-align: left;
     margin-left: auto;
+    white-space: pre-wrap;
 `
 
 export const SubMessage = styled.div`
