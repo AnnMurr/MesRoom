@@ -4,7 +4,7 @@ import { Container, Icon, Item } from "./styledMessageSettings";
 import { getDataFromSessionStorage } from "../../../../../../../store/sessionStorage";
 import { socket } from "../../../../../../../socket/socket";
 
-export const MessageSettings = ({messageId}) => {
+export const MessageSettings = ({ messageId }) => {
     const { id } = getDataFromSessionStorage("userData");
     const deleteMessage = () => {
         socket.emit("DELETE_MESSAGE", {

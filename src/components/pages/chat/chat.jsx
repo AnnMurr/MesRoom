@@ -17,8 +17,6 @@ export const Chat = () => {
         socket.on("chatMessages", (messages) => setChatMessages(messages));
         socket.on("changed-messages", (messages) => setChatMessages(messages));
 
-        console.log("chatMessages", chatMessages)
-
         const handleUnload = () => socket.emit("ROOM:LEAVE", {
             roomId: id,
             userName: {
@@ -51,7 +49,6 @@ export const Chat = () => {
                     <RightBlock
                         chatMessages={chatMessages}
                         setMessage={setMessage}
-                        setChatMessages={setChatMessages}
                         message={message} />
                 </Wrapper>
             </Container>

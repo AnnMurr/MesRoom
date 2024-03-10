@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { v4 as uuid } from "uuid";
+import { MessageSettings } from "../messageSettings/messageSettings";
 import { getDataFromSessionStorage } from "../../../../../../../store/sessionStorage";
 import {
     Container,
@@ -9,7 +10,6 @@ import {
     MessageOwn,
     SubMessage
 } from "./styledMessagesBlock";
-import { MessageSettings } from "../messageSettings/messageSettings";
 
 export const MessagesBlock = ({ chatMessages }) => {
     const [isMessageSettings, setIsMessageSettings] = useState(null)
