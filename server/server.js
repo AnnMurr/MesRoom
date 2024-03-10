@@ -128,12 +128,24 @@ io.on("connection", (socket) => {
 
     if(rooms.has(roomId))  {
       const messages = rooms.get(roomId).get("messages");
-      const updatedMessages = messages.filter(data => data.id !== messageId)
+      const updatedMessages = messages.filter(messageData => messageData.id !== messageId)
       rooms.get(roomId).set("messages", updatedMessages)
 
       io.to(roomId).emit("changed-messages", updatedMessages);
     }
     
+  })
+
+  socket.on("EDIT_MESSAGE", ({ roomId, messageId, editedMessage }) => {
+    const messages = rooms.get(roomId).get("messages");
+    console.log(messages)
+    messages.forEach(messageData => {
+      if(messageData.id === messageId) {
+        messageData.text = editedMessage
+      }
+    })
+    
+    io.to(roomId).emit("changed-messages", messages);
   })
 
   socket.on("disconnect", () => {

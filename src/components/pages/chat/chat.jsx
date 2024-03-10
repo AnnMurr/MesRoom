@@ -54,6 +54,7 @@ export const Chat = () => {
                     <RightBlock
                         chatMessages={chatMessages}
                         setMessage={setMessage}
+                        setChatMessages={setChatMessages}
                         message={message} />
                 </Wrapper>
             </Container>

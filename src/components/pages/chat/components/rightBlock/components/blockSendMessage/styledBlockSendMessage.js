@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
     position: relative;
@@ -16,10 +16,19 @@ export const SendBtn = styled.button`
     top: 18px;
 `
 
+export const AddEditBtn = styled.button`
+    position: absolute;
+    right: 10px;
+    top: 7px;
+    right: 42px;
+    top: 18px;
+`
+
 export const TextArea = styled.textarea`
+    max-height: 300px;
     width: 100%;
     border-radius: 10px;
-    padding: 7px 33px 7px 15px;
+    padding: 7px 40px 7px 15px;
     background-color: #101010;
     border: none;
     color: #fff;

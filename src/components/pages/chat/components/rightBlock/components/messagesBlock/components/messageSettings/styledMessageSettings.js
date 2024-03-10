@@ -15,11 +15,15 @@ export const Icon = styled.span`
 `;
 
 export const Item = styled.li`
-  padding: 10px;
   transition: all 0.5s ease-in-out;
   cursor: pointer;
 
   &:hover {
     background-color: #6b6b6b5c;
   }
+`;
+
+export const Btn = styled.button`
+  color: #fff;
+  padding: 10px;
 `;
