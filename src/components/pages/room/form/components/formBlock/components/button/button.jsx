@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import { Button } from "../../../../../common/button/button";
-import { setDataToSessionStorage } from "../../../../../../store/sessionStorage";
-import { checkUserName, checkUserIcon } from "../../../../../../api/checkUserData";
+import { Button } from "../../../../../../../common/button/button";
+import { setDataToSessionStorage } from "../../../../../../../../store/sessionStorage";
+import { checkUserName, checkUserIcon } from "../../../../../../../../api/checkUserData";
 
 export const Btn = ({ userName, userEmoji, setErrorMessage }) => {
     const navigation = useNavigate();
     const roomId = document.location.href.split('#room/')[1];
+
+    const removeErrorMessage = () => setTimeout(() => setErrorMessage(""), 3000)
 
     const sendData = async (e) => {
         e.preventDefault();
@@ -14,8 +16,10 @@ export const Btn = ({ userName, userEmoji, setErrorMessage }) => {
 
         if (isUser) {
             setErrorMessage("User has already existed");
+            removeErrorMessage()
         } else if (isEmoji) {
             setErrorMessage("This emoji has already taken");
+            removeErrorMessage()
         } else if (userName.length >= 2) {
             const data = {
                 name: userName,
@@ -26,6 +30,7 @@ export const Btn = ({ userName, userEmoji, setErrorMessage }) => {
             navigation(`/room/${roomId}/${userName}`);
         } else {
             setErrorMessage("wrong data");
+            removeErrorMessage()
         }
     }
 

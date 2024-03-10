@@ -20,7 +20,7 @@ export const MessageSettings = ({
             roomId: id
         })
     }
-    const editMEssage = (event) => {
+    const editMEssage = () => {
         setMessage(messageText)
         sessionStorage.setItem("messageId", JSON.stringify(messageId))
         setIsEditing(true);

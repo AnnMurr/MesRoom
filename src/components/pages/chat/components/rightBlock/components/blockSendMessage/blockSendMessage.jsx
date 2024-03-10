@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationArrow } from "@fortawesome/free-solid-svg-icons";
 import { faCircleCheck } from "@fortawesome/free-regular-svg-icons";
@@ -7,7 +8,6 @@ import { getDataFromSessionStorage } from "../../../../../../../store/sessionSto
 import { socket } from "../../../../../../../socket/socket";
 import { v4 as uuid } from "uuid";
 import { Wrapper, SendBtn, AddEditBtn, TextArea } from "./styledBlockSendMessage";
-import { useState } from "react";
 
 export const BlockSendMessage = ({ setMessage, message, isEditing, setIsEditing, setChatMessages }) => {
     const { id, name } = getDataFromSessionStorage("userData");
@@ -72,6 +72,7 @@ export const BlockSendMessage = ({ setMessage, message, isEditing, setIsEditing,
             <Wrapper>
                 <TextArea
                     onChange={(e) => {
+                        console.log(e.target.value)
                         handleInputChange(e);
                         if (initialHeight === '33px') setInitialHeight(e.target.scrollHeight + 'px');
                     }}

@@ -9,11 +9,6 @@ export const Label = styled.label`
     position: relative;
 `
 
-export const ErrorMes = styled.span`
-    color: #af1919;
-    font-size: 13px;
-`
-
 export const Input = styled.input`
     background-color: transparent;
     color: #fff;
