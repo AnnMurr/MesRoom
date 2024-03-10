@@ -32,10 +32,11 @@ export const TextArea = styled.textarea`
     background-color: #101010;
     border: none;
     color: #fff;
-    resize: none;
     overflow: hidden;
     overflow-y: scroll;
     scrollbar-width: none;
+    min-height: 33px; 
+    resize: none;
 
     &:focus-visible {
         outline: 1px auto #00ff005c;

@@ -7,9 +7,22 @@ import { getDataFromSessionStorage } from "../../../../../../../store/sessionSto
 import { socket } from "../../../../../../../socket/socket";
 import { v4 as uuid } from "uuid";
 import { Wrapper, SendBtn, AddEditBtn, TextArea } from "./styledBlockSendMessage";
+import { useState } from "react";
 
 export const BlockSendMessage = ({ setMessage, message, isEditing, setIsEditing, setChatMessages }) => {
     const { id, name } = getDataFromSessionStorage("userData");
+    const [initialHeight, setInitialHeight] = useState('33px');
+
+    const handleInputChange = (e) => {
+        const text = e.target.value;
+        setMessage(text);
+        autoResize(e);
+    };
+
+    const autoResize = (e) => {
+        e.target.style.height = '33px';
+        e.target.style.height = `${e.target.scrollHeight}px`;
+    };
 
     const sendMessagebyEnter = (event) => {
         if (event.key === "Enter" && !event.shiftKey) {
@@ -20,6 +33,7 @@ export const BlockSendMessage = ({ setMessage, message, isEditing, setIsEditing,
 
     const closeEditing = () => {
         setIsEditing(false);
+        setInitialHeight('33px');
         setMessage("");
     }
 
@@ -46,14 +60,10 @@ export const BlockSendMessage = ({ setMessage, message, isEditing, setIsEditing,
                     }
                 });
             }
+            setInitialHeight('33px');
             setMessage("");
         }
     }
-
-    const autoResize = (e) => {
-        e.target.style.height = '33px';
-        e.target.style.height = `${e.target.scrollHeight}px`;
-    };
 
     return (
         <div>
@@ -62,12 +72,12 @@ export const BlockSendMessage = ({ setMessage, message, isEditing, setIsEditing,
             <Wrapper>
                 <TextArea
                     onChange={(e) => {
-                        setMessage(e.target.value);
-                        autoResize(e);
+                        handleInputChange(e);
+                        if (initialHeight === '33px') setInitialHeight(e.target.scrollHeight + 'px');
                     }}
+                    style={{ height: initialHeight }}
                     placeholder="Message"
                     onKeyDown={sendMessagebyEnter}
-                    style={{ minHeight: '33px' }}
                     aria-rowcount={100}
                     value={message} />
                 {!isEditing ?
