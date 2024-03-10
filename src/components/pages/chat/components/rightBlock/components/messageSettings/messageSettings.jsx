@@ -1,11 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { Container, Icon, Item } from "./styledMessageSettings";
 import { getDataFromSessionStorage } from "../../../../../../../store/sessionStorage";
 import { socket } from "../../../../../../../socket/socket";
+import { Container, Icon, Item } from "./styledMessageSettings";
 
-export const MessageSettings = ({ messageId }) => {
+export const MessageSettings = ({ messageId, type }) => {
     const { id } = getDataFromSessionStorage("userData");
+
     const deleteMessage = () => {
         socket.emit("DELETE_MESSAGE", {
             messageId: messageId,
@@ -14,7 +15,7 @@ export const MessageSettings = ({ messageId }) => {
     }
 
     return (
-        <Container>
+        <Container type={type}>
             <div>
                 <Item>
                     <Icon><FontAwesomeIcon color="#fff" icon={faPen} /></Icon> <span>Edit</span>

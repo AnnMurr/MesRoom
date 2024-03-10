@@ -131,7 +131,7 @@ io.on("connection", (socket) => {
       const updatedMessages = messages.filter(data => data.id !== messageId)
       rooms.get(roomId).set("messages", updatedMessages)
 
-      io.to(roomId).emit("changed-messages", messages);
+      io.to(roomId).emit("changed-messages", updatedMessages);
     }
     
   })

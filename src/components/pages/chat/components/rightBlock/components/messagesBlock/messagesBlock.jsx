@@ -34,13 +34,13 @@ export const MessagesBlock = ({ chatMessages }) => {
                             <MessageInner id={message.id} onContextMenu={openMessageSettings}>
                                 <Message><span>{message.text}</span></Message>
                                 <SubMessage>{message.time} {message.userName}</SubMessage>
-                                  {isMessageSettings === message.id && <MessageSettings messageId={message.id} />}
+                                {isMessageSettings === message.id && <MessageSettings type={"otherSettings"} messageId={message.id} />}
                             </MessageInner>
                             :
                             <MessageInnerOwn id={message.id} onContextMenu={openMessageSettings}>
                                 <MessageOwn><span>{message.text}</span></MessageOwn>
                                 <SubMessage>{message.time} {message.userName}</SubMessage>
-                                  {isMessageSettings === message.id && <MessageSettings  messageId={message.id} />}
+                                {isMessageSettings === message.id && <MessageSettings type={"ownSettings"} messageId={message.id} />}
                             </MessageInnerOwn>}
                     </React.Fragment >
                 ))}

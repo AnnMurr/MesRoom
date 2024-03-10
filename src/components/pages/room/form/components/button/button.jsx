@@ -2,11 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../../../../../common/button/button";
 import { setDataToSessionStorage } from "../../../../../../store/sessionStorage";
 import { checkUserName, checkUserIcon } from "../../../../../../api/checkUserData";
-import { LoadingPage } from "../../../../loading/loading";
-import { useState } from "react";
 
 export const Btn = ({ userName, userEmoji, setErrorMessage }) => {
-    const [isLoad, setIsLoad] = useState(false)
     const navigation = useNavigate();
     const roomId = document.location.href.split('#room/')[1];
 
@@ -17,7 +14,7 @@ export const Btn = ({ userName, userEmoji, setErrorMessage }) => {
 
         if (isUser) {
             setErrorMessage("User has already existed");
-        } else if(isEmoji) {
+        } else if (isEmoji) {
             setErrorMessage("This emoji has already taken");
         } else if (userName.length >= 2) {
             const data = {
@@ -25,23 +22,16 @@ export const Btn = ({ userName, userEmoji, setErrorMessage }) => {
                 id: roomId,
                 userEmoji: userEmoji
             };
-            setIsLoad(true);
-            setTimeout(() => {
-                setIsLoad(false)
-                navigation(`/room/${roomId}/${userName}`);
-            }, 5000)
-        
             setDataToSessionStorage("userData", data);
+            navigation(`/room/${roomId}/${userName}`);
         } else {
             setErrorMessage("wrong data");
         }
     }
-    
-    return (
-        <div style={{marginTop: "20px"}}>
-            <Button text={"Sign in"} func={sendData} size={"small"} />
 
-         {isLoad ?   <LoadingPage /> : null}
+    return (
+        <div style={{ marginTop: "20px" }}>
+            <Button text={"Sign in"} func={sendData} size={"small"} />
         </div>
     )
 }
