@@ -4,7 +4,7 @@ import { getDataFromSessionStorage } from "../../../../../../../store/sessionSto
 import { socket } from "../../../../../../../socket/socket";
 import { Container, Icon, Item } from "./styledMessageSettings";
 
-export const MessageSettings = ({ messageId, type }) => {
+export const MessageSettings = ({ messageId, type, messageSettingsPosition }) => {
     const { id } = getDataFromSessionStorage("userData");
 
     const deleteMessage = () => {
@@ -15,7 +15,7 @@ export const MessageSettings = ({ messageId, type }) => {
     }
 
     return (
-        <Container type={type}>
+        <Container style={{ top: messageSettingsPosition.y, left: messageSettingsPosition.x }} type={type}>
             <div>
                 <Item>
                     <Icon><FontAwesomeIcon color="#fff" icon={faPen} /></Icon> <span>Edit</span>

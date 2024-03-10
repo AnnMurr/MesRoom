@@ -2,9 +2,6 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   position: absolute;
-  top: 1em;
-  right: ${({ type }) => (type === "ownSettings" ? "2em" : "")};
-  left: ${({ type }) => (type === "otherSettings" ? "2em" : "")};
   background-color: #232121;
   z-index: 5;
   width: max-content;

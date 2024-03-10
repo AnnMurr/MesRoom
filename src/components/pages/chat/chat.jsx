@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { socket } from "../../../socket/socket";
 import { LeftBlock } from "./components/leftBlock/leftBlock";
 import { RightBlock } from "./components/rightBlock/rightBlock";
+import { LoadingPage } from "../loading/loading";
 import { getDataFromSessionStorage } from "../../../store/sessionStorage";
 import { Container, Section, Wrapper } from "./styledChat";
-import { LoadingPage } from "../loading/loading";
 
 export const Chat = () => {
     const [usersOnline, setUsersOnline] = useState([]);
@@ -20,7 +20,7 @@ export const Chat = () => {
         socket.on("usersOnline", (users) => setUsersOnline(users));
         socket.on("chatMessages", (messages) => setChatMessages(messages));
         socket.on("changed-messages", (messages) => setChatMessages(messages));
-        
+
         const handleUnload = () => socket.emit("ROOM:LEAVE", {
             roomId: id,
             userName: {
