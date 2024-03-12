@@ -1,5 +1,5 @@
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
-import { Body, Main, LinkGenerator, Room, Chat } from "./components";
+import { Body, Main, Room, Chat } from "./components";
 
 function App() {
   return (
@@ -7,7 +7,6 @@ function App() {
       <Body>
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/generator" element={<LinkGenerator />} />
           <Route path="/room/:link" element={<Room />} />
           <Route path="/room/:link/:name" element={<Chat />} />
         </Routes>

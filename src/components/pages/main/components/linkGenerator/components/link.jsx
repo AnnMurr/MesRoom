@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faCopy } from "@fortawesome/free-solid-svg-icons";
-import { getCopyText } from "../../../../utils/copyText";
+import { getCopyText } from "../../../../../../utils/copyText";
 import { CopyBtn, LinkWrapper, TitleLink } from "./styledLink";
 
 export const Link = ({ isLink, setIsSuccessAlert, setIsErrorAlert }) => {
