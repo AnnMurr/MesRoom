@@ -29,7 +29,7 @@ export const LinkGenerator = () => {
     return (
         <Wrapper>
             <BtnInner>
-                <Button size={"big"} func={onGenerateLink} text={"Generate link"} />
+                <Button  size={"big"} func={onGenerateLink} text={"Generate link"} />
             </BtnInner>
             {isLink && (<Link isLink={isLink} setIsSuccessAlert={setIsSuccessAlert} setIsErrorAlert={setIsErrorAlert} />)}
             {isSuccessAlert ?
