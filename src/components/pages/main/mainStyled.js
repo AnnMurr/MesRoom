@@ -27,8 +27,8 @@ export const Message = styled(motion.div)`
 `;
 
 export const LaptopImage = styled(motion.div)`
-  position: relative;
-  
+  position: fixed;
+  bottom: 20%;
   max-width: 50%;
 `;
 
