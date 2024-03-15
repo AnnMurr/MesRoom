@@ -1,7 +1,6 @@
-import { useScroll, motion, useTransform, distance } from 'framer-motion';
-import { Button } from '../../common/button/button.jsx';
+import { useScroll, useTransform } from 'framer-motion';
 import { LogoCube } from './components/logoCube/logoCube.jsx';
-import { Section, BtnInner, Title, Message, MessageGreenWrap, MessageGrayWrap, MessageText, LaptopImage } from './mainStyled.js';
+import { Section, Title, Message, MessageGreenWrap, MessageGrayWrap, MessageText, LaptopImage } from './mainStyled.js';
 import { LinkGenerator } from './components/linkGenerator/linkGenerator';
 import { useEffect, useRef, useState } from 'react';
 const laptop = require("../../../accet/images/laptop.png");
@@ -30,7 +29,6 @@ export const Main = () => {
         const laptopScale = useTransform(scrollY, [leptopDistance, 3500], [0, 20])
 
         window.addEventListener("scroll", () => {
-                console.log(window.scrollY)
                 window.innerHeight + window.scrollY >= document.body.offsetHeight - 50 ?
                         laptopImageRef.current.style.display = "none" :
                         laptopImageRef.current.style.display = "block";

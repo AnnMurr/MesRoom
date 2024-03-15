@@ -1,17 +1,17 @@
-import { Container } from "./styledLoading";
+import { Container, LoadContainer, LoadItem } from "./styledLoading";
 
 export const LoadingPage = () => {
     return (
         <Container>
-            <div id="load">
-                <div>G</div>
-                <div>N</div>
-                <div>I</div>
-                <div>D</div>
-                <div>A</div>
-                <div>O</div>
-                <div>L</div>
-            </div>
+            <LoadContainer id="load">
+                <LoadItem>G</LoadItem>
+                <LoadItem>N</LoadItem>
+                <LoadItem>I</LoadItem>
+                <LoadItem>D</LoadItem>
+                <LoadItem>A</LoadItem>
+                <LoadItem>O</LoadItem>
+                <LoadItem>L</LoadItem>
+            </LoadContainer>
         </Container>
     )
 }
