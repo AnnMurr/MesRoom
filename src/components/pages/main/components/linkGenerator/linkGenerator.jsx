@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Button } from "../../../../common/button/button";
-import { Link } from "./components/link";
+import { LinkBlock } from "./components/link";
 import { OutlinedAlerts } from "../../../../common/alerts/alerts";
-import { Wrapper, BtnInner } from "./styledLinkGenerator";
+import { Wrapper, BtnInner, Container } from "./styledLinkGenerator";
 
 export const LinkGenerator = () => {
     const [isLink, setIsLink] = useState('');
@@ -27,17 +27,19 @@ export const LinkGenerator = () => {
     };
 
     return (
-        <Wrapper>
-            <BtnInner>
-                <Button  size={"big"} func={onGenerateLink} text={"Generate link"} />
-            </BtnInner>
-            {isLink && (<Link isLink={isLink} setIsSuccessAlert={setIsSuccessAlert} setIsErrorAlert={setIsErrorAlert} />)}
-            {isSuccessAlert ?
-                <OutlinedAlerts type={"success"} text={"The link has been successfully copied"} />
-                : null}
-            {isErrorAlert ?
-                <OutlinedAlerts type={"error"} text={"Error copying text"} />
-                : null}
-        </Wrapper>
+        <Container>
+            <Wrapper>
+                <BtnInner>
+                    <Button size={"big"} func={onGenerateLink} text={"Generate link"} />
+                </BtnInner>
+                <LinkBlock isLink={isLink} setIsSuccessAlert={setIsSuccessAlert} setIsErrorAlert={setIsErrorAlert} />
+                {isSuccessAlert ?
+                    <OutlinedAlerts type={"success"} text={"The link has been successfully copied"} />
+                    : null}
+                {isErrorAlert ?
+                    <OutlinedAlerts type={"error"} text={"Error copying text"} />
+                    : null}
+            </Wrapper>
+        </Container>
     );
 };

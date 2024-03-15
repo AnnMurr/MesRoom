@@ -5,16 +5,25 @@ export const LinkWrapper = styled.div`
     margin-top: 60px;
     background-color: #dce3e9;
     align-items: center;
-    max-width: 45%;
+    max-width: 40rem;
     width: 100%;
     display: grid;
     grid-template-columns: 5% 90% 5%;
     text-align: center;
     border-radius: 2px;
+
+
+  @media screen and (max-width: 640px) {
+    font-size: 12px;
+  }
 `
 
 export const TitleLink = styled.h5`
     font-size: 17px;
+
+    @media screen and (max-width: 640px) {
+      font-size: 14px;
+    }
 `
 
 export const CopyBtn = styled.button`

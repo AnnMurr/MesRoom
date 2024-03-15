@@ -21,7 +21,7 @@ export const Main = () => {
         }, [])
 
         const { scrollY } = useScroll();
-        const titleScale = useTransform(scrollY, [0, 2000], [1, 20]);
+        const titleScale = useTransform(scrollY, [0, 1000], [1, 8]);
         const scale = useTransform(scrollY, [0, 3000], [1, 1]);
 
         const right = useTransform(scrollY, [leptopDistance + 100, 3000], ["25%", "-200%"]);
@@ -30,10 +30,13 @@ export const Main = () => {
         const laptopScale = useTransform(scrollY, [leptopDistance, 3500], [0, 20])
 
         window.addEventListener("scroll", () => {
+                console.log(window.scrollY)
                 window.innerHeight + window.scrollY >= document.body.offsetHeight - 50 ?
                         laptopImageRef.current.style.display = "none" :
                         laptopImageRef.current.style.display = "block";
         });
+
+        const opacity = useTransform(scrollY, [leptopDistance, 3500], [0, 1])
 
         return (
                 <>
@@ -55,17 +58,17 @@ export const Main = () => {
                                                         <MessageText>Hello</MessageText>
                                                 </MessageGreenWrap>
                                         </Message >
-                                        <Message style={{ top: "45%", left: left, scale: scale }}>
+                                        <Message style={{ top: "50%", left: left, scale: scale }}>
                                                 <MessageGrayWrap>
                                                         <MessageText>there we go 😜</MessageText>
                                                 </MessageGrayWrap>
                                         </Message >
-                                        <Message style={{ top: "35%", right: right, scale: scale }}>
+                                        <Message style={{ top: "40%", right: right, scale: scale }}>
                                                 <MessageGrayWrap>
                                                         <MessageText>you are cute kitchen❤️</MessageText>
                                                 </MessageGrayWrap>
                                         </Message >
-                                        <Message style={{ top: "50%", right: right, scale: scale }}>
+                                        <Message style={{ top: "60%", right: right, scale: scale }}>
                                                 <MessageGreenWrap>
                                                         <MessageText>How are you going?</MessageText>
                                                 </MessageGreenWrap>
@@ -74,7 +77,7 @@ export const Main = () => {
                                         <img src={laptop} alt="" />
                                 </LaptopImage>
                         </Section>
-                        <Section>
+                        <Section style={{opacity}}>
                                 <LinkGenerator />
                         </Section>
 

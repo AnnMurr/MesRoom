@@ -17,13 +17,40 @@ export const BtnInner = styled(Link)`
 export const Title = styled(motion.div)`
   color: white;
   font-size: 20px;
+
+  @media screen and (max-width: 750px) {
+    font-size: 16px;
+  }
+
+  @media screen and (max-width: 650px) {
+    font-size: 12px;
+  }
+
+  @media screen and (max-width: 520px) {
+    font-size: 10px;
+  }
+
+  @media screen and (max-width: 400px) {
+    font-size: 8px;
+  }
 `;
 
 export const Message = styled(motion.div)`
   color: white;
-  font-size: 20px;
   position: absolute;
   text-wrap: nowrap;
+`;
+
+export const MessageGreenWrap = styled.div`
+  border-radius: 10px;
+  background-color: #3e9413;
+  padding: 0px 10px 3px 10px;
+`;
+
+export const MessageGrayWrap = styled.div`
+  border-radius: 10px;
+  background-color: #242121;
+  padding: 0px 10px 3px 10px;
 `;
 
 export const LaptopImage = styled(motion.div)`
@@ -32,18 +59,14 @@ export const LaptopImage = styled(motion.div)`
   max-width: 50%;
 `;
 
-export const MessageGreenWrap = styled.div`
-  border-radius: 10px;
-  background-color: #3e9413;
-  padding: 0px 10px 5px 10px;
-`;
-
-export const MessageGrayWrap = styled.div`
-  border-radius: 10px;
-  background-color: #242121;
-  padding: 0px 10px 5px 10px;
-`;
-
 export const MessageText = styled.span`
   font-size: 13px;
+
+  @media screen and (max-width: 940px) {
+    font-size: 11px;
+  }
+
+  @media screen and (max-width: 650px) {
+    font-size: 10px;
+  }
 `;
