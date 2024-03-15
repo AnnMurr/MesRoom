@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Section = styled.section`
   min-height: 100vh;
@@ -8,6 +8,7 @@ export const Section = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
 
 export const BtnInner = styled(Link)`
@@ -33,6 +34,11 @@ export const Title = styled(motion.div)`
   @media screen and (max-width: 400px) {
     font-size: 8px;
   }
+
+
+  @media screen and (max-width: 320px) {
+    font-size: 6px;
+  }
 `;
 
 export const Message = styled(motion.div)`
@@ -41,16 +47,33 @@ export const Message = styled(motion.div)`
   text-wrap: nowrap;
 `;
 
-export const MessageGreenWrap = styled.div`
+const MessageWrap = css`
   border-radius: 10px;
+  padding: 10px;
+  line-height: 10px;
+
+  @media screen and (max-width: 940px) {
+    padding: 7px;
+  }
+
+  @media screen and (max-width: 650px) {
+    padding: 5px 5px 8px 5px;
+    line-height: 6px;
+  }
+
+  @media screen and (max-width: 500px) {
+    padding: 0px 4px 4px 5px;
+  }
+`;
+
+export const MessageGreenWrap = styled.div`
   background-color: #3e9413;
-  padding: 0px 10px 3px 10px;
+  ${MessageWrap}
 `;
 
 export const MessageGrayWrap = styled.div`
-  border-radius: 10px;
   background-color: #242121;
-  padding: 0px 10px 3px 10px;
+  ${MessageWrap}
 `;
 
 export const LaptopImage = styled(motion.div)`
@@ -68,5 +91,9 @@ export const MessageText = styled.span`
 
   @media screen and (max-width: 650px) {
     font-size: 10px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 8px;
   }
 `;

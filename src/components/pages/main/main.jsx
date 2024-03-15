@@ -1,84 +1,100 @@
+import { useEffect, useRef, useState } from 'react';
 import { useScroll, useTransform } from 'framer-motion';
 import { LogoCube } from './components/logoCube/logoCube.jsx';
-import { Section, Title, Message, MessageGreenWrap, MessageGrayWrap, MessageText, LaptopImage } from './mainStyled.js';
 import { LinkGenerator } from './components/linkGenerator/linkGenerator';
-import { useEffect, useRef, useState } from 'react';
+import { Section, Title, Message, MessageGreenWrap, MessageGrayWrap, MessageText, LaptopImage } from './mainStyled.js';
 const laptop = require("../../../accet/images/laptop.png");
 
 export const Main = () => {
+        const { scrollY } = useScroll();
         const laptopImageRef = useRef(null);
-        const sectionRef = useRef(null);
-        const [leptopDistance, setLeptopDistance] = useState(null);
+        const sectionLaptopRef = useRef(null);
+        const sectionLink = useRef(null);
+        const titleRef = useRef(null);
+        const [laptopDistance, setlaptopDistance] = useState(null);
+        const [titleDistance, setTitleDistance] = useState(null);
+
+        const titleScale = useTransform(scrollY, [titleDistance, 2000], [1, 8]);
+        const messageScale = useTransform(scrollY, [0, 3000], [1, 1]);
+        const messageRight = useTransform(scrollY, [laptopDistance + 100, 3000], ["25%", "-200%"]);
+        const messageLeft = useTransform(scrollY, [laptopDistance + 100, 3000], ["25%", "-200%"]);
+        const laptopScale = useTransform(scrollY, [laptopDistance, 3500], [0, 20]);
+
+        useEffect(() => { updateDistance() }, []);
 
         const updateDistance = () => {
-                const result = sectionRef.current.offsetTop * 1.2;
-                setLeptopDistance(result);
+                const result = sectionLaptopRef.current.offsetTop * 1.2;
+                setlaptopDistance(result);
+                setTitleDistance(titleRef.current.offsetTop)
         }
 
-        useEffect(() => {
-                updateDistance();
-        }, [])
-
-        const { scrollY } = useScroll();
-        const titleScale = useTransform(scrollY, [0, 1000], [1, 8]);
-        const scale = useTransform(scrollY, [0, 3000], [1, 1]);
-
-        const right = useTransform(scrollY, [leptopDistance + 100, 3000], ["25%", "-200%"]);
-        const left = useTransform(scrollY, [leptopDistance + 100, 3000], ["25%", "-200%"]);
-
-        const laptopScale = useTransform(scrollY, [leptopDistance, 3500], [0, 20])
-
-        window.addEventListener("scroll", () => {
-                window.innerHeight + window.scrollY >= document.body.offsetHeight - 50 ?
+        const hideLaptop = (windowHeight, bodyHeight) => {
+                windowHeight + window.scrollY >= bodyHeight - 50 ?
                         laptopImageRef.current.style.display = "none" :
                         laptopImageRef.current.style.display = "block";
-        });
+        }
 
-        const opacity = useTransform(scrollY, [leptopDistance, 3500], [0, 1])
+        const hideSectionLink = (windowHeight, bodyHeight) => {
+                windowHeight + window.scrollY >= bodyHeight - 200 ?
+                        sectionLink.current.style.visibility = "visible" :
+                        sectionLink.current.style.visibility = "hidden";
+        }
+
+        const toggleBlockVisibility = () => {
+                const isOpacity = window.scrollY >= sectionLaptopRef.current.offsetTop;
+                laptopImageRef.current.style.visibility = isOpacity ? "visible" : "hidden";
+        }
+
+        window.addEventListener("scroll", () => {
+                const bodyHeight = document.body.offsetHeight;
+                const windowHeight = window.innerHeight;
+
+                toggleBlockVisibility()
+                hideLaptop(windowHeight, bodyHeight)
+                hideSectionLink(windowHeight, bodyHeight)
+        });
 
         return (
                 <>
                         <Section>
                                 <LogoCube />
                         </Section>
-                        <Section ref={sectionRef} style={{ position: "relative" }}>
-                                <Title style={{ scale: titleScale }}>
+                        <Section style={{ zIndex: "10" }} ref={sectionLaptopRef}>
+                                <Title ref={titleRef} style={{ scale: titleScale }}>
                                         <span>Mess Chat</span>
                                 </Title>
                                 <LaptopImage
                                         ref={laptopImageRef}
                                         style={{
                                                 scale: laptopScale,
+                                                visibility: "hidden"
                                         }}>
-
-                                        <Message style={{ top: "30%", left: left, scale: scale }}>
+                                        <Message style={{ top: "30%", left: messageLeft, scale: messageScale }}>
                                                 <MessageGreenWrap>
                                                         <MessageText>Hello</MessageText>
                                                 </MessageGreenWrap>
                                         </Message >
-                                        <Message style={{ top: "50%", left: left, scale: scale }}>
+                                        <Message style={{ top: "50%", left: messageLeft, scale: messageScale }}>
                                                 <MessageGrayWrap>
                                                         <MessageText>there we go 😜</MessageText>
                                                 </MessageGrayWrap>
                                         </Message >
-                                        <Message style={{ top: "40%", right: right, scale: scale }}>
+                                        <Message style={{ top: "40%", right: messageRight, scale: messageScale }}>
                                                 <MessageGrayWrap>
                                                         <MessageText>you are cute kitchen❤️</MessageText>
                                                 </MessageGrayWrap>
                                         </Message >
-                                        <Message style={{ top: "60%", right: right, scale: scale }}>
+                                        <Message style={{ top: "60%", right: messageRight, scale: messageScale }}>
                                                 <MessageGreenWrap>
                                                         <MessageText>How are you going?</MessageText>
                                                 </MessageGreenWrap>
                                         </Message >
-
-                                        <img src={laptop} alt="" />
+                                        <img src={laptop} alt="laptop" />
                                 </LaptopImage>
                         </Section>
-                        <Section style={{opacity}}>
+                        <Section ref={sectionLink}>
                                 <LinkGenerator />
                         </Section>
-
                 </>
         )
 }

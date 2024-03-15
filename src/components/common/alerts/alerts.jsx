@@ -1,16 +1,9 @@
-import { Alert, Slide, Stack } from "@mui/material";
+import { Alert, Slide } from "@mui/material";
+import { Container } from "./styledAlerts";
 
 export const OutlinedAlerts = ({ type, text }) => {
     return (
-        <Stack
-            sx={{
-                width: '100%',
-                position: "fixed",
-                top: "5px",
-                maxWidth: "18%",
-                right: "5px",
-            }}
-            spacing={2}>
+        <Container spacing={2}>
             {type ? (
                 <Slide direction="down" in={true} mountOnEnter unmountOnExit>
                     <Alert
@@ -26,6 +19,6 @@ export const OutlinedAlerts = ({ type, text }) => {
                     </Alert>
                 </Slide>
             ) : null}
-        </Stack>
+        </Container>
     );
 }

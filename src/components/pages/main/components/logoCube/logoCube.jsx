@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { useRef, useState } from 'react';
 import { Cube, FaceBack, FaceBottom, FaceFront, FaceLeft, FaceRight, FaceTop } from './styledLogoCube';
+const cubeGreySide = require("../../../../../accet/images/cubeGreySide.png");
+const cubeGreenSide = require("../../../../../accet/images/cubeGreenSide.png");
+const cubeBackSide = require("../../../../../accet/images/cubeBlackSide.png");
 
 export const LogoCube = () => {
     const sceneRef = useRef(null);
@@ -38,22 +41,22 @@ export const LogoCube = () => {
             onMouseMove={handleMouseMove}>
             <Cube ref={cubeRef}>
                 <FaceFront>
-                    <img src="https://i.imgur.com/y7bK6CD.png" alt="Front" />
+                    <img src={cubeGreenSide} alt="Front" />
                 </FaceFront>
                 <FaceBack>
-                    <img src="https://i.imgur.com/y7bK6CD.png" alt="Back" />
+                    <img src={cubeGreenSide} alt="Back" />
                 </FaceBack>
                 <FaceTop>
-                    <img src="https://i.imgur.com/DF214xg.png" alt="Top" />
+                    <img src={cubeGreySide} alt="Top" />
                 </FaceTop>
                 <FaceBottom>
-                    <img src="https://i.imgur.com/DF214xg.png" alt="Bottom" />
+                    <img src={cubeGreySide}  alt="Bottom" />
                 </FaceBottom>
                 <FaceLeft>
-                    <img src="https://i.imgur.com/ctelnv0.png" alt="Left" />
+                    <img src={cubeBackSide} alt="Left" />
                 </FaceLeft>
                 <FaceRight>
-                    <img src="https://i.imgur.com/ctelnv0.png" alt="Right" />
+                    <img src={cubeBackSide} alt="Right" />
                 </FaceRight>
             </Cube>
         </div>
