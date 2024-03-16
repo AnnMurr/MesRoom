@@ -10,10 +10,11 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
     height: 100%;
+    
 `
 
 export const Wrapper = styled.div`
     position: relative;
-    max-width: 15%;
+    max-width: 13rem;
     width: 100%;
 `

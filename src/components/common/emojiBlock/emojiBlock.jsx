@@ -3,7 +3,7 @@ import { EMOJI, fetchEmojiData } from "../../../consts/consts";
 import { v4 as uuid } from "uuid";
 import { EmojiBlockContainer, EmojiList, EmojiItem, EmojiItemBtn } from "./styledEmojiBlock";
 
-export const EmojiBlock = ({ selectEmoji, emojiBlockRef }) => {
+export const EmojiBlock = ({ selectEmoji, emojiBlockRef, type }) => {
     const [emojiFromApi, setEmojiFromApi] = useState(null);
 
     const getEmoji = async () => {
@@ -20,7 +20,7 @@ export const EmojiBlock = ({ selectEmoji, emojiBlockRef }) => {
     }, []);
 
     return (
-        <EmojiBlockContainer ref={emojiBlockRef}>
+        <EmojiBlockContainer type={type} ref={emojiBlockRef}>
             <EmojiList>
                 {emojiFromApi ?
                     emojiFromApi.map((data) => (

@@ -1,23 +1,37 @@
 import styled from "styled-components";
 
 export const Section = styled.section`
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 export const Container = styled.div`
-    max-width: 60%;
-    width: 100%;
-    background-color: #101010;
-    border-radius: 5px;
-    height: 70%;
-`
+  width: 100%;
+  max-width: 55rem;
+  margin: 0 auto;
+  padding: 0 15px;
+  height: 70vh;
+
+  @media screen and (max-width: 640px) {
+    height: 65vh;
+  }
+`;
 
 export const Wrapper = styled.div`
-    display: grid;
-    grid-template-columns: 25% 75%;
-    height: 100%;
-`
+  display: grid;
+  grid-template-columns: 25% 75%;
+  height: 100%;
+  background-color: #101010;
+  border-radius: 5px;
+
+  @media screen and (max-width: 640px) {
+    grid-template-columns: 30% 70%;
+  }
+
+  @media screen and (max-width: 480px) {
+    grid-template-columns: 35% 65%;
+  }
+`;

@@ -47,7 +47,8 @@ export const Main = () => {
         }
 
         const toggleBlockVisibility = () => {
-                const isOpacity = window.scrollY >= sectionLaptopRef.current.offsetTop;
+                const sectionLaptopTop = sectionLaptopRef.current.offsetTop
+                const isOpacity = window.scrollY >= sectionLaptopTop;
                 laptopImageRef.current.style.visibility = isOpacity ? "visible" : "hidden";
         }
 
@@ -59,8 +60,6 @@ export const Main = () => {
                 hideLaptop(windowHeight, bodyHeight)
                 hideSectionLink(windowHeight, bodyHeight)
         });
-
-        console.log(windowWidth)
 
         return (
                 <>
@@ -76,7 +75,7 @@ export const Main = () => {
                                         style={{
                                                 scale: laptopScale,
                                                 visibility: "hidden",
-                                                top: windowWidth <= 400 ? "15rem":  windowWidth <= 767 ? "18rem" :  "none"
+                                                top: windowWidth <= 400 ? "15rem" : windowWidth <= 767 ? "18rem" : "none"
                                         }}>
                                         <Message style={{ top: "30%", left: messageLeft, scale: messageScale }}>
                                                 <MessageGreenWrap>

@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { getDataFromSessionStorage } from "../../../../../../../../../store/sessionStorage";
 import { socket } from "../../../../../../../../../socket/socket";
-import { Container, Icon, Item, Btn } from "./styledMessageSettings";
+import { Container, Icon, Item, Btn, Text } from "./styledMessageSettings";
 
 export const MessageSettings = ({
     messageId,
@@ -20,6 +20,7 @@ export const MessageSettings = ({
             roomId: id
         })
     }
+    
     const editMEssage = () => {
         setMessage(messageText)
         sessionStorage.setItem("messageId", JSON.stringify(messageId))
@@ -27,19 +28,19 @@ export const MessageSettings = ({
     }
 
     return (
-        <Container style={{ top: messageSettingsPosition.y, left: messageSettingsPosition.x }} type={type}>
+        <Container style={{ top: messageSettingsPosition.y, left: messageSettingsPosition.x - 50 }} type={type}>
             <div>
                 {type === "ownSettings" ?
                     <Item>
                         <Btn onClick={editMEssage}>
-                            <Icon><FontAwesomeIcon color="#fff" icon={faPen} /></Icon> <span>Edit</span>
+                            <Icon><FontAwesomeIcon size="sm" color="#fff" icon={faPen} /></Icon> <Text>Edit</Text>
                         </Btn>
                     </Item>
                     : null}
                 <Item>
                     <Btn onClick={deleteMessage}>
-                        <Icon><FontAwesomeIcon color="#fff" icon={faTrashCan} /></Icon>
-                        <span>Delete</span>
+                        <Icon><FontAwesomeIcon size="sm"  color="#fff" icon={faTrashCan} /></Icon>
+                        <Text>Delete</Text>
                     </Btn>
                 </Item>
             </div>

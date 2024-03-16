@@ -1,50 +1,71 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Container = styled.div`
-    padding: 0 40px 0 40px;
-    overflow: scroll;
-`
+  padding: 0 40px;
+  overflow: scroll;
+
+  @media screen and (max-width: 520px) {
+    padding: 0 15px;
+  }
+`;
+
+const MessageInnerCommon = css`
+  padding: 10px;
+  color: white;
+  overflow-wrap: anywhere;
+
+  @media screen and (max-width: 520px) {
+    padding: 8px;
+  }
+`;
 
 export const MessageInner = styled.div`
- 
-    padding: 10px;
-    color: white;
-    overflow-wrap: anywhere;
-`
+  ${MessageInnerCommon}
+`;
 
 export const MessageInnerOwn = styled.div`
-    padding: 10px;
-    color: white;
-    width: fit-content;
-    text-align: end;
-    margin-left: auto;
-    overflow-wrap: anywhere;
+  ${MessageInnerCommon}
+  text-align: end;
+  margin-left: auto;
+`;
 
-`
+const MessageCommon = css`
+  width: fit-content;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: left;
+  white-space: pre-wrap;
+
+  @media screen and (max-width: 520px) {
+    padding: 8px;
+  }
+
+  span {
+    color: #fff;
+    
+    @media screen and (max-width: 520px) {
+      font-size: 14px;
+    }
+  }
+`;
 
 export const Message = styled.div`
-    width: fit-content;
-    background-color: #242121;
-    color: #fff;
-    padding: 10px;
-    border-radius: 10px;
-    text-align: left;
-    white-space: pre-wrap;
-`
+  ${MessageCommon}
+  background-color: #242121;
+`;
 
 export const MessageOwn = styled.div`
-    width: fit-content;
-    background-color: #3e9413;
-    color: #fff;
-    padding: 10px;
-    border-radius: 10px;
-    text-align: left;
-    margin-left: auto;
-    white-space: pre-wrap;
-`
+  ${MessageCommon}
+  background-color: #3e9413;
+  margin-left: auto;
+`;
 
 export const SubMessage = styled.div`
-    font-size: 13px;
-    opacity: 0.6;
-    padding-top: 5px;
-`
+  font-size: 13px;
+  opacity: 0.6;
+  padding-top: 5px;
+
+  @media screen and (max-width: 520px) {
+    font-size: 11px;
+  }
+`;

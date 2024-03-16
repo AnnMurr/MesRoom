@@ -8,7 +8,7 @@ import { getDataFromSessionStorage, setDataToSessionStorage } from "../../../../
 import { checkUserIcon } from "../../../../../api/checkUserData";
 import { OutlinedAlerts } from "../../../../common/alerts/alerts";
 import { blockPreviousPage } from "../../../../../utils/blockPreviousPage";
-import { Container, OnlineTitle, Item, EditBtn } from "./styledLeftBlock";
+import { Container, OnlineTitle, Item, EditBtn, IconBtn } from "./styledLeftBlock";
 
 export const LeftBlock = () => {
     const { id, name } = getDataFromSessionStorage("userData");
@@ -17,10 +17,12 @@ export const LeftBlock = () => {
     const [isErrorAlert, setIsErrorAlert] = useState(false);
     const emojiBlockRef = useRef(null);
     const editBtnRef = useRef(null);
+    const iconBtnRef = useRef(null);
+    const windowWidth = window.innerWidth
 
     const closeEmojiBlockByClickOutside = (event) => {
         if (emojiBlockRef.current && !emojiBlockRef.current.contains(event.target)
-            && !editBtnRef.current.contains(event.target)) {
+            && !editBtnRef.current.contains(event.target) && !iconBtnRef.current.contains(event.target)) {
             openEmojiBlock()
         }
     }
@@ -56,7 +58,7 @@ export const LeftBlock = () => {
 
     useEffect(() => {
         blockPreviousPage()
-        
+
         socket.on("usersOnline", (users) => setUsersOnline(users));
         socket.on("CHANGED-USERDATA", (data) => setUsersOnline(data));
     }, []);
@@ -69,14 +71,20 @@ export const LeftBlock = () => {
                     {usersOnline &&
                         usersOnline.map((userData) => (
                             <Item key={uuid()}>
-                                <span>{userData.icon}</span> {userData.name}
+                                <IconBtn
+                                    ref={iconBtnRef}
+                                    type="button"
+                                    onClick={() => windowWidth <= 1024 && openEmojiBlock()}>
+                                    {userData.icon}
+                                </IconBtn>
+                                {userData.name}
                                 {userData.name.toLowerCase() === name.toLowerCase() ?
                                     <EditBtn ref={editBtnRef} onClick={openEmojiBlock}>
                                         {<FontAwesomeIcon size="sm" style={{ color: "lightgray" }} icon={faPen} />}
                                     </EditBtn>
                                     : null}
                                 {userData.name.toLowerCase() === name.toLowerCase() ?
-                                    <EmojiBlock emojiBlockRef={emojiBlockRef} selectEmoji={selectEmoji} />
+                                    <EmojiBlock type={"chatBlock"} emojiBlockRef={emojiBlockRef} selectEmoji={selectEmoji} />
                                     : null}
                             </Item>
                         ))

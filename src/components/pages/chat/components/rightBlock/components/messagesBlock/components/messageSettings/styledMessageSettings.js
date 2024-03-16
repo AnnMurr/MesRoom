@@ -26,4 +26,20 @@ export const Item = styled.li`
 export const Btn = styled.button`
   color: #fff;
   padding: 10px;
+  width: 100%;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 20% 80%;
+  text-align: start;
+  gap: 10px;
+
+  @media screen and (max-width: 520px) {
+    padding: 8px 10px;
+  }
+`;
+
+export const Text = styled.span`
+  @media screen and (max-width: 520px) {
+    font-size: 14px;
+  }
 `;

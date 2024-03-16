@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    background-color: #141414;
-    padding-top: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    overflow: hidden;
-    border-left: 2px solid #66666670;
-`
+  background-color: #141414;
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  border-left: 2px solid #66666670;
+
+  @media screen and (max-width: 520px) {
+    padding-top: 30px;
+  }
+`;
