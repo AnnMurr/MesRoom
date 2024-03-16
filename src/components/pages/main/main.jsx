@@ -4,6 +4,7 @@ import { LogoCube } from './components/logoCube/logoCube.jsx';
 import { LinkGenerator } from './components/linkGenerator/linkGenerator';
 import { Section, Title, Message, MessageGreenWrap, MessageGrayWrap, MessageText, LaptopImage } from './mainStyled.js';
 const laptop = require("../../../accet/images/laptop.png");
+const phone = require("../../../accet/images/phone.png");
 
 export const Main = () => {
         const { scrollY } = useScroll();
@@ -11,6 +12,7 @@ export const Main = () => {
         const sectionLaptopRef = useRef(null);
         const sectionLink = useRef(null);
         const titleRef = useRef(null);
+        const windowWidth = window.innerWidth
         const [laptopDistance, setlaptopDistance] = useState(null);
         const [titleDistance, setTitleDistance] = useState(null);
 
@@ -35,9 +37,13 @@ export const Main = () => {
         }
 
         const hideSectionLink = (windowHeight, bodyHeight) => {
-                windowHeight + window.scrollY >= bodyHeight - 200 ?
-                        sectionLink.current.style.visibility = "visible" :
+                if (windowHeight + window.scrollY >= bodyHeight - 200) {
+                        sectionLink.current.style.visibility = "visible";
+                        sectionLink.current.style.opacity = "1";
+                } else {
                         sectionLink.current.style.visibility = "hidden";
+                        sectionLink.current.style.opacity = "0";
+                }
         }
 
         const toggleBlockVisibility = () => {
@@ -54,6 +60,8 @@ export const Main = () => {
                 hideSectionLink(windowHeight, bodyHeight)
         });
 
+        console.log(windowWidth)
+
         return (
                 <>
                         <Section>
@@ -67,7 +75,8 @@ export const Main = () => {
                                         ref={laptopImageRef}
                                         style={{
                                                 scale: laptopScale,
-                                                visibility: "hidden"
+                                                visibility: "hidden",
+                                                top: windowWidth <= 400 ? "15rem":  windowWidth <= 767 ? "18rem" :  "none"
                                         }}>
                                         <Message style={{ top: "30%", left: messageLeft, scale: messageScale }}>
                                                 <MessageGreenWrap>
@@ -89,7 +98,7 @@ export const Main = () => {
                                                         <MessageText>How are you going?</MessageText>
                                                 </MessageGreenWrap>
                                         </Message >
-                                        <img src={laptop} alt="laptop" />
+                                        <img src={windowWidth >= 768 ? laptop : phone} alt="laptop" />
                                 </LaptopImage>
                         </Section>
                         <Section ref={sectionLink}>

@@ -28,7 +28,7 @@ export const LinkBlock = ({ isLink, setIsSuccessAlert, setIsErrorAlert }) => {
                 <TitleLink>Link:</TitleLink>
             </div>
             <div style={{padding: "0 15px 0 25px"}}>
-                <span style={{width: "fit-content"}}>{isLink.slice(0, 50)}...</span>
+                <span style={{width: "fit-content", wordWrap: "break-word"}}>{isLink.slice(0, 50)}...</span>
             </div>
             <div>
                 <CopyBtn onClick={onCopy} type="button">

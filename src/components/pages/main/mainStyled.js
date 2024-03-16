@@ -30,21 +30,13 @@ export const Title = styled(motion.div)`
   @media screen and (max-width: 520px) {
     font-size: 10px;
   }
-
-  @media screen and (max-width: 400px) {
-    font-size: 8px;
-  }
-
-
-  @media screen and (max-width: 320px) {
-    font-size: 6px;
-  }
 `;
 
 export const Message = styled(motion.div)`
   color: white;
   position: absolute;
   text-wrap: nowrap;
+  z-index: 30;
 `;
 
 const MessageWrap = css`

@@ -16,6 +16,10 @@ export const LinkWrapper = styled.div`
   @media screen and (max-width: 640px) {
     font-size: 12px;
   }
+
+  @media screen and (max-width: 640px) {
+    grid-template-columns: 10% 80% 10%;
+  }
 `
 
 export const TitleLink = styled.h5`
