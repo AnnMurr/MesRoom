@@ -3,6 +3,7 @@ import { useScroll, useTransform } from 'framer-motion';
 import { LogoCube } from './components/logoCube/logoCube.jsx';
 import { LinkGenerator } from './components/linkGenerator/linkGenerator';
 import { Section, Title, Message, MessageGreenWrap, MessageGrayWrap, MessageText, LaptopImage } from './mainStyled.js';
+
 const laptop = require("../../../accet/images/laptop.png");
 const phone = require("../../../accet/images/phone.png");
 
