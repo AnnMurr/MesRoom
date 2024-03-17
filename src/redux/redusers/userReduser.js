@@ -1,19 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  userIcon: null,
+  chatMessages: null,
+  usersOnline: null,
+  userMessage: "",
 };
 
 const userSlice = createSlice({
-  name: "user",
+  name: "chatData",
   initialState,
   reducers: {
-    setUserNameToRedux: (state, action) => {
-      state.userIcon = action.payload;
+    setChatMessages: (state, action) => {
+      state.chatMessages = action.payload;
+    },
+
+    setUsersOnline: (state, action) => {
+      state.usersOnline = action.payload;
+    },
+
+    setUserMessage: (state, action) => {
+      state.userMessage = action.payload;
     },
   },
 });
 
-export const userDataReducer = userSlice.reducer;
+export const chatDataReducer = userSlice.reducer;
 
-export const { setUserNameToRedux } = userSlice.actions;
+export const { setChatMessages, setUsersOnline, setUserMessage } = userSlice.actions;

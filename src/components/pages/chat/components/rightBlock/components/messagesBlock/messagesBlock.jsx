@@ -10,12 +10,14 @@ import {
     MessageOwn,
     SubMessage
 } from "./styledMessagesBlock";
+import { useSelector } from "react-redux";
 
-export const MessagesBlock = ({ chatMessages, setIsEditing, setMessage }) => {
+export const MessagesBlock = ({ setIsEditing }) => {
     const [isMessageSettings, setIsMessageSettings] = useState(null);
     const [messageSettingsPosition, setMessageSettingsPosition] = useState({ x: 0, y: 0 });
-    const containerRef = useRef(null);
     const { name } = getDataFromSessionStorage("userData");
+    const { chatMessages } = useSelector(state => state.chatData);
+    const containerRef = useRef(null);
 
     const closeMessageSettingsBlock = () => {
         setIsMessageSettings(null);
@@ -62,7 +64,6 @@ export const MessagesBlock = ({ chatMessages, setIsEditing, setMessage }) => {
                                 <SubMessage>{message.time} {message.userName}</SubMessage>
                                 {isMessageSettings === message.id &&
                                     <MessageSettings
-                                        setMessage={setMessage}
                                         messageText={message.text}
                                         setIsEditing={setIsEditing}
                                         messageSettingsPosition={messageSettingsPosition}

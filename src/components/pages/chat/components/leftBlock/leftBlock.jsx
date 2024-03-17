@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setUsersOnline } from "../../../../../redux/redusers/userReduser";
 import { Item } from "./components/item";
 import { socket } from "../../../../../socket/socket";
 import { v4 as uuid } from "uuid";
@@ -7,14 +9,15 @@ import { blockPreviousPage } from "../../../../../utils/blockPreviousPage";
 import { Container, OnlineTitle } from "./styledLeftBlock";
 
 export const LeftBlock = () => {
-    const [usersOnline, setUsersOnline] = useState([]);
     const [isErrorAlert, setIsErrorAlert] = useState(false);
+    const { usersOnline } = useSelector(state => state.chatData)
+    const dispatch = useDispatch();
 
     useEffect(() => {
         blockPreviousPage();
 
-        socket.on("usersOnline", (users) => setUsersOnline(users));
-        socket.on("CHANGED-USERDATA", (data) => setUsersOnline(data));
+        socket.on("usersOnline", (users) => dispatch(setUsersOnline(users)));
+        socket.on("CHANGED-USERDATA", (data) => dispatch(setUsersOnline(data)));
     }, []);
 
     return (

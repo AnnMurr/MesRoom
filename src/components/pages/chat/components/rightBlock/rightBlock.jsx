@@ -3,18 +3,13 @@ import { BlockSendMessage } from "./components/blockSendMessage/blockSendMessage
 import { MessagesBlock } from "./components/messagesBlock/messagesBlock";
 import { Container } from "./styledRightBlock";
 
-export const RightBlock = ({ setMessage, message, chatMessages, setChatMessages }) => {
+export const RightBlock = () => {
     const [isEditing, setIsEditing] = useState(false);
 
     return (
         <Container>
-            <MessagesBlock setMessage={setMessage} setIsEditing={setIsEditing} chatMessages={chatMessages} />
-            <BlockSendMessage
-                setChatMessages={setChatMessages}
-                setIsEditing={setIsEditing}
-                isEditing={isEditing}
-                message={message}
-                setMessage={setMessage} />
+            <MessagesBlock setIsEditing={setIsEditing} />
+            <BlockSendMessage setIsEditing={setIsEditing} isEditing={isEditing} />
         </Container>
     )
 }

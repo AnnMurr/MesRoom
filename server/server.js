@@ -142,7 +142,7 @@ io.on("connection", (socket) => {
 
   socket.on("EDIT_MESSAGE", ({ roomId, messageId, editedMessage }) => {
     const messages = rooms.get(roomId).get("messages");
-    console.log(messages);
+
     messages.forEach((messageData) => {
       if (messageData.id === messageId) {
         messageData.text = editedMessage;

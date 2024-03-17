@@ -1,3 +1,5 @@
+import { useDispatch } from "react-redux";
+import { setUserMessage } from "../../../../../../../../../redux/redusers/userReduser";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { getDataFromSessionStorage } from "../../../../../../../../../store/sessionStorage";
@@ -7,12 +9,12 @@ import { Container, Icon, Item, Btn, Text } from "./styledMessageSettings";
 export const MessageSettings = ({
     messageId,
     type,
-    setMessage,
     messageSettingsPosition,
     setIsEditing,
     messageText
 }) => {
     const { id } = getDataFromSessionStorage("userData");
+    const dispatch = useDispatch();
 
     const deleteMessage = () => {
         socket.emit("DELETE_MESSAGE", {
@@ -20,10 +22,10 @@ export const MessageSettings = ({
             roomId: id
         })
     }
-    
+
     const editMEssage = () => {
-        setMessage(messageText)
-        sessionStorage.setItem("messageId", JSON.stringify(messageId))
+        dispatch(setUserMessage(messageText));
+        sessionStorage.setItem("messageId", JSON.stringify(messageId));
         setIsEditing(true);
     }
 
@@ -39,7 +41,7 @@ export const MessageSettings = ({
                     : null}
                 <Item>
                     <Btn onClick={deleteMessage}>
-                        <Icon><FontAwesomeIcon size="sm"  color="#fff" icon={faTrashCan} /></Icon>
+                        <Icon><FontAwesomeIcon size="sm" color="#fff" icon={faTrashCan} /></Icon>
                         <Text>Delete</Text>
                     </Btn>
                 </Item>

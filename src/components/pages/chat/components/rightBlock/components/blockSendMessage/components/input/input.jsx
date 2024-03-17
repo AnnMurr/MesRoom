@@ -1,3 +1,5 @@
+import { useDispatch, useSelector } from "react-redux";
+import { setChatMessages, setUserMessage } from "../../../../../../../../../redux/redusers/userReduser";
 import { v4 as uuid } from "uuid";
 import { getDataFromSessionStorage } from "../../../../../../../../../store/sessionStorage";
 import { socket } from "../../../../../../../../../socket/socket";
@@ -7,20 +9,14 @@ import { faLocationArrow } from "@fortawesome/free-solid-svg-icons";
 import { faCircleCheck } from "@fortawesome/free-regular-svg-icons";
 import { AddEditBtn, SendBtn, TextArea } from "./styledInput";
 
-export const Input = ({
-    setMessage,
-    message,
-    isEditing,
-    setChatMessages,
-    setIsEditing,
-    setInitialHeight,
-    initialHeight }) => {
-
+export const Input = ({ isEditing, setIsEditing, setInitialHeight, initialHeight }) => {
     const { id, name } = getDataFromSessionStorage("userData");
+    const { userMessage } = useSelector(state => state.chatData);
+    const dispatch = useDispatch();
 
     const handleInputChange = (e) => {
         const text = e.target.value;
-        setMessage(text);
+        dispatch(setUserMessage(text));
         autoResize(e);
     };
 
@@ -37,29 +33,29 @@ export const Input = ({
     }
 
     const sendMessage = () => {
-        if (message && !message.split("").every((symbol) => symbol === " ")) {
+        if (userMessage && !userMessage.split("").every((symbol) => symbol === " ")) {
             if (isEditing) {
                 socket.emit("EDIT_MESSAGE", {
                     roomId: id,
                     messageId: getDataFromSessionStorage("messageId"),
-                    editedMessage: message
+                    editedMessage: userMessage
                 });
 
-                socket.on("changed-messages", (messages) => setChatMessages(messages));
+                socket.on("changed-messages", (messages) => dispatch(setChatMessages(messages)));
                 setIsEditing(false);
             } else {
                 socket.emit("SEND_MESSAGE", {
                     roomId: id,
                     message: {
                         userName: name,
-                        text: message,
+                        text: userMessage,
                         id: uuid(),
                         time: getCurrentTime()
                     }
                 });
             }
             setInitialHeight('33px');
-            setMessage("");
+            dispatch(setUserMessage(""));
         }
     }
 
@@ -67,7 +63,6 @@ export const Input = ({
         <>
             <TextArea
                 onChange={(e) => {
-                    console.log(e.target.value)
                     handleInputChange(e);
                     if (initialHeight === '33px') setInitialHeight(e.target.scrollHeight + 'px');
                 }}
@@ -75,7 +70,7 @@ export const Input = ({
                 placeholder="Message"
                 onKeyDown={sendMessagebyEnter}
                 aria-rowcount={100}
-                value={message} />
+                value={userMessage} />
             {!isEditing ?
                 <SendBtn onClick={sendMessage}>
                     <FontAwesomeIcon

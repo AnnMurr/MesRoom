@@ -1,10 +1,12 @@
 import { useMemo } from "react";
+import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-regular-svg-icons";
 import { EditDetails, EditableMessage, Inner } from "./styledEditDetails";
 
-export const EditDetailsBlock = ({ message, closeEditing }) => {
-    const memoizedMessage = useMemo(() => message, []);
+export const EditDetailsBlock = ({ closeEditing }) => {
+    const { userMessage } = useSelector(state => state.chatData);
+    const memoizedMessage = useMemo(() => userMessage, []);
 
     return (
         <EditDetails>
