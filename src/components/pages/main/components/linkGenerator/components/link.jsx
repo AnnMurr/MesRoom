@@ -12,12 +12,12 @@ export const LinkBlock = ({ isLink, setIsSuccessAlert, setIsErrorAlert }) => {
         setTimeout(() => setIsCopyBtnClick(false), 2000);
 
         try {
-            await getCopyText(isLink)
+            await getCopyText(isLink);
             setIsSuccessAlert(true);
-            setTimeout(() => setIsSuccessAlert(false), 3000)
+            setTimeout(() => setIsSuccessAlert(false), 3000);
         } catch (error) {
             setIsErrorAlert(true);
-            setTimeout(() => setIsErrorAlert(false), 3000)
+            setTimeout(() => setIsErrorAlert(false), 3000);
             console.error(error);
         }
     };
@@ -27,8 +27,8 @@ export const LinkBlock = ({ isLink, setIsSuccessAlert, setIsErrorAlert }) => {
             <div>
                 <TitleLink>Link:</TitleLink>
             </div>
-            <div style={{padding: "0 15px 0 25px"}}>
-                <span style={{width: "fit-content", wordWrap: "break-word"}}>{isLink.slice(0, 50)}...</span>
+            <div style={{ padding: "0 15px 0 25px" }}>
+                <span style={{ width: "fit-content", wordWrap: "break-word" }}>{isLink.slice(0, 50)}...</span>
             </div>
             <div>
                 <CopyBtn onClick={onCopy} type="button">

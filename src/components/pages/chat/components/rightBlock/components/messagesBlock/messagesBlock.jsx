@@ -43,7 +43,9 @@ export const MessagesBlock = ({ chatMessages, setIsEditing, setMessage }) => {
                     <React.Fragment key={uuid()}>
                         {message.userName !== name ?
                             <MessageInner id={message.id} onContextMenu={openMessageSettings}>
-                                <Message><span>{message.text}</span></Message>
+                                <Message>
+                                    <span>{message.text}</span>
+                                </Message>
                                 <SubMessage>{message.time} {message.userName}</SubMessage>
                                 {isMessageSettings === message.id &&
                                     <MessageSettings
@@ -54,7 +56,9 @@ export const MessagesBlock = ({ chatMessages, setIsEditing, setMessage }) => {
                             </MessageInner>
                             :
                             <MessageInnerOwn id={message.id} onContextMenu={openMessageSettings}>
-                                <MessageOwn><span>{message.text}</span></MessageOwn>
+                                <MessageOwn>
+                                    <span>{message.text}</span>
+                                </MessageOwn>
                                 <SubMessage>{message.time} {message.userName}</SubMessage>
                                 {isMessageSettings === message.id &&
                                     <MessageSettings

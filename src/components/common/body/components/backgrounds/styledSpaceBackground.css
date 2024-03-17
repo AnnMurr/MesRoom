@@ -1,72 +1,75 @@
 .space-container {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background-color: #0b0a0a;
-    z-index: -1;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #0b0a0a;
+  z-index: -1;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: opacity 2s ease;
+}
+
+.star_anim {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background-color: #fff;
+  border-radius: 50%;
+  animation-duration: 15s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes star-animation-left-top {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
   }
-  
-  .star {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background-color: #fff;
-    border-radius: 50%; 
-    transition: opacity 2s ease;
+
+  100% {
+    opacity: 0;
+    transform: translate(-50vw, -50vh) scale(7);
   }
-  
-  .star_anim {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background-color: #fff;
-    border-radius: 50%; 
-    animation-duration: 15s;
-    animation-iteration-count: infinite; 
+}
+
+@keyframes star-animation-right-top {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
   }
-  
-  @keyframes star-animation-left-top {
-    0% {
-      opacity: 1;
-      transform: translate(0, 0) scale(1);
-    }
-    100% {
-      opacity: 0;
-      transform: translate(-50vw, -50vh) scale(7);
-    }
+
+  100% {
+    opacity: 0;
+    transform: translate(50vw, -50vh) scale(7);
   }
-  
-  @keyframes star-animation-right-top {
-    0% {
-      opacity: 1;
-      transform: translate(0, 0) scale(1);
-    }
-    100% {
-      opacity: 0;
-      transform: translate(50vw, -50vh) scale(7);
-    }
+}
+
+@keyframes star-animation-left-bottom {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
   }
-  
-  @keyframes star-animation-left-bottom {
-    0% {
-      opacity: 1;
-      transform: translate(0, 0) scale(1);
-    }
-    100% {
-      opacity: 0;
-      transform: translate(-50vw, 50vh) scale(7);
-    }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50vw, 50vh) scale(7);
   }
-  
-  @keyframes star-animation-right-bottom {
-    0% {
-      opacity: 1;
-      transform: translate(0, 0) scale(1);
-    }
-    100% {
-      opacity: 0;
-      transform: translate(50vw, 50vh) scale(7);
-    }
+}
+
+@keyframes star-animation-right-bottom {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
   }
-  
+
+  100% {
+    opacity: 0;
+    transform: translate(50vw, 50vh) scale(7);
+  }
+}

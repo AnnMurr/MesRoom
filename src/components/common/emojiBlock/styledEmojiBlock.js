@@ -37,11 +37,3 @@ export const EmojiList = styled.ul`
   overflow-y: scroll;
   scrollbar-width: none;
 `;
-
-export const EmojiItem = styled.div`
-  display: inline-block;
-`;
-
-export const EmojiItemBtn = styled.button`
-  cursor: pointer;
-`;

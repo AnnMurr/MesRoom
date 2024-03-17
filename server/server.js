@@ -57,8 +57,12 @@ app.post("/check-userEmoji", (req, res) => {
   let isUserEmoji = false;
 
   if (rooms.has(roomId)) {
-    if (rooms.get(roomId).get("users")
-      .findIndex((data) => data.icon === userEmoji) !== -1) {
+    if (
+      rooms
+        .get(roomId)
+        .get("users")
+        .findIndex((data) => data.icon === userEmoji) !== -1
+    ) {
       isUserEmoji = true;
     }
   }
@@ -125,28 +129,28 @@ io.on("connection", (socket) => {
   });
 
   socket.on("DELETE_MESSAGE", ({ messageId, roomId }) => {
-
-    if(rooms.has(roomId))  {
+    if (rooms.has(roomId)) {
       const messages = rooms.get(roomId).get("messages");
-      const updatedMessages = messages.filter(messageData => messageData.id !== messageId)
-      rooms.get(roomId).set("messages", updatedMessages)
+      const updatedMessages = messages.filter(
+        (messageData) => messageData.id !== messageId
+      );
+      rooms.get(roomId).set("messages", updatedMessages);
 
       io.to(roomId).emit("changed-messages", updatedMessages);
     }
-    
-  })
+  });
 
   socket.on("EDIT_MESSAGE", ({ roomId, messageId, editedMessage }) => {
     const messages = rooms.get(roomId).get("messages");
-    console.log(messages)
-    messages.forEach(messageData => {
-      if(messageData.id === messageId) {
-        messageData.text = editedMessage
+    console.log(messages);
+    messages.forEach((messageData) => {
+      if (messageData.id === messageId) {
+        messageData.text = editedMessage;
       }
-    })
-    
+    });
+
     io.to(roomId).emit("changed-messages", messages);
-  })
+  });
 
   socket.on("disconnect", () => {
     console.log("Client disconnected");

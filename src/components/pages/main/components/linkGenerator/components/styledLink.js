@@ -12,7 +12,6 @@ export const LinkWrapper = styled.div`
     text-align: center;
     border-radius: 2px;
 
-
   @media screen and (max-width: 640px) {
     font-size: 12px;
   }

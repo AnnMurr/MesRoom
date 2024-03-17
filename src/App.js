@@ -1,8 +1,9 @@
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import { Body, Main, Room, Chat } from "./components";
+import fonts from "./styles/general/fonts.css";
+import reset from "./styles/general/reset.css";
 
 function App() {
-  
   return (
     <Router>
       <Body>

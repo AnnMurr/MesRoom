@@ -1,1 +1,1 @@
-export const getCurrentTime = () => `${new Date().getHours()}:${String(new Date().getMinutes()).padStart(2, '0')}`
+export const getCurrentTime = () => `${new Date().getHours()}:${String(new Date().getMinutes()).padStart(2, '0')}`;

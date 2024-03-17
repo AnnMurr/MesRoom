@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { useRef, useState } from 'react';
 import { Cube, FaceBack, FaceBottom, FaceFront, FaceLeft, FaceRight, FaceTop } from './styledLogoCube';
-const cubeGreySide = require("../../../../../accet/images/cubeGreySide.png");
-const cubeGreenSide = require("../../../../../accet/images/cubeGreenSide.png");
-const cubeBackSide = require("../../../../../accet/images/cubeBlackSide.png");
+
+const cubeGreySide = require("../../../../../assets/images/cubeGreySide.png");
+const cubeGreenSide = require("../../../../../assets/images/cubeGreenSide.png");
+const cubeBackSide = require("../../../../../assets/images/cubeBlackSide.png");
 
 export const LogoCube = () => {
     const sceneRef = useRef(null);

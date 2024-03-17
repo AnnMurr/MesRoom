@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { EMOJI, fetchEmojiData } from "../../../consts/consts";
 import { v4 as uuid } from "uuid";
-import { EmojiBlockContainer, EmojiList, EmojiItem, EmojiItemBtn } from "./styledEmojiBlock";
+import { EmojiBlockContainer, EmojiList } from "./styledEmojiBlock";
+import { EmojiItem } from "./components/emojiItem";
 
 export const EmojiBlock = ({ selectEmoji, emojiBlockRef, type }) => {
     const [emojiFromApi, setEmojiFromApi] = useState(null);
@@ -24,19 +25,17 @@ export const EmojiBlock = ({ selectEmoji, emojiBlockRef, type }) => {
             <EmojiList>
                 {emojiFromApi ?
                     emojiFromApi.map((data) => (
-                        <EmojiItem key={uuid()}>
-                            <EmojiItemBtn onClick={selectEmoji}>
-                                {data.character}
-                            </EmojiItemBtn>
-                        </EmojiItem>
+                        <EmojiItem
+                            key={uuid()}
+                            selectEmoji={selectEmoji}
+                            data={data.character} />
                     )) :
                     EMOJI &&
                     EMOJI.map((data) => (
-                        <EmojiItem key={uuid()}>
-                            <EmojiItemBtn onClick={selectEmoji}>
-                                {data}
-                            </EmojiItemBtn>
-                        </EmojiItem>
+                        <EmojiItem
+                            key={uuid()}
+                            selectEmoji={selectEmoji}
+                            data={data} />
                     ))
                 }
             </EmojiList>

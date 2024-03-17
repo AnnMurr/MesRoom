@@ -7,7 +7,7 @@ export const Btn = ({ userName, userEmoji, setErrorMessage }) => {
     const navigation = useNavigate();
     const roomId = document.location.href.split('#room/')[1];
 
-    const removeErrorMessage = () => setTimeout(() => setErrorMessage(""), 3000)
+    const removeErrorMessage = () => setTimeout(() => setErrorMessage(""), 3000);
 
     const sendData = async (e) => {
         e.preventDefault();
@@ -30,7 +30,7 @@ export const Btn = ({ userName, userEmoji, setErrorMessage }) => {
             navigation(`/room/${roomId}/${userName}`);
         } else {
             setErrorMessage("wrong data");
-            removeErrorMessage()
+            removeErrorMessage();
         }
     }
 

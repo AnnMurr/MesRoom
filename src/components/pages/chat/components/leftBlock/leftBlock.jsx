@@ -1,63 +1,17 @@
-import { useEffect, useRef, useState } from "react";
-import { EmojiBlock } from "../../../../common/emojiBlock/emojiBlock";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react";
+import { Item } from "./components/item";
 import { socket } from "../../../../../socket/socket";
 import { v4 as uuid } from "uuid";
-import { getDataFromSessionStorage, setDataToSessionStorage } from "../../../../../store/sessionStorage";
-import { checkUserIcon } from "../../../../../api/checkUserData";
 import { OutlinedAlerts } from "../../../../common/alerts/alerts";
 import { blockPreviousPage } from "../../../../../utils/blockPreviousPage";
-import { Container, OnlineTitle, Item, EditBtn, IconBtn } from "./styledLeftBlock";
+import { Container, OnlineTitle } from "./styledLeftBlock";
 
 export const LeftBlock = () => {
-    const { id, name } = getDataFromSessionStorage("userData");
-    const dataFromLocalStorage = getDataFromSessionStorage("userData");
     const [usersOnline, setUsersOnline] = useState([]);
     const [isErrorAlert, setIsErrorAlert] = useState(false);
-    const emojiBlockRef = useRef(null);
-    const editBtnRef = useRef(null);
-    const iconBtnRef = useRef(null);
-    const windowWidth = window.innerWidth
-
-    const closeEmojiBlockByClickOutside = (event) => {
-        if (emojiBlockRef.current && !emojiBlockRef.current.contains(event.target)
-            && !editBtnRef.current.contains(event.target) && !iconBtnRef.current.contains(event.target)) {
-            openEmojiBlock()
-        }
-    }
-
-    const openEmojiBlock = () => {
-        const emojiBlocStyle = emojiBlockRef.current.style;
-        emojiBlocStyle.opacity = emojiBlocStyle.opacity === "1" ? "0" : "1";
-        emojiBlocStyle.visibility = emojiBlocStyle.visibility === "visible" ? "hidden" : "visible";
-
-        emojiBlocStyle.visibility === "visible" ?
-            document.addEventListener("click", closeEmojiBlockByClickOutside) :
-            document.removeEventListener("click", closeEmojiBlockByClickOutside);
-    }
-
-    const selectEmoji = async (event) => {
-        const selectedEmoji = event.target.textContent;
-        const isEmoji = await checkUserIcon(id, selectedEmoji);
-
-        if (isEmoji) {
-            setIsErrorAlert(true);
-            setTimeout(() => setIsErrorAlert(false), 3000)
-        } else {
-            const newEmoji = selectedEmoji;
-            event.preventDefault();
-
-            socket.emit("CHANGE-USERICON", { id, name, newEmoji });
-
-            dataFromLocalStorage.userEmoji = newEmoji;
-            setDataToSessionStorage("userData", dataFromLocalStorage);
-            document.removeEventListener("click", closeEmojiBlockByClickOutside);
-        }
-    };
 
     useEffect(() => {
-        blockPreviousPage()
+        blockPreviousPage();
 
         socket.on("usersOnline", (users) => setUsersOnline(users));
         socket.on("CHANGED-USERDATA", (data) => setUsersOnline(data));
@@ -70,27 +24,15 @@ export const LeftBlock = () => {
                 <ul>
                     {usersOnline &&
                         usersOnline.map((userData) => (
-                            <Item key={uuid()}>
-                                <IconBtn
-                                    ref={iconBtnRef}
-                                    type="button"
-                                    onClick={() => windowWidth <= 1024 && openEmojiBlock()}>
-                                    {userData.icon}
-                                </IconBtn>
-                                {userData.name}
-                                {userData.name.toLowerCase() === name.toLowerCase() ?
-                                    <EditBtn ref={editBtnRef} onClick={openEmojiBlock}>
-                                        {<FontAwesomeIcon size="sm" style={{ color: "lightgray" }} icon={faPen} />}
-                                    </EditBtn>
-                                    : null}
-                                {userData.name.toLowerCase() === name.toLowerCase() ?
-                                    <EmojiBlock type={"chatBlock"} emojiBlockRef={emojiBlockRef} selectEmoji={selectEmoji} />
-                                    : null}
-                            </Item>
-                        ))
-                    }
+                            <Item
+                                key={uuid()}
+                                setIsErrorAlert={setIsErrorAlert}
+                                userData={userData} />
+                        ))}
                 </ul>
-                {isErrorAlert ? <OutlinedAlerts type={"error"} text={"This emoji has already taken"} /> : null}
+                {isErrorAlert ?
+                    <OutlinedAlerts type={"error"} text={"This emoji has already taken"} />
+                    : null}
             </div>
         </Container>
     )

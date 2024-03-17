@@ -37,4 +37,4 @@ export const fetchEmojiData = async () => {
     .catch((err) => {
         throw err;
     })
-  };
+};
