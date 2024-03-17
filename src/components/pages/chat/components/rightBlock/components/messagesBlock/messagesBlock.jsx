@@ -12,7 +12,7 @@ import {
 } from "./styledMessagesBlock";
 import { useSelector } from "react-redux";
 
-export const MessagesBlock = ({ setIsEditing }) => {
+export const MessagesBlock = () => {
     const [isMessageSettings, setIsMessageSettings] = useState(null);
     const [messageSettingsPosition, setMessageSettingsPosition] = useState({ x: 0, y: 0 });
     const { name } = getDataFromSessionStorage("userData");
@@ -51,7 +51,6 @@ export const MessagesBlock = ({ setIsEditing }) => {
                                 <SubMessage>{message.time} {message.userName}</SubMessage>
                                 {isMessageSettings === message.id &&
                                     <MessageSettings
-                                        setIsEditing={setIsEditing}
                                         messageSettingsPosition={messageSettingsPosition}
                                         type={"otherSettings"}
                                         messageId={message.id} />}
@@ -65,7 +64,6 @@ export const MessagesBlock = ({ setIsEditing }) => {
                                 {isMessageSettings === message.id &&
                                     <MessageSettings
                                         messageText={message.text}
-                                        setIsEditing={setIsEditing}
                                         messageSettingsPosition={messageSettingsPosition}
                                         type={"ownSettings"}
                                         messageId={message.id} />}

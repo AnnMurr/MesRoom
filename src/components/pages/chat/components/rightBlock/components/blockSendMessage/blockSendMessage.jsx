@@ -1,29 +1,28 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { setUserMessage } from "../../../../../../../redux/redusers/userReduser";
+import { useDispatch, useSelector } from "react-redux";
+import { setIsEditingMessage, setUserMessage } from "../../../../../../../redux/redusers/userReduser";
 import { EditDetailsBlock } from "./components/editDetails/editDetails";
 import { Input } from "./components/input/input";
 import { Wrapper } from "./styledBlockSendMessage";
 
-export const BlockSendMessage = ({ isEditing, setIsEditing }) => {
+export const BlockSendMessage = () => {
     const [initialHeight, setInitialHeight] = useState('33px');
+    const { isEditingMessage } = useSelector(state => state.chatData);
     const dispatch = useDispatch();
 
     const closeEditing = () => {
-        setIsEditing(false);
+        dispatch(setIsEditingMessage(false));
         setInitialHeight('33px');
         dispatch(setUserMessage(""));
     }
 
     return (
         <div>
-            {isEditing ?
+            {isEditingMessage ?
                 <EditDetailsBlock closeEditing={closeEditing} />
                 : null}
             <Wrapper>
                 <Input
-                    isEditing={isEditing}
-                    setIsEditing={setIsEditing}
                     setInitialHeight={setInitialHeight}
                     initialHeight={initialHeight} />
             </Wrapper>

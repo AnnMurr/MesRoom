@@ -1,16 +1,15 @@
 import { useDispatch } from "react-redux";
-import { setUserMessage } from "../../../../../../../../../redux/redusers/userReduser";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { setIsEditingMessage, setUserMessage } from "../../../../../../../../../redux/redusers/userReduser";
 import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { getDataFromSessionStorage } from "../../../../../../../../../store/sessionStorage";
 import { socket } from "../../../../../../../../../socket/socket";
-import { Container, Icon, Item, Btn, Text } from "./styledMessageSettings";
+import { Item } from "./components/item/item";
+import { Container } from "./styledMessageSettings";
 
 export const MessageSettings = ({
     messageId,
     type,
     messageSettingsPosition,
-    setIsEditing,
     messageText
 }) => {
     const { id } = getDataFromSessionStorage("userData");
@@ -26,25 +25,16 @@ export const MessageSettings = ({
     const editMEssage = () => {
         dispatch(setUserMessage(messageText));
         sessionStorage.setItem("messageId", JSON.stringify(messageId));
-        setIsEditing(true);
+        dispatch(setIsEditingMessage(true));
     }
 
     return (
         <Container style={{ top: messageSettingsPosition.y, left: messageSettingsPosition.x - 50 }} type={type}>
             <div>
                 {type === "ownSettings" ?
-                    <Item>
-                        <Btn onClick={editMEssage}>
-                            <Icon><FontAwesomeIcon size="sm" color="#fff" icon={faPen} /></Icon> <Text>Edit</Text>
-                        </Btn>
-                    </Item>
+                    <Item text={"Edit"} func={editMEssage} icon={faPen} />
                     : null}
-                <Item>
-                    <Btn onClick={deleteMessage}>
-                        <Icon><FontAwesomeIcon size="sm" color="#fff" icon={faTrashCan} /></Icon>
-                        <Text>Delete</Text>
-                    </Btn>
-                </Item>
+                <Item text={"Delete"} func={deleteMessage} icon={faTrashCan} />
             </div>
         </Container >
     )

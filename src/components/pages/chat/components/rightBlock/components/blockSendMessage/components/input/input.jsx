@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setChatMessages, setUserMessage } from "../../../../../../../../../redux/redusers/userReduser";
+import { setChatMessages, setIsEditingMessage, setUserMessage } from "../../../../../../../../../redux/redusers/userReduser";
 import { v4 as uuid } from "uuid";
 import { getDataFromSessionStorage } from "../../../../../../../../../store/sessionStorage";
 import { socket } from "../../../../../../../../../socket/socket";
@@ -9,9 +9,10 @@ import { faLocationArrow } from "@fortawesome/free-solid-svg-icons";
 import { faCircleCheck } from "@fortawesome/free-regular-svg-icons";
 import { AddEditBtn, SendBtn, TextArea } from "./styledInput";
 
-export const Input = ({ isEditing, setIsEditing, setInitialHeight, initialHeight }) => {
+export const Input = ({ setInitialHeight, initialHeight }) => {
     const { id, name } = getDataFromSessionStorage("userData");
     const { userMessage } = useSelector(state => state.chatData);
+    const { isEditingMessage } = useSelector(state => state.chatData);
     const dispatch = useDispatch();
 
     const handleInputChange = (e) => {
@@ -34,7 +35,7 @@ export const Input = ({ isEditing, setIsEditing, setInitialHeight, initialHeight
 
     const sendMessage = () => {
         if (userMessage && !userMessage.split("").every((symbol) => symbol === " ")) {
-            if (isEditing) {
+            if (isEditingMessage) {
                 socket.emit("EDIT_MESSAGE", {
                     roomId: id,
                     messageId: getDataFromSessionStorage("messageId"),
@@ -42,7 +43,7 @@ export const Input = ({ isEditing, setIsEditing, setInitialHeight, initialHeight
                 });
 
                 socket.on("changed-messages", (messages) => dispatch(setChatMessages(messages)));
-                setIsEditing(false);
+                dispatch(setIsEditingMessage(false));
             } else {
                 socket.emit("SEND_MESSAGE", {
                     roomId: id,
@@ -71,7 +72,7 @@ export const Input = ({ isEditing, setIsEditing, setInitialHeight, initialHeight
                 onKeyDown={sendMessagebyEnter}
                 aria-rowcount={100}
                 value={userMessage} />
-            {!isEditing ?
+            {!isEditingMessage ?
                 <SendBtn onClick={sendMessage}>
                     <FontAwesomeIcon
                         size="lg"

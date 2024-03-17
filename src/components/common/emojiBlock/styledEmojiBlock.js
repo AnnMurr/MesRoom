@@ -5,7 +5,7 @@ export const EmojiBlockContainer = styled.div`
   visibility: hidden;
   transition: all 0.5s ease-in-out;
   position: absolute;
-  width: ${({ type }) => (type === "chatBlock" ? "152px" : "100%")};
+  width: ${({ type }) => (type === "chatBlock" ? "155px" : "100%")};
   background-color: #2c2c2c;
   border-radius: 5px;
   padding: 5px;

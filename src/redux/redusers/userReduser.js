@@ -4,6 +4,7 @@ const initialState = {
   chatMessages: null,
   usersOnline: null,
   userMessage: "",
+  isEditingMessage: false,
 };
 
 const userSlice = createSlice({
@@ -21,9 +22,13 @@ const userSlice = createSlice({
     setUserMessage: (state, action) => {
       state.userMessage = action.payload;
     },
+
+    setIsEditingMessage: (state, action) => {
+      state.isEditingMessage = action.payload;
+    },
   },
 });
 
 export const chatDataReducer = userSlice.reducer;
 
-export const { setChatMessages, setUsersOnline, setUserMessage } = userSlice.actions;
+export const { setChatMessages, setUsersOnline, setUserMessage, setIsEditingMessage } = userSlice.actions;
