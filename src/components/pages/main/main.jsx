@@ -16,6 +16,7 @@ export const Main = () => {
         const windowWidth = window.innerWidth
         const [laptopDistance, setlaptopDistance] = useState(null);
         const [titleDistance, setTitleDistance] = useState(null);
+        const [isLink, setIsLink] = useState('');
 
         const titleScale = useTransform(scrollY, [titleDistance, 2000], [1, 8]);
         const messageScale = useTransform(scrollY, [0, 3000], [1, 1]);
@@ -30,6 +31,8 @@ export const Main = () => {
                 setlaptopDistance(result);
                 setTitleDistance(titleRef.current.offsetTop)
         }
+
+        const hideLinkBlock = () => setIsLink('');
 
         const hideLaptop = (windowHeight, bodyHeight) => {
                 windowHeight + window.scrollY >= bodyHeight - 50 ?
@@ -60,6 +63,7 @@ export const Main = () => {
                 toggleBlockVisibility()
                 hideLaptop(windowHeight, bodyHeight)
                 hideSectionLink(windowHeight, bodyHeight)
+                hideLinkBlock()
         });
 
         return (
@@ -102,7 +106,7 @@ export const Main = () => {
                                 </LaptopImage>
                         </Section>
                         <Section ref={sectionLink}>
-                                <LinkGenerator />
+                                <LinkGenerator isLink={isLink} setIsLink={setIsLink} />
                         </Section>
                 </>
         )

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import "./styledSpaceBackground.css"
+import "./styledSpaceBackground.css";
 
 export const SpaceBackground = () => {
   const [stars, setStars] = useState([]);

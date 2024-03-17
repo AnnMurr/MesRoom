@@ -4,8 +4,8 @@ import { LinkBlock } from "./components/link";
 import { OutlinedAlerts } from "../../../../common/alerts/alerts";
 import { Wrapper, BtnInner, Container } from "./styledLinkGenerator";
 
-export const LinkGenerator = () => {
-    const [isLink, setIsLink] = useState('');
+export const LinkGenerator = ({isLink, setIsLink}) => {
+  
     const [isSuccessAlert, setIsSuccessAlert] = useState(false);
     const [isErrorAlert, setIsErrorAlert] = useState(false);
 
