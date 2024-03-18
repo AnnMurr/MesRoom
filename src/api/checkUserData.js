@@ -1,6 +1,6 @@
 export const checkUserName = async (roomId, userName) => {
   try {
-    const response = await fetch(`${process.env.MAIN_FULL_URL}:${process.env.PORT}/check-userName`, {
+    const response = await fetch(`https://mesroom.onrender.com:8080/check-userName`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
@@ -20,7 +20,7 @@ export const checkUserName = async (roomId, userName) => {
 
 export const checkUserIcon = async (roomId, userEmoji) => {
   try {
-    const response = await fetch(`${process.env.MAIN_FULL_URL}:${process.env.PORT}/check-userEmoji`, {
+    const response = await fetch(`https://mesroom.onrender.com:8080/check-userEmoji`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
