@@ -18,7 +18,7 @@ const rooms = new Map();
 
 app.post("/room", (req, res) => {
   const roomId = uuidv4();
-  const link = `${process.env.MAIN_URL}/#room/${roomId}.com`;
+  const link = `${process.env.MAIN_FULL_URL}/#room/${roomId}.com`;
 
   if (!rooms.has(roomId)) {
     rooms.set(
