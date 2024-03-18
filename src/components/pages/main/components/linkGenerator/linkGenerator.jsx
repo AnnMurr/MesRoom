@@ -3,6 +3,8 @@ import { Button } from "../../../../common/button/button";
 import { LinkBlock } from "./components/link";
 import { OutlinedAlerts } from "../../../../common/alerts/alerts";
 import { Wrapper, BtnInner, Container } from "./styledLinkGenerator";
+const env = require("dotenv");
+env.config();
 
 export const LinkGenerator = ({ isLink, setIsLink }) => {
     const [isSuccessAlert, setIsSuccessAlert] = useState(false);

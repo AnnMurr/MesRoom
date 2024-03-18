@@ -1,3 +1,6 @@
+const env = require("dotenv");
+env.config();
+
 export const checkUserName = async (roomId, userName) => {
   try {
     const response = await fetch(`${process.env.MAIN_FULL_URL}:${process.env.PORT}/check-userName`, {
