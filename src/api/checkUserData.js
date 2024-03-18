@@ -1,6 +1,6 @@
 export const checkUserName = async (roomId, userName) => {
   try {
-    const response = await fetch(`https://mesroom.onrender.com/check-userName`, {
+    const response = await fetch(`https://messchat-service.onrender.com/check-userName`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
@@ -20,7 +20,7 @@ export const checkUserName = async (roomId, userName) => {
 
 export const checkUserIcon = async (roomId, userEmoji) => {
   try {
-    const response = await fetch(`https://mesroom.onrender.com/check-userEmoji`, {
+    const response = await fetch(`https://messchat-service.onrender.com/check-userEmoji`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({

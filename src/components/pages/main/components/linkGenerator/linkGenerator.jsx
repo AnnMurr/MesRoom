@@ -10,7 +10,7 @@ export const LinkGenerator = ({ isLink, setIsLink }) => {
 
     const onGenerateLink = async () => {
         try {
-            const response = await fetch(`https://mesroom.onrender.com/room`, {
+            const response = await fetch(`https://messchat-service.onrender.com/room`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'aplication/json' },
                 body: JSON.stringify({}),
