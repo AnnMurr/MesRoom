@@ -10,8 +10,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/room/:link" element={<Room />} />
-          <Route path="/room/:link/:name" element={<Chat />} />
-        </Routes>
+          <Route path="/:name" element={<Chat />} />
+        </Routes>/room/:link
       </Body>
     </Router>
   );

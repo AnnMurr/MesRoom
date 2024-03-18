@@ -2,7 +2,7 @@ const { v4: uuidv4 } = require("uuid");
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const PORT = 1234;
+const PORT = process.env.PORT || 1234;
 
 const server = require("http").Server(app);
 const io = require("socket.io")(server, {
@@ -18,7 +18,7 @@ const rooms = new Map();
 
 app.post("/room", (req, res) => {
   const roomId = uuidv4();
-  const link = `http://localhost:3000/#room/${roomId}`;
+  const link = `${process.env.MAIN_URL}/#room/${roomId}.com`;
 
   if (!rooms.has(roomId)) {
     rooms.set(
