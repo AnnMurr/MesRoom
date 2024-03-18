@@ -1,3 +1,3 @@
 import io from "socket.io-client";
 
-export const socket = io(`https://mesroom.onrender.com:8080`);
+export const socket = io(`https://mesroom.onrender.com`);
