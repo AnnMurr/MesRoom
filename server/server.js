@@ -1,10 +1,10 @@
-const env = require("dotenv");
-env.config();
+require('dotenv').config();
 const { v4: uuidv4 } = require("uuid");
 const express = require("express");
 const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 5050;
+console.log("Port: " + process.env.PORT);
 
 const server = require("http").Server(app);
 const io = require("socket.io")(server, {
