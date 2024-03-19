@@ -1,10 +1,11 @@
-require('dotenv').config({ path: '../.env' });
+require('dotenv-extended').load({ path: '../.env' });
 const { v4: uuidv4 } = require("uuid");
 const express = require("express");
 const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 5050;
-
+console.log(process.env.PORT)
+console.log(process.env.MAIN_FULL_URL)
 const server = require("https").Server(app);
 const io = require("socket.io")(server, {
   cors: {
