@@ -4,7 +4,7 @@
   "engines": {
     "npm": "10.5.0",
     "node": "18.18.0"
-    },
+  },
   "private": true,
   "dependencies": {
     "cors": "^2.8.5",
@@ -19,5 +19,8 @@
     "build": "react-scripts build && npm i",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "react-scripts": "^5.0.1"
   }
 }
