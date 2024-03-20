@@ -18,13 +18,10 @@ app.use(cors());
 
 const rooms = new Map();
 
-app.get('/', (req, res) => {
-  res.send('Welcome to Messchat Service!');
-});
-
 app.post("/room", (req, res) => {
   const roomId = uuidv4();
-  const link = `${process.env.MAIN_FULL_URL}/#room/${roomId}.com`;
+  const url = req.body.url
+  const link = `${url}/#room/${roomId}.com`;
 
   if (!rooms.has(roomId)) {
     rooms.set(
