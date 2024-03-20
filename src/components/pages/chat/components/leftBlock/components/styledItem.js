@@ -37,5 +37,10 @@ export const IconBtn = styled.button`
 `;
 
 export const TextContent = styled.div`
+  overflow: hidden;
+  text-overflow: ellipsis;
 
+  @media screen and (max-width: 1024px) {
+    overflow: visible;
+  }
 `;
