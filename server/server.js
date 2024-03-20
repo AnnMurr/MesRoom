@@ -21,7 +21,7 @@ const rooms = new Map();
 app.post("/room", (req, res) => {
   const roomId = uuidv4();
   const url = req.body.url
-  const link = `${url}/#room/${roomId}`;
+  const link = `${url}#room/${roomId}`;
 
   if (!rooms.has(roomId)) {
     rooms.set(

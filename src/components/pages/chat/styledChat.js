@@ -15,8 +15,12 @@ export const Container = styled.div`
   padding: 0 15px;
   height: 70vh;
 
-  @media screen and (max-width: 640px) {
-    height: 65vh;
+  @media screen and (max-width: 768px) {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    padding: 0;
   }
 `;
 

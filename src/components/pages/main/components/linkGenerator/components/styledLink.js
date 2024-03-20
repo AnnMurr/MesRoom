@@ -23,6 +23,7 @@ export const LinkWrapper = styled.div`
 
 export const TitleLink = styled.h5`
     font-size: 17px;
+    color: #000;
 
     @media screen and (max-width: 640px) {
       font-size: 14px;
@@ -31,4 +32,10 @@ export const TitleLink = styled.h5`
 
 export const CopyBtn = styled.button`
     margin-left: 15px;
+`
+
+export const LinkText = styled.span`
+  width: fit-content;
+  word-wrap: break-word;
+  color: 000;
 `

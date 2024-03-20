@@ -11,6 +11,7 @@ export const Emoji = styled.div`
   opacity: 1;
   z-index: 5;
   color: #fff;
+  line-height: 18px;
 
   &:hover + ${EmojiBlockContainer} {
     opacity: 1;
