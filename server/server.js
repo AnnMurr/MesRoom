@@ -13,7 +13,7 @@ const io = require("socket.io")(server, {
 });
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: '*' }));
 
 const rooms = new Map();
 
