@@ -11,7 +11,7 @@ import { Container, Section, Wrapper } from "./styledChat";
 export const Chat = () => {
     const [isLoad, setIsLoad] = useState(true);
     const { id, name, userEmoji } = getDataFromSessionStorage("userData");
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     useEffect(() => {
         setTimeout(() => setIsLoad(false), 4000);
