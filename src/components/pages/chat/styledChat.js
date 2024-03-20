@@ -19,7 +19,7 @@ export const Container = styled.div`
     position: fixed;
     inset: 0;
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
     padding: 0;
   }
 `;
