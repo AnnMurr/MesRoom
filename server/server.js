@@ -3,9 +3,10 @@ const { v4: uuidv4 } = require("uuid");
 const express = require("express");
 const cors = require("cors");
 const app = express();
+const http = require("http");
 const PORT = process.env.PORT || 5050;
 
-const server = require("https").Server(app);
+const server = http.createServer(app);
 const io = require("socket.io")(server, {
   cors: {
     origin: "*",
@@ -16,6 +17,10 @@ app.use(express.json());
 app.use(cors());
 
 const rooms = new Map();
+
+app.get('/', (req, res) => {
+  res.send('Welcome to Messchat Service!');
+});
 
 app.post("/room", (req, res) => {
   const roomId = uuidv4();
