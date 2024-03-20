@@ -18,7 +18,7 @@ export const LeftBlock = () => {
 
         socket.on("usersOnline", (users) => dispatch(setUsersOnline(users)));
         socket.on("CHANGED-USERDATA", (data) => dispatch(setUsersOnline(data)));
-    }, []);
+    }, [dispatch]);
 
     return (
         <Container>

@@ -6,7 +6,7 @@ import { EditDetails, EditableMessage, Inner } from "./styledEditDetails";
 
 export const EditDetailsBlock = ({ closeEditing }) => {
     const { userMessage } = useSelector(state => state.chatData);
-    const memoizedMessage = useMemo(() => userMessage, []);
+    const memoizedMessage = useMemo(() => userMessage, [userMessage]);
 
     return (
         <EditDetails>

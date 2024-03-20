@@ -42,7 +42,7 @@ export const Chat = () => {
             });
             socket.disconnect();
         };
-    }, []);
+    }, [dispatch, id, name, userEmoji]);
 
     return (
         <Section>
