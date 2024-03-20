@@ -3,19 +3,17 @@ import { Button } from "../../../../common/button/button";
 import { LinkBlock } from "./components/link";
 import { OutlinedAlerts } from "../../../../common/alerts/alerts";
 import { Wrapper, BtnInner, Container } from "./styledLinkGenerator";
-import { useLocation } from "react-router-dom";
 
 export const LinkGenerator = ({ isLink, setIsLink }) => {
     const [isSuccessAlert, setIsSuccessAlert] = useState(false);
     const [isErrorAlert, setIsErrorAlert] = useState(false);
-    const location = useLocation();
 
     const onGenerateLink = async () => {
         try {
             const response = await fetch(`https://messchat-service.onrender.com/room`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ url: location.pathname }),
+                body: JSON.stringify({ url: window.location.href }),
             });
 
             if (!response.ok) throw new Error('Failed to generate link');
