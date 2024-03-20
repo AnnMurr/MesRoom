@@ -17,6 +17,10 @@ app.use(cors({ origin: '*' }));
 
 const rooms = new Map();
 
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/public/index.html')
+})
+
 app.post("/room", (req, res) => {
   const roomId = uuidv4();
   const link = `${process.env.MAIN_FULL_URL}/#room/${roomId}.com`;
