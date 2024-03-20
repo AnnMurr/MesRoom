@@ -13,7 +13,6 @@ export const LaptopBlock = ({ laptopImageRef, laptopDistance }) => {
     const messageLeft = useTransform(scrollY, [laptopDistance + 100, 3000], ["25%", "-200%"]);
     const laptopScale = useTransform(scrollY, [laptopDistance, 3500], [0, 20]);
 
-
     return (
         <LaptopImage
             ref={laptopImageRef}

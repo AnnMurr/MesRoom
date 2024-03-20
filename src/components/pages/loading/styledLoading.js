@@ -6,7 +6,7 @@ export const Container = styled.div`
   height: 100vh;
   width: 100%;
   background-color: #1d1b1b;
-  z-index: 30;
+  z-index: 90;
 `;
 
 const moveKeyframes = keyframes`
