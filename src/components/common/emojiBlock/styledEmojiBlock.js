@@ -11,6 +11,7 @@ export const EmojiBlockContainer = styled.div`
   padding: 5px;
   left: 0;
   top: -130px;
+  z-index: 20;
 
   @media screen and (max-width: 1024px) {
     top: ${({ type }) => (type === "chatBlock" ? "30px" : "-130px")};

@@ -6,9 +6,9 @@ import { LaptopBlock } from './components/laptopBlock/laptopBlock.jsx';
 import { Section, Title } from './mainStyled.js';
 import { CircularIndeterminate } from '../../common/loading/loading.jsx';
 
-const cubeGreySide = require("../../../assets/images/cubeGreySide.png");
-const cubeGreenSide = require("../../../assets/images/cubeGreenSide.png");
-const cubeBackSide = require("../../../assets/images/cubeBlackSide.png");
+const cubeGreySide = "https://i.imgur.com/vKE9Q3R.png";
+const cubeGreenSide = "https://i.imgur.com/5lE6HW3.png";
+const cubeBackSide = "https://i.imgur.com/sQr8jIK.png";
 
 export const Main = () => {
         const { scrollY } = useScroll();
@@ -27,9 +27,7 @@ export const Main = () => {
         useEffect(() => {
                 updateDistance();
 
-                if (cubeGreySide && cubeGreenSide && cubeBackSide) {
-                        setIsLoading(false)
-                }
+                if (cubeGreySide && cubeGreenSide && cubeBackSide) setIsLoading(false);
         }, []);
 
         const updateDistance = () => {

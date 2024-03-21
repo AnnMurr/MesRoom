@@ -48,14 +48,7 @@ export const Chat = () => {
         return () => {
             window.removeEventListener("beforeunload", handleUnload);
 
-            socket.emit("ROOM:LEAVE", {
-                roomId: id,
-                userName: {
-                    name: name,
-                    icon: userEmoji
-                }
-            });
-            socket.disconnect();
+           
         };
     }, [windowWidth, dispatch, id, name, userEmoji]);
 
