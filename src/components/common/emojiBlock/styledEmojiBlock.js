@@ -12,14 +12,8 @@ export const EmojiBlockContainer = styled.div`
   left: 0;
   top: -130px;
 
-  @media screen and (max-width: 760px) {
-    width: ${({ type }) => (type === "chatBlock" ? "122px" : "100%")};
-    width: ;
-  }
-
-  @media screen and (max-width: 520px) {
-    width: ${({ type }) => (type === "chatBlock" ? "100px" : "100%")};
-    width: ;
+  @media screen and (max-width: 768px) {
+    top: ${({ type }) => (type === "chatBlock" ? "25px" : "-130px")};
   }
 
   &:hover {

@@ -26,8 +26,6 @@ export const Main = () => {
                 setTitleDistance(titleRef.current.offsetTop);
         }
 
-        const hideLinkBlock = () => setIsLink('');
-
         const hideLaptop = (windowHeight, bodyHeight) => {
                 windowHeight + window.scrollY >= bodyHeight - 50 ?
                         laptopImageRef.current.style.display = "none" :
@@ -41,6 +39,7 @@ export const Main = () => {
                 } else {
                         sectionLink.current.style.visibility = "hidden";
                         sectionLink.current.style.opacity = "0";
+                        setIsLink('');
                 }
         }
 
@@ -57,7 +56,6 @@ export const Main = () => {
                 toggleBlockVisibility();
                 hideLaptop(windowHeight, bodyHeight);
                 hideSectionLink(windowHeight, bodyHeight);
-                hideLinkBlock();
         });
 
         return (

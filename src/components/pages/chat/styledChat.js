@@ -31,11 +31,15 @@ export const Wrapper = styled.div`
   background-color: #101010;
   border-radius: 5px;
 
-  @media screen and (max-width: 640px) {
-    grid-template-columns: 30% 70%;
+  @media screen and (max-width: 768px) {
+    grid-template-columns: none;
   }
+`;
 
-  @media screen and (max-width: 480px) {
-    grid-template-columns: 35% 65%;
-  }
+export const Burger = styled.button`
+  width: fit-content;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 20;
 `;

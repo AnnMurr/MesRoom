@@ -19,10 +19,6 @@ export const Wrapper = styled.li`
   text-overflow: ellipsis;
   position: relative;
 
-  @media screen and (max-width: 520px) {
-    font-size: 13px;
-  }
-
   &:hover > ${EditBtn} {
     opacity: 1;
     visibility: visible;
@@ -43,4 +39,8 @@ export const IconBtn = styled.button`
 export const TextContent = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @media screen and (max-width: 1024px) {
+    overflow: visible;
+  }
 `;

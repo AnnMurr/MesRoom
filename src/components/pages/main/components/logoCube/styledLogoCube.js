@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 export const rotateKeyframes = css`
   @keyframes rotate {
@@ -10,6 +10,27 @@ export const rotateKeyframes = css`
       transform: rotateX(360deg) rotateY(360deg);
     }
   }
+`;
+
+const cubeAppearence = keyframes`
+  0% {
+    display: none;
+    transform: scale(0.1);
+  }
+
+  5% {
+    opacity: 1;
+    display: block;
+    transform: scale(0.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+`
+
+export const Wrapper = styled.div`
+  animation: ${cubeAppearence} 7s forwards;
 `;
 
 export const Cube = styled.div`
