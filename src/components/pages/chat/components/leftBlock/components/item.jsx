@@ -31,7 +31,7 @@ export const Item = ({ setIsErrorAlert, userData }) => {
 
             dataFromLocalStorage.userEmoji = newEmoji;
             setDataToSessionStorage("userData", dataFromLocalStorage);
-            document.removeEventListener("click", closeEmojiBlockByClickOutside);
+            window.removeEventListener("click", closeEmojiBlockByClickOutside);
         }
     };
 
@@ -49,8 +49,8 @@ export const Item = ({ setIsErrorAlert, userData }) => {
             emojiBlocStyle.visibility = emojiBlocStyle.visibility === "visible" ? "hidden" : "visible";
     
             emojiBlocStyle.visibility === "visible" ?
-                document.addEventListener("click", closeEmojiBlockByClickOutside) :
-                document.removeEventListener("click", closeEmojiBlockByClickOutside);
+                window.addEventListener("click", closeEmojiBlockByClickOutside) :
+                window.removeEventListener("click", closeEmojiBlockByClickOutside);
         }
     }
 

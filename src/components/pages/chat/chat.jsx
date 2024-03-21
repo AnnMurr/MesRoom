@@ -12,7 +12,6 @@ import { Burger, Container, Section, Wrapper } from "./styledChat";
 
 export const Chat = () => {
     const [isLoad, setIsLoad] = useState(true);
-    const [isLeftBlock, setIsLeftBlock] = useState(true);
     const [isBurger, setIsBurger] = useState(false);
     const [isCloseBtn, setIsCloseBtn] = useState(false);
     const leftBlockRef = useRef(null);
@@ -24,7 +23,6 @@ export const Chat = () => {
 
     useEffect(() => {
         if (windowWidth <= 768) {
-            setIsLeftBlock(false);
             setIsBurger(true);
             setIsCloseBtn(true);
         };
@@ -48,16 +46,22 @@ export const Chat = () => {
         return () => {
             window.removeEventListener("beforeunload", handleUnload);
 
-           
+            socket.emit("ROOM:LEAVE", {
+                roomId: id,
+                userName: {
+                    name: name,
+                    icon: userEmoji
+                }
+            });
+
+            socket.disconnect();
         };
     }, [windowWidth, dispatch, id, name, userEmoji]);
 
     const closeLeftBlock = () => {
+        leftBlockRef.current.classList.remove("open");
         leftBlockRef.current.classList.add("hide");
-        setTimeout(() => {
-            setIsLeftBlock(false)
-            leftBlockRef.current.classList.remove("hide");
-        }, 600);
+ 
         window.removeEventListener("click", closeLeftBlockByClickOutside);
     }
 
@@ -73,7 +77,8 @@ export const Chat = () => {
     }
 
     const openLeftBlock = () => {
-        setIsLeftBlock(true);
+        leftBlockRef.current.classList.remove("hide");
+        leftBlockRef.current.classList.add("open");
         window.addEventListener("click", closeLeftBlockByClickOutside);
     }
 
@@ -87,15 +92,11 @@ export const Chat = () => {
                             <FontAwesomeIcon size="xl" color="white" icon={faBars} />
                         </Burger>
                         : null}
-                    {isLeftBlock ?
                         <LeftBlock
                             isCloseBtn={isCloseBtn}
                             closeLeftBlock={closeLeftBlock}
                             leftBlockRef={leftBlockRef}
-                            setIsLeftBlock={setIsLeftBlock}
-                            closeBtnRef={closeBtnRef}
-                            isLeftBlock={isLeftBlock} />
-                        : null}
+                            closeBtnRef={closeBtnRef} />
                     <RightBlock />
                 </Wrapper>
             </Container>

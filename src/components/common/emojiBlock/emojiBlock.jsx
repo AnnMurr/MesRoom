@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { EMOJI, fetchEmojiData } from "../../../consts/consts";
+import { EMOJI, fetchEmojiData } from "../../../consts/emoji";
 import { v4 as uuid } from "uuid";
 import { EmojiBlockContainer, EmojiList } from "./styledEmojiBlock";
 import { EmojiItem } from "./components/emojiItem";

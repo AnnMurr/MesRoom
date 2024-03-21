@@ -3,12 +3,9 @@ import { useScroll, useTransform } from 'framer-motion';
 import { LogoCube } from './components/logoCube/logoCube.jsx';
 import { LinkGenerator } from './components/linkGenerator/linkGenerator';
 import { LaptopBlock } from './components/laptopBlock/laptopBlock.jsx';
-import { Section, Title } from './mainStyled.js';
 import { CircularIndeterminate } from '../../common/loading/loading.jsx';
-
-const cubeGreySide = "https://i.imgur.com/vKE9Q3R.png";
-const cubeGreenSide = "https://i.imgur.com/5lE6HW3.png";
-const cubeBackSide = "https://i.imgur.com/sQr8jIK.png";
+import { CUBE_GREY_SIDE, CUBE_GREEN_SIDE, CUBE_BACK_SIDE } from '../../../consts/images.js';
+import { Section, Title } from './mainStyled.js';
 
 export const Main = () => {
         const { scrollY } = useScroll();
@@ -27,7 +24,7 @@ export const Main = () => {
         useEffect(() => {
                 updateDistance();
 
-                if (cubeGreySide && cubeGreenSide && cubeBackSide) setIsLoading(false);
+                if (CUBE_GREY_SIDE && CUBE_GREEN_SIDE && CUBE_BACK_SIDE) setIsLoading(false);
         }, []);
 
         const updateDistance = () => {
@@ -73,9 +70,9 @@ export const Main = () => {
                         <Section>
                                 {!isLoading ?
                                         <LogoCube
-                                                cubeGreySide={cubeGreySide}
-                                                cubeGreenSide={cubeGreenSide}
-                                                cubeBackSide={cubeBackSide} /> :
+                                                cubeGreySide={CUBE_GREY_SIDE}
+                                                cubeGreenSide={CUBE_GREEN_SIDE}
+                                                cubeBackSide={CUBE_BACK_SIDE} /> :
                                         <CircularIndeterminate />}
                         </Section>
                         <Section ref={sectionLaptopRef}>

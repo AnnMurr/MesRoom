@@ -8,6 +8,7 @@ import {
     MessageInner,
     MessageInnerOwn,
     MessageOwn,
+    MessageText,
     SubMessage
 } from "./styledMessagesBlock";
 import { useSelector } from "react-redux";
@@ -46,7 +47,7 @@ export const MessagesBlock = () => {
                         {message.userName !== name ?
                             <MessageInner id={message.id} onContextMenu={openMessageSettings}>
                                 <Message>
-                                    <span>{message.text}</span>
+                                    <MessageText>{message.text}</MessageText>
                                 </Message>
                                 <SubMessage>{message.time} {message.userName}</SubMessage>
                                 {isMessageSettings === message.id &&
@@ -59,7 +60,7 @@ export const MessagesBlock = () => {
                             :
                             <MessageInnerOwn id={message.id} onContextMenu={openMessageSettings}>
                                 <MessageOwn>
-                                    <span>{message.text}</span>
+                                    <MessageText>{message.text}</MessageText>
                                 </MessageOwn>
                                 <SubMessage>{message.time} {message.userName}</SubMessage>
                                 {isMessageSettings === message.id &&

@@ -30,7 +30,6 @@ export const MessageSettings = ({
     }
 
     const copyText = async () => {
-        console.log(messageText)
         try {
             await getCopyText(messageText);
         } catch (error) {
