@@ -17,7 +17,6 @@ export const Item = ({ setIsErrorAlert, userData }) => {
     const dataFromLocalStorage = getDataFromSessionStorage("userData");
 
     const selectEmoji = async (event) => {
-        console.log("event", event)
         const selectedEmoji = event.target.textContent;
         const isEmoji = await checkUserIcon(id, selectedEmoji);
 
@@ -44,13 +43,15 @@ export const Item = ({ setIsErrorAlert, userData }) => {
     }
 
     const openEmojiBlock = () => {
-        const emojiBlocStyle = emojiBlockRef.current.style;
-        emojiBlocStyle.opacity = emojiBlocStyle.opacity === "1" ? "0" : "1";
-        emojiBlocStyle.visibility = emojiBlocStyle.visibility === "visible" ? "hidden" : "visible";
-
-        emojiBlocStyle.visibility === "visible" ?
-            document.addEventListener("click", closeEmojiBlockByClickOutside) :
-            document.removeEventListener("click", closeEmojiBlockByClickOutside);
+        if(emojiBlockRef.current) {
+            const emojiBlocStyle = emojiBlockRef.current.style;
+            emojiBlocStyle.opacity = emojiBlocStyle.opacity === "1" ? "0" : "1";
+            emojiBlocStyle.visibility = emojiBlocStyle.visibility === "visible" ? "hidden" : "visible";
+    
+            emojiBlocStyle.visibility === "visible" ?
+                document.addEventListener("click", closeEmojiBlockByClickOutside) :
+                document.removeEventListener("click", closeEmojiBlockByClickOutside);
+        }
     }
 
     return (
