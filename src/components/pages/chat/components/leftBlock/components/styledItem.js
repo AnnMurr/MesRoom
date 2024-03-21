@@ -31,7 +31,7 @@ export const IconBtn = styled.button`
   width: 20px;
 
   @media screen and (max-width: 520px) {
-    margin-right: 5px;
+    margin-right: 10px;
     width: 15px;
   }
 `;

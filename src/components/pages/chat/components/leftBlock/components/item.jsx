@@ -17,6 +17,7 @@ export const Item = ({ setIsErrorAlert, userData }) => {
     const dataFromLocalStorage = getDataFromSessionStorage("userData");
 
     const selectEmoji = async (event) => {
+        console.log("event", event)
         const selectedEmoji = event.target.textContent;
         const isEmoji = await checkUserIcon(id, selectedEmoji);
 
