@@ -2,21 +2,27 @@ import styled, { keyframes } from "styled-components";
 
 const open = keyframes`
 0% {
-  left: -300px;
+  left: -550px;
 }
 
 100% {
   left: 0;
+  opacity: 1;
+  visibility: visible;
 }
 `;
 
 const hide = keyframes`
 0% {
   left: 0;
+  opacity: 1;
+  visibility: visible;
 }
 
 100% {
   left: -550px;
+  opacity: 0;
+  visibility: hidden;
 }
 `;
 
@@ -31,7 +37,9 @@ export const Container = styled.div`
     position: absolute;
     height: 100dvh;
     background-color: #232121;
-    animation: ${open} 0.6s ease forwards;
+    visibility: hidden;
+    opacity: 0;
+    left: -550px;
   }
 
   @media screen and (max-width: 320px) {
@@ -40,6 +48,12 @@ export const Container = styled.div`
 
   &.hide {
     animation: ${hide} 0.6s ease forwards;
+  }
+
+  &.open {
+    animation: ${open} 0.6s ease forwards;
+    visibility: visible;
+    opacity: 1;
   }
 `;
 

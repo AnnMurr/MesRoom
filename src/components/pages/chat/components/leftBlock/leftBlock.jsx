@@ -10,7 +10,7 @@ import { OutlinedAlerts } from "../../../../common/alerts/alerts";
 import { blockPreviousPage } from "../../../../../utils/blockPreviousPage";
 import { CloseBtn, Container, OnlineTitle } from "./styledLeftBlock";
 
-export const LeftBlock = ({leftBlockRef, closeLeftBlock, closeBtnRef, isCloseBtn}) => {
+export const LeftBlock = ({ leftBlockRef, closeLeftBlock, closeBtnRef, isCloseBtn }) => {
     const [isErrorAlert, setIsErrorAlert] = useState(false);
     const { usersOnline } = useSelector(state => state.chatData);
     const dispatch = useDispatch();
@@ -38,10 +38,10 @@ export const LeftBlock = ({leftBlockRef, closeLeftBlock, closeBtnRef, isCloseBtn
                 {isErrorAlert ?
                     <OutlinedAlerts type={"error"} text={"This emoji has already taken"} />
                     : null}
-               {isCloseBtn ? <CloseBtn ref={closeBtnRef} onClick={closeLeftBlock} type="button">
+                {isCloseBtn ? <CloseBtn ref={closeBtnRef} onClick={closeLeftBlock} type="button">
                     <FontAwesomeIcon size="xl" color="white" icon={faXmark} />
                 </CloseBtn>
-                : null}
+                    : null}
             </div>
         </Container>
     )

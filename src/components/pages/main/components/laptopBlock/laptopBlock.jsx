@@ -1,9 +1,7 @@
-import { useScroll, useTransform } from 'framer-motion';
-import { LaptopImage, Message, MessageGrayWrap, MessageGreenWrap, MessageText } from "./styledLaptopBlock"
 import { useEffect, useState } from 'react';
-
-const laptop = require("../../../../../assets/images/laptop.png");
-const phone = require("../../../../../assets/images/phone.png");
+import { useScroll, useTransform } from 'framer-motion';
+import { LAPTOP, PHONE } from '../../../../../consts/images';
+import { LaptopImage, Message, MessageGrayWrap, MessageGreenWrap, MessageText } from "./styledLaptopBlock"
 
 export const LaptopBlock = ({ laptopImageRef, laptopDistance }) => {
     const [toDistanceMessages, setToDistanceMessages] = useState(null);
@@ -47,7 +45,7 @@ export const LaptopBlock = ({ laptopImageRef, laptopDistance }) => {
                     <MessageText>there we go 😜</MessageText>
                 </MessageGreenWrap>
             </Message >
-            <img src={windowWidth >= 768 ? laptop : phone} alt="laptop" />
+            <img src={windowWidth >= 768 ? LAPTOP : PHONE} alt="laptop" />
         </LaptopImage>
     )
 }
