@@ -1,16 +1,22 @@
 import { useScroll, useTransform } from 'framer-motion';
 import { LaptopImage, Message, MessageGrayWrap, MessageGreenWrap, MessageText } from "./styledLaptopBlock"
+import { useEffect, useState } from 'react';
 
 const laptop = require("../../../../../assets/images/laptop.png");
 const phone = require("../../../../../assets/images/phone.png");
 
 export const LaptopBlock = ({ laptopImageRef, laptopDistance }) => {
+    const [toDistanceMessages, setToDistanceMessages] = useState(null);
     const windowWidth = window.innerWidth;
     const { scrollY } = useScroll();
 
+    useEffect(() => {
+        windowWidth >= 768 ? setToDistanceMessages(3000) : setToDistanceMessages(2000);
+    }, [windowWidth]);
+
     const messageScale = useTransform(scrollY, [0, 3000], [1, 1]);
-    const messageRight = useTransform(scrollY, [laptopDistance + 100, 3000], ["25%", "-200%"]);
-    const messageLeft = useTransform(scrollY, [laptopDistance + 100, 3000], ["25%", "-200%"]);
+    const messageRight = useTransform(scrollY, [laptopDistance + 100, toDistanceMessages], ["25%", "-200%"]);
+    const messageLeft = useTransform(scrollY, [laptopDistance + 100, toDistanceMessages], ["25%", "-200%"]);
     const laptopScale = useTransform(scrollY, [laptopDistance, 3500], [0, 20]);
 
     return (
