@@ -4,6 +4,11 @@ import { LogoCube } from './components/logoCube/logoCube.jsx';
 import { LinkGenerator } from './components/linkGenerator/linkGenerator';
 import { LaptopBlock } from './components/laptopBlock/laptopBlock.jsx';
 import { Section, Title } from './mainStyled.js';
+import { CircularIndeterminate } from '../../common/loading/loading.jsx';
+
+const cubeGreySide = require("../../../assets/images/cubeGreySide.png");
+const cubeGreenSide = require("../../../assets/images/cubeGreenSide.png");
+const cubeBackSide = require("../../../assets/images/cubeBlackSide.png");
 
 export const Main = () => {
         const { scrollY } = useScroll();
@@ -14,11 +19,18 @@ export const Main = () => {
 
         const [laptopDistance, setlaptopDistance] = useState(null);
         const [titleDistance, setTitleDistance] = useState(null);
+        const [isLoading, setIsLoading] = useState(true);
         const [isLink, setIsLink] = useState('');
 
         const titleScale = useTransform(scrollY, [titleDistance, 2000], [1, 8]);
 
-        useEffect(() => { updateDistance() }, []);
+        useEffect(() => {
+                updateDistance();
+
+                if (cubeGreySide && cubeGreenSide && cubeBackSide) {
+                        setIsLoading(false)
+                }
+        }, []);
 
         const updateDistance = () => {
                 const result = sectionLaptopRef.current.offsetTop * 1.2;
@@ -61,7 +73,12 @@ export const Main = () => {
         return (
                 <>
                         <Section>
-                                <LogoCube />
+                                {isLoading ?
+                                        <LogoCube
+                                                cubeGreySide={cubeGreySide}
+                                                cubeGreenSide={cubeGreenSide}
+                                                cubeBackSide={cubeBackSide} /> :
+                                        <CircularIndeterminate />}
                         </Section>
                         <Section ref={sectionLaptopRef}>
                                 <Title ref={titleRef} style={{ scale: titleScale }}>

@@ -11,11 +11,7 @@ import {
     Wrapper
 } from './styledLogoCube';
 
-const cubeGreySide = require("../../../../../assets/images/cubeGreySide.png");
-const cubeGreenSide = require("../../../../../assets/images/cubeGreenSide.png");
-const cubeBackSide = require("../../../../../assets/images/cubeBlackSide.png");
-
-export const LogoCube = () => {
+export const LogoCube = ({ cubeBackSide, cubeGreenSide, cubeGreySide }) => {
     const sceneRef = useRef(null);
     const cubeRef = useRef(null);
     const [isMouseOver, setIsMouseOver] = useState(false);
