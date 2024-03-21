@@ -13,8 +13,10 @@ export const Emoji = styled.div`
   color: #fff;
   line-height: 18px;
 
-  &:hover + ${EmojiBlockContainer} {
-    opacity: 1;
-    visibility: visible;
+  @media screen and (min-width: 1024px) {
+    &:hover + ${EmojiBlockContainer} {
+      opacity: 1;
+      visibility: visible;
+    }
   }
 `;
