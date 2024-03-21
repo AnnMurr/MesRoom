@@ -73,7 +73,7 @@ export const Main = () => {
         return (
                 <>
                         <Section>
-                                {isLoading ?
+                                {!isLoading ?
                                         <LogoCube
                                                 cubeGreySide={cubeGreySide}
                                                 cubeGreenSide={cubeGreenSide}
