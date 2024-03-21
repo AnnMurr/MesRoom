@@ -1,6 +1,15 @@
 import * as React from 'react';
 import { useRef, useState } from 'react';
-import { Cube, FaceBack, FaceBottom, FaceFront, FaceLeft, FaceRight, FaceTop } from './styledLogoCube';
+import {
+    Cube,
+    FaceBack,
+    FaceBottom,
+    FaceFront,
+    FaceLeft,
+    FaceRight,
+    FaceTop,
+    Wrapper
+} from './styledLogoCube';
 
 const cubeGreySide = require("../../../../../assets/images/cubeGreySide.png");
 const cubeGreenSide = require("../../../../../assets/images/cubeGreenSide.png");
@@ -35,7 +44,7 @@ export const LogoCube = () => {
     };
 
     return (
-        <div
+        <Wrapper
             ref={sceneRef}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -51,7 +60,7 @@ export const LogoCube = () => {
                     <img src={cubeGreySide} alt="Top" />
                 </FaceTop>
                 <FaceBottom>
-                    <img src={cubeGreySide}  alt="Bottom" />
+                    <img src={cubeGreySide} alt="Bottom" />
                 </FaceBottom>
                 <FaceLeft>
                     <img src={cubeBackSide} alt="Left" />
@@ -60,6 +69,6 @@ export const LogoCube = () => {
                     <img src={cubeBackSide} alt="Right" />
                 </FaceRight>
             </Cube>
-        </div>
+        </Wrapper>
     );
 };
