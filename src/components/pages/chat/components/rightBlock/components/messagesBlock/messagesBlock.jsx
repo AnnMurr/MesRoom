@@ -51,6 +51,7 @@ export const MessagesBlock = () => {
                                 <SubMessage>{message.time} {message.userName}</SubMessage>
                                 {isMessageSettings === message.id &&
                                     <MessageSettings
+                                        messageText={message.text}
                                         messageSettingsPosition={messageSettingsPosition}
                                         type={"otherSettings"}
                                         messageId={message.id} />}
