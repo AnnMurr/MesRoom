@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 export const Container = styled.div`
   padding: 0 40px;
   overflow: scroll;
+  scrollbar-width: none;
 
   @media screen and (max-width: 520px) {
     padding: 0 15px;
@@ -35,6 +36,12 @@ const MessageCommon = css`
   border-radius: 10px;
   text-align: left;
   white-space: pre-wrap;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none; 
+  -khtml-user-select: none; 
+  -moz-user-select: none; 
+  -ms-user-select: none;
+  user-select: none;
 
   @media screen and (max-width: 520px) {
     padding: 8px;

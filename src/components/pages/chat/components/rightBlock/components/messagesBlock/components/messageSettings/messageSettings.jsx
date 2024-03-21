@@ -1,10 +1,11 @@
 import { useDispatch } from "react-redux";
 import { setIsEditingMessage, setUserMessage } from "../../../../../../../../../redux/redusers/userReduser";
-import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faCopy, faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { getDataFromSessionStorage } from "../../../../../../../../../store/sessionStorage";
 import { socket } from "../../../../../../../../../socket/socket";
 import { Item } from "./components/item/item";
 import { Container } from "./styledMessageSettings";
+import { getCopyText } from "../../../../../../../../../utils/copyText";
 
 export const MessageSettings = ({
     messageId,
@@ -28,6 +29,15 @@ export const MessageSettings = ({
         dispatch(setIsEditingMessage(true));
     }
 
+    const copyText = async () => {
+        console.log(messageText)
+        try {
+            await getCopyText(messageText);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     return (
         <Container style={{ top: messageSettingsPosition.y, left: messageSettingsPosition.x - 50 }} type={type}>
             <div>
@@ -35,6 +45,7 @@ export const MessageSettings = ({
                     <Item text={"Edit"} func={editMEssage} icon={faPen} />
                     : null}
                 <Item text={"Delete"} func={deleteMessage} icon={faTrashCan} />
+                <Item text={"Copy"} func={copyText} icon={faCopy} />
             </div>
         </Container >
     )
