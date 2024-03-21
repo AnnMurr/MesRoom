@@ -36,12 +36,6 @@ const MessageCommon = css`
   border-radius: 10px;
   text-align: left;
   white-space: pre-wrap;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none; 
-  -khtml-user-select: none; 
-  -moz-user-select: none; 
-  -ms-user-select: none;
-  user-select: none;
 
   @media screen and (max-width: 520px) {
     padding: 8px;
@@ -65,6 +59,15 @@ export const MessageOwn = styled.div`
   ${MessageCommon}
   background-color: #3e9413;
   margin-left: auto;
+`;
+
+export const MessageText = styled.span`
+  -webkit-touch-callout: none;
+  -webkit-user-select: none; 
+  -khtml-user-select: none; 
+  -moz-user-select: none; 
+  -ms-user-select: none;
+  user-select: none;
 `;
 
 export const SubMessage = styled.div`
