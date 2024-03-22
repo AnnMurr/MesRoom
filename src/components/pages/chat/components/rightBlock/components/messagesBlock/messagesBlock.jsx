@@ -19,25 +19,42 @@ export const MessagesBlock = () => {
     const { name } = getDataFromSessionStorage("userData");
     const { chatMessages } = useSelector(state => state.chatData);
     const containerRef = useRef(null);
+    const touchTimeoutRef = useRef(null);
+    const windowWidth = window.innerWidth;
 
     const closeMessageSettingsBlock = () => {
         setIsMessageSettings(null);
+        window.removeEventListener("click", closeMessageSettingsBlock);
         containerRef.current.style.overflow = "scroll";
     }
 
-    const openMessageSettings = (messageId) => {
-        return (event) => {
-            event.preventDefault();
+    const openMessageSettings = (event, id) => {
+        if (windowWidth <= 1023 && event.touches && event.touches.length > 0) {
+            const touch = event.touches[0];
+            setMessageSettingsPosition({ x: touch.clientX, y: touch.clientY });
+        } else {
             setMessageSettingsPosition({ x: event.clientX, y: event.clientY });
-            setIsMessageSettings(messageId);
-            containerRef.current.style.overflow = "hidden";
-            window.addEventListener("click", closeMessageSettingsBlock);
-        };
+        }
+
+        setIsMessageSettings(id);
+        containerRef.current.style.overflow = "hidden";
+
+        window.addEventListener("click", closeMessageSettingsBlock);
     }
 
     useEffect(() => {
         containerRef.current && containerRef.current.scrollTo(0, containerRef.current.scrollHeight);
     }, [chatMessages]);
+
+    const handleTouchStart = (event, message) => {
+        touchTimeoutRef.current = setTimeout(() => {
+            openMessageSettings(event, message.id);
+        }, 500);
+    };
+
+    const handleTouchEnd = () => {
+        clearTimeout(touchTimeoutRef.current);
+    };
 
     return (
         <Container ref={containerRef}>
@@ -45,7 +62,16 @@ export const MessagesBlock = () => {
                 chatMessages.map((message) => (
                     <React.Fragment key={uuid()}>
                         {message.userName !== name ?
-                            <MessageInner id={message.id} onContextMenu={openMessageSettings(message.id)}>
+                            <MessageInner
+                                id={message.id}
+                                onContextMenu={(event) => {
+                                    event.preventDefault()
+                                    if (windowWidth > 1023) {
+                                        openMessageSettings(event, message.id)
+                                    }
+                                }}
+                                onTouchStart={(event) => handleTouchStart(event, message)}
+                                onTouchEnd={handleTouchEnd}>
                                 <Message>
                                     <MessageText>{message.text}</MessageText>
                                 </Message>
@@ -58,7 +84,17 @@ export const MessagesBlock = () => {
                                         messageId={message.id} />}
                             </MessageInner>
                             :
-                            <MessageInnerOwn id={message.id} onContextMenu={openMessageSettings(message.id)}>
+                            <MessageInnerOwn
+                                id={message.id}
+                                onContextMenu={(event) => {
+                                    event.preventDefault()
+                                    if (windowWidth > 1023) {
+                                        openMessageSettings(event, message.id)
+                                    }
+                                }}
+                                onTouchStart={(event) => handleTouchStart(event, message)}
+                                onTouchEnd={handleTouchEnd}
+                            >
                                 <MessageOwn>
                                     <MessageText>{message.text}</MessageText>
                                 </MessageOwn>

@@ -38,7 +38,7 @@ export const MessageSettings = ({
     }
 
     return (
-        <Container style={{ top: messageSettingsPosition.y, left: messageSettingsPosition.x - 50 }} type={type}>
+        <Container style={{ top: messageSettingsPosition.y + 10, left: messageSettingsPosition.x - 50 }} type={type}>
             <div>
                 {type === "ownSettings" ?
                     <Item text={"Edit"} func={editMEssage} icon={faPen} />
