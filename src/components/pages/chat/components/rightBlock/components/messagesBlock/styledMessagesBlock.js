@@ -5,6 +5,10 @@ export const Container = styled.div`
   overflow: scroll;
   scrollbar-width: none;
 
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
   @media screen and (max-width: 520px) {
     padding: 0 15px;
   }
