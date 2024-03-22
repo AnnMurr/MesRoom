@@ -4,10 +4,8 @@ export const Container = styled.div`
   padding: 0 40px;
   overflow: scroll;
   scrollbar-width: none;
-
-  ::-webkit-scrollbar {
-    display: none;
-  }
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
 
   @media screen and (max-width: 520px) {
     padding: 0 15px;
@@ -47,7 +45,7 @@ const MessageCommon = css`
 
   span {
     color: #fff;
-    
+
     @media screen and (max-width: 520px) {
       font-size: 14px;
     }
@@ -67,9 +65,9 @@ export const MessageOwn = styled.div`
 
 export const MessageText = styled.span`
   -webkit-touch-callout: none;
-  -webkit-user-select: none; 
-  -khtml-user-select: none; 
-  -moz-user-select: none; 
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 `;
