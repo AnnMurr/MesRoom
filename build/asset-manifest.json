@@ -1,18 +1,15 @@
 {
   "files": {
     "main.css": "/static/css/main.593c6fbd.css",
-    "main.js": "/static/js/main.0bb0910b.js",
-    "static/media/cubeGreenSide.png": "/static/media/cubeGreenSide.218df0a2e4519976dad9.png",
-    "static/media/cubeBlackSide.png": "/static/media/cubeBlackSide.bba4fc8fd4aa9ff64c42.png",
-    "static/media/cubeGreySide.png": "/static/media/cubeGreySide.927b1b3035258c3c1f6b.png",
+    "main.js": "/static/js/main.22e26d74.js",
     "static/media/laptop.png": "/static/media/laptop.2716b28d602737a7f43f.png",
     "static/media/phone.png": "/static/media/phone.ae20014bf022b9e5a365.png",
     "index.html": "/index.html",
     "main.593c6fbd.css.map": "/static/css/main.593c6fbd.css.map",
-    "main.0bb0910b.js.map": "/static/js/main.0bb0910b.js.map"
+    "main.22e26d74.js.map": "/static/js/main.22e26d74.js.map"
   },
   "entrypoints": [
     "static/css/main.593c6fbd.css",
-    "static/js/main.0bb0910b.js"
+    "static/js/main.22e26d74.js"
   ]
 }
