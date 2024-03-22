@@ -4,8 +4,10 @@ export const Inner = styled.li`
   transition: all 0.5s ease-in-out;
   cursor: pointer;
 
-  &:hover {
-    background-color: #6b6b6b5c;
+  @media screen and (min-width: 1024px) {
+    &:hover {
+      background-color: #6b6b6b5c;
+    }
   }
 `;
 

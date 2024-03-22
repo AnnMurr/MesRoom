@@ -22,17 +22,17 @@ export const MessagesBlock = () => {
 
     const closeMessageSettingsBlock = () => {
         setIsMessageSettings(null);
-        window.removeEventListener("click", closeMessageSettingsBlock);
         containerRef.current.style.overflow = "scroll";
     }
 
-    const openMessageSettings = (event) => {
-        event.preventDefault();
-        setMessageSettingsPosition({ x: event.clientX, y: event.clientY });
-        setIsMessageSettings(event.currentTarget.id);
-        containerRef.current.style.overflow = "hidden";
-
-        window.addEventListener("click", closeMessageSettingsBlock);
+    const openMessageSettings = (messageId) => {
+        return (event) => {
+            event.preventDefault();
+            setMessageSettingsPosition({ x: event.clientX, y: event.clientY });
+            setIsMessageSettings(messageId);
+            containerRef.current.style.overflow = "hidden";
+            window.addEventListener("click", closeMessageSettingsBlock);
+        };
     }
 
     useEffect(() => {
@@ -45,7 +45,7 @@ export const MessagesBlock = () => {
                 chatMessages.map((message) => (
                     <React.Fragment key={uuid()}>
                         {message.userName !== name ?
-                            <MessageInner id={message.id} onContextMenu={openMessageSettings}>
+                            <MessageInner id={message.id} onContextMenu={openMessageSettings(message.id)}>
                                 <Message>
                                     <MessageText>{message.text}</MessageText>
                                 </Message>
@@ -58,7 +58,7 @@ export const MessagesBlock = () => {
                                         messageId={message.id} />}
                             </MessageInner>
                             :
-                            <MessageInnerOwn id={message.id} onContextMenu={openMessageSettings}>
+                            <MessageInnerOwn id={message.id} onContextMenu={openMessageSettings(message.id)}>
                                 <MessageOwn>
                                     <MessageText>{message.text}</MessageText>
                                 </MessageOwn>
