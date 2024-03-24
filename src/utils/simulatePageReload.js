@@ -1,5 +1,5 @@
 export const simulatePageReload = () => {
-  window.addEventListener("popstate", function (event) {
+  window.addEventListener("popstate", function () {
     window.location.reload();
   });
 };
