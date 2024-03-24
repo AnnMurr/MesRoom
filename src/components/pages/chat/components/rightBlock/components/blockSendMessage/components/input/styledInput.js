@@ -13,6 +13,7 @@ export const TextArea = styled.textarea`
   scrollbar-width: none;
   min-height: 33px;
   resize: none;
+  touch-action: manipulation;
 
   &:focus-visible {
     outline: 1px auto #00ff005c;
