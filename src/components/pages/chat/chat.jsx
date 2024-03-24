@@ -58,7 +58,6 @@ export const Chat = () => {
 
         setTimeout(() => setIsLoad(false), 4000);
 
-
         socket.emit("ROOM:JOIN", { roomId: id, userName: { name: name, icon: userEmoji ? userEmoji : userEmoji } });
         socket.on("usersOnline", (users) => dispatch(setUsersOnline(users)));
         socket.on("chatMessages", (messages) => dispatch(setChatMessages(messages)));
