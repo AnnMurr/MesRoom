@@ -22,19 +22,7 @@ export const Chat = () => {
     const { id, name, userEmoji } = getDataFromSessionStorage("userData");
     const windowWidth = window.innerWidth;
 
-    const handleUnload = () => socket.emit("ROOM:LEAVE", {
-        roomId: id,
-        userName: {
-            name: name,
-            icon: userEmoji
-        }
-    });
-
-    const setupBeforeUnloadHandler = () => {
-        window.addEventListener("beforeunload", handleUnload);
-    }
-
-    const cleanupBeforeUnloadHandler = () => {
+    useEffect(() => {
         const handleUnload = () => socket.emit("ROOM:LEAVE", {
             roomId: id,
             userName: {
@@ -43,41 +31,24 @@ export const Chat = () => {
             }
         });
 
-        window.removeEventListener("beforeunload", handleUnload);
-
-        socket.emit("ROOM:LEAVE", {
-            roomId: id,
-            userName: {
-                name: name,
-                icon: userEmoji
-            }
-        });
-
-        socket.disconnect();
-    }
-
-    // useEffect(() => {
-    //     simulatePageReload();
-    //     setupBeforeUnloadHandler();
-
-    //     return () => { 
-    //         console.log("return 1")
-    //         cleanupBeforeUnloadHandler()
-    //      };
-
-    // }, [])
-
-    useEffect(() => { 
-        console.log("simulatePageReload")
         simulatePageReload();
-        setupBeforeUnloadHandler();
+        window.addEventListener("beforeunload", handleUnload);
 
-        return () => { 
-            console.log("return 2")
-            cleanupBeforeUnloadHandler()
-         };
+        return () => {
+            window.removeEventListener("beforeunload", handleUnload);
 
-    }, [window.location.href])
+            socket.emit("ROOM:LEAVE", {
+                roomId: id,
+                userName: {
+                    name: name,
+                    icon: userEmoji
+                }
+            });
+
+            socket.disconnect();
+        };
+
+    }, []);
 
     useEffect(() => {
         if (windowWidth <= 768) {
@@ -86,13 +57,10 @@ export const Chat = () => {
         };
 
         setTimeout(() => setIsLoad(false), 4000);
-        
-      
+
+
         socket.emit("ROOM:JOIN", { roomId: id, userName: { name: name, icon: userEmoji ? userEmoji : userEmoji } });
-        socket.on("usersOnline", (users) => {
-            console.log("users", users)
-            dispatch(setUsersOnline(users))
-        });
+        socket.on("usersOnline", (users) => dispatch(setUsersOnline(users)));
         socket.on("chatMessages", (messages) => dispatch(setChatMessages(messages)));
         socket.on("changed-messages", (messages) => dispatch(setChatMessages(messages)));
 
