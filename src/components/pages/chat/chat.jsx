@@ -48,7 +48,7 @@ export const Chat = () => {
             socket.disconnect();
         };
 
-    }, []);
+    }, [id, name, userEmoji]);
 
     useEffect(() => {
         if (windowWidth <= 768) {
