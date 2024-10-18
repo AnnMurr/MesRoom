@@ -1,44 +1,53 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import { Button } from "../../../../common/button/button";
 import { LinkBlock } from "./components/link";
 import { OutlinedAlerts } from "../../../../common/alerts/alerts";
 import { Wrapper, BtnInner, Container } from "./styledLinkGenerator";
+import { getLink } from "../../../../../redux/redusers/linkGenerationReduser";
+import { CircularIndeterminate } from "../../../../common/loading/loading";
 
 export const LinkGenerator = ({ isLink, setIsLink }) => {
     const [isSuccessAlert, setIsSuccessAlert] = useState(false);
     const [isErrorAlert, setIsErrorAlert] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const dispatch = useDispatch();
+    const loading = useSelector(state => state.linkData.loading);
 
     const onGenerateLink = async () => {
         try {
-            const response = await fetch(`https://messchat-service.onrender.com/room`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ url: window.location.href }),
-            });
+            const action = await dispatch(getLink());
+            const link = action.payload;
 
-            if (!response.ok) throw new Error('Failed to generate link');
-
-            const { link } = await response.json();
-            setIsLink(link);
+            link && setIsLink(link);
         } catch (error) {
             console.error('Failed to fetch:', error);
+            setIsErrorAlert(true);
+            setIsSuccessAlert(false);
         }
     };
 
+    useEffect(() => {
+        setIsLoading(loading);
+    }, [loading]);
+
     return (
-        <Container>
-            <Wrapper>
-                <BtnInner>
-                    <Button size={"big"} func={onGenerateLink} text={"Generate link"} />
-                </BtnInner>
-                <LinkBlock isLink={isLink} setIsSuccessAlert={setIsSuccessAlert} setIsErrorAlert={setIsErrorAlert} />
-                {isSuccessAlert ?
-                    <OutlinedAlerts type={"success"} text={"The link has been successfully copied"} />
-                    : null}
-                {isErrorAlert ?
-                    <OutlinedAlerts type={"error"} text={"Error copying text"} />
-                    : null}
-            </Wrapper>
-        </Container>
+        isLoading ? <CircularIndeterminate />
+            : (
+                <Container>
+                    <Wrapper>
+                        <BtnInner>
+                            <Button size={"big"} func={onGenerateLink} text={"Generate link"} />
+                        </BtnInner>
+                        <LinkBlock isLink={isLink} setIsSuccessAlert={setIsSuccessAlert} setIsErrorAlert={setIsErrorAlert} />
+                        {isSuccessAlert ?
+                            <OutlinedAlerts type={"success"} text={"The link has been successfully copied"} />
+                            : null}
+                        {isErrorAlert ?
+                            <OutlinedAlerts type={"error"} text={"Error copying text"} />
+                            : null}
+                    </Wrapper>
+                </Container>
+            )
     );
 };
